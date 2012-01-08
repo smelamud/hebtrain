@@ -1,11 +1,15 @@
 <?php
 require_once('lib/database.php');
+require_once('lib/items.php');
 
 $mysqli = dbConnect();
 
-$st = $mysqli->prepare('insert into items(hebrew, russian) values(?, ?)');
+$st = $mysqli->prepare(
+    'insert into items(`group`, hebrew, russian) 
+     values(?, ?, ?)');
 dbFailsafe($mysqli);
-$st->bind_param('ss', $_POST['hebrew'], $_POST['russian']);
+$group = VI_WORD;
+$st->bind_param('iss', $group, $_POST['hebrew'], $_POST['russian']);
 $st->execute();
 $st->close();
 

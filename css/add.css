@@ -5,11 +5,13 @@
 #adder input {
     width: 96%;
     margin: 0;
+    font: normal 14pt serif;
 }
 
 #adder td {
     border-left: solid 3px teal;
     padding-left: 2px;
+    font: normal 14pt serif;
 }
 
 #adder td.spinner {

@@ -10,6 +10,7 @@ $(function() {
                 newLine.find(".russian").text(data.russian);
                 $(".template").before(newLine);
                 $("#adder input").val("");
+                $("#adder input[name='hebrew']").focus();
             }
         ).error(
             function() {

@@ -23,3 +23,12 @@
     border-left: solid 3px teal;
     padding-left: 2px;
 }
+
+#adder td.spinner {
+    border-left: 0;
+    width: 16px;
+}
+
+#adder td.spinner img {
+    visibility: hidden;
+}

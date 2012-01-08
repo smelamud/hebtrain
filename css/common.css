@@ -1,35 +1,35 @@
 header {
-  background-color: #000066;
+    background-color: #000066;
 }
 
 .site-title {
-  color: white;
-  font: bold 16pt sans-serif;
-  padding: 1ex;
+    color: white;
+    font: bold 16pt sans-serif;
+    padding: 1ex;
 }
 
 .menu {
-  list-style-type: none;
-  -moz-padding-start: 0px;
-  background-color: white;
-  margin-top: 0;
+    list-style-type: none;
+    -moz-padding-start: 0px;
+    background-color: white;
+    margin-top: 0;
 }
 
 .menu li {
-  display: inline-block;
-  color: yellow;
-  background-color: #000066;
-  font: bold 11pt sans-serif;
-  width: 100px;
-  text-align: center;
-  vertical-align: middle;
-  border-right: solid 6px white;
-  border-bottom: solid 1px white;
-  padding-top: 0.5ex;
-  padding-bottom: 0.5ex;
+    display: inline-block;
+    color: yellow;
+    background-color: #000066;
+    font: bold 11pt sans-serif;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    border-right: solid 6px white;
+    border-bottom: solid 1px white;
+    padding-top: 0.5ex;
+    padding-bottom: 0.5ex;
 }
 
 .menu li a {
-  color: white;
-  font-weight: normal;
+    color: white;
+    font-weight: normal;
 }

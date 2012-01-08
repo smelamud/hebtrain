@@ -11,7 +11,7 @@ const LS_6_MONTHS = 7;
 const LS_1_YEAR = 8;
 const LS_PERMANENT = 9;
 
-const LS_PARAMS =
+$LS_PARAMS =
     array(
         LS_1_DAY => array(
             'steps' => 3,

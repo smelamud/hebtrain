@@ -9,8 +9,8 @@ function displayMainMenuItem($current, $page, $title, $href) {
 
 function displayMainMenu($current) {?>
     <header>
-        <div class="site-title">Иврит</div>
-        <ul class="menu"><?php
+        <div id="site-title">Иврит</div>
+        <ul id="menu"><?php
           displayMainMenuItem($current, 'index', 'Начало', '/');
           displayMainMenuItem($current, 'run', 'Тест', '/run.php');
           displayMainMenuItem($current, 'add', 'Добавить', '/add.php');

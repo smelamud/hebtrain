@@ -1,0 +1,25 @@
+#adder .hebrew {
+    width: 200px;
+}
+
+#adder .hebrew-comment {
+    width: 200px;
+}
+
+#adder .russian {
+    width: 200px;
+}
+
+#adder .russian-comment {
+    width: 200px;
+}
+
+#adder input {
+    width: 96%;
+    margin: 0;
+}
+
+#adder td {
+    border-left: solid 3px teal;
+    padding-left: 2px;
+}

@@ -2,20 +2,20 @@ header {
     background-color: #000066;
 }
 
-.site-title {
+#site-title {
     color: white;
     font: bold 16pt sans-serif;
     padding: 1ex;
 }
 
-.menu {
+#menu {
     list-style-type: none;
     -moz-padding-start: 0px;
     background-color: white;
     margin-top: 0;
 }
 
-.menu li {
+#menu li {
     display: inline-block;
     color: yellow;
     background-color: #000066;
@@ -29,7 +29,7 @@ header {
     padding-bottom: 0.5ex;
 }
 
-.menu li a {
+#menu li a {
     color: white;
     font-weight: normal;
 }

@@ -1,8 +1,6 @@
 function addItem() {
-    $(".spinner img").css("visibility", "visible");
     $.post("/actions/item-modify.php", $("#addform").serialize(),
         function(data) {
-            $(".spinner img").css("visibility", "hidden");
             var newLine = $(".template").clone();
             newLine.removeClass();
             newLine.data("id", data.id);
@@ -14,7 +12,6 @@ function addItem() {
         }
     ).error(
         function() {
-            $(".spinner img").css("visibility", "hidden");
             alert("Error!");
         }
     );
@@ -32,12 +29,28 @@ function recallItem() {
     $("#reset").show();
 }
 
+function modifyItem() {
+    $.post("/actions/item-modify.php", $("#addform").serialize(),
+        function(data) {
+            var line = $("#adder tr").filter(function() {
+                return $(this).data("id") == data.id;
+            });
+            line.find(".hebrew").text(data.hebrew);
+            line.find(".russian").text(data.russian);
+            resetAdder();
+        }
+    ).error(
+        function() {
+            alert("Error!");
+        }
+    );
+    return false;
+}
+
 function deleteItem() {
-    $(".spinner img").css("visibility", "visible");
     $.post("/actions/item-delete.php",
         { "id": $("#adder input[name='id']").val() },
         function(data) {
-            $(".spinner img").css("visibility", "hidden");
             $("#adder tr").filter(function() {
                 return $(this).data("id") == data.id;
             }).remove();
@@ -45,7 +58,6 @@ function deleteItem() {
         }
     ).error(
         function() {
-            $(".spinner img").css("visibility", "hidden");
             alert("Error!");
         }
     );
@@ -63,6 +75,13 @@ function resetAdder() {
 
 $(function() {
     $("#add").click(addItem);
+    $("#modify").click(modifyItem);
     $("#delete").click(deleteItem);
     $("#reset").click(resetAdder);
+    $.ajaxStart(function() {
+        $(".spinner img").css("visibility", "visible");
+    });
+    $.ajaxStop(function() {
+        $(".spinner img").css("visibility", "hidden");
+    });
 });

@@ -78,10 +78,10 @@ $(function() {
     $("#modify").click(modifyItem);
     $("#delete").click(deleteItem);
     $("#reset").click(resetAdder);
-    $.ajaxStart(function() {
+    $("#adder").ajaxStart(function() {
         $(".spinner img").css("visibility", "visible");
     });
-    $.ajaxStop(function() {
+    $("#adder").ajaxStop(function() {
         $(".spinner img").css("visibility", "hidden");
     });
 });

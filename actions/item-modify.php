@@ -27,6 +27,7 @@ $st->close();
 dbClose($mysqli);
 
 $result = array(
+    'id' => $itemId,
     'hebrew' => $_POST['hebrew'],
     'russian' => $_POST['russian']
 );

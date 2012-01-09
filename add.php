@@ -16,12 +16,20 @@ require_once('parts/header.php');
         <form id="addform">
             <table id="adder">
                 <tr>
-                    <td class='spinner'><img src="/pics/ajax.gif"></td>
+                    <td class='spinner'>
+                        <img src="/pics/ajax.gif">
+                        <input type="hidden" name="id" value="0">
+                    </td>
                     <td class='hebrew'><input type="text" name="hebrew" maxlength="63"/></td>
                     <td class='hebrew-comment'>&nbsp;</td>
                     <td class='russian'><input type="text" name="russian" maxlength="63"/></td>
                     <td class='russian-comment'>&nbsp;</td>
-                    <td><button id="add">Добавить</button></td>
+                    <td>
+                        <button id="add">Добавить</button>
+                        <button id="modify">Изменить</button>
+                        <button type="button" id="delete">Удалить</button>
+                        <button type="reset" id="reset">Сброс</button>
+                    </td>
                 </tr>
                 <tr class="template">
                     <td class='spinner'>&nbsp;</td>

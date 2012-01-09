@@ -2,6 +2,10 @@
     border-spacing: 0;
 }
 
+#adder tr:hover {
+    background-color: #ffffee;
+}
+
 #adder input {
     width: 96%;
     margin: 0;
@@ -41,5 +45,9 @@
 }
 
 #adder tr.template {
+    display: none;
+}
+
+#modify, #delete, #reset {
     display: none;
 }

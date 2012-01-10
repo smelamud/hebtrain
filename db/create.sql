@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: hebtrain
 -- ------------------------------------------------------
--- Server version	5.1.58-1ubuntu1
+-- Server version	5.1.58-1ubuntu1-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,12 +26,15 @@ CREATE TABLE `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group` tinyint(4) NOT NULL,
   `hebrew` varchar(63) COLLATE utf8_bin NOT NULL,
+  `hebrew_bare` varchar(63) COLLATE utf8_bin NOT NULL,
   `hebrew_comment` varchar(255) COLLATE utf8_bin NOT NULL,
   `russian` varchar(63) COLLATE utf8_bin NOT NULL,
   `russian_comment` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `group` (`group`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `group` (`group`),
+  KEY `hebrew_bare` (`hebrew_bare`),
+  KEY `russian` (`russian`)
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,6 +54,18 @@ CREATE TABLE `questions` (
   KEY `next_test` (`next_test`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `versions`
+--
+
+DROP TABLE IF EXISTS `versions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `versions` (
+  `version` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -61,4 +76,4 @@ CREATE TABLE `questions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-01-08  1:21:40
+-- Dump completed on 2012-01-10 13:19:46

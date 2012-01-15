@@ -16,14 +16,19 @@ require_once('parts/header.php');
         <form id="items-form">
             <table id="items">
                 <tr>
-                    <td class='spinner'>
-                        <img src="/pics/ajax.gif">
+                    <th>&nbsp;</th>
+                    <th colspan="2" class="russian">Русский</th>
+                    <th>&nbsp;</th>
+                    <th colspan="2" class="hebrew">עברית</th>
+                </tr>
+                <tr id="editor">
+                    <td>
+                        <img id="spinner" src="/pics/ajax.gif">
                         <input type="hidden" name="id" value="0">
                     </td>
-                    <td class='hebrew'><input type="text" name="hebrew" maxlength="63"/></td>
-                    <td class='hebrew-comment'>&nbsp;</td>
-                    <td class='russian'><input type="text" name="russian" maxlength="63"/></td>
-                    <td class='russian-comment'>&nbsp;</td>
+                    <td class="russian" colspan="2"><input type="text" name="russian" maxlength="63" autofocus/></td>
+                    <td class="separator">&mdash;</td>
+                    <td class="hebrew" colspan="2"><input type="text" name="hebrew" maxlength="63"/></td>
                     <td>
                         <button id="add">Добавить</button>
                         <button id="modify">Изменить</button>
@@ -31,12 +36,13 @@ require_once('parts/header.php');
                         <button type="reset" id="reset">Сброс</button>
                     </td>
                 </tr>
-                <tr class="template">
-                    <td class='spinner'>&nbsp;</td>
-                    <td class='hebrew'>&nbsp;</td>
-                    <td class='hebrew-comment'>&nbsp;</td>
-                    <td class='russian'>&nbsp;</td>
-                    <td class='russian-comment'>&nbsp;</td>
+                <tr class="template item">
+                    <td>&nbsp;</td>
+                    <td class="russian">&nbsp;</td>
+                    <td class="russian-comment">&nbsp;</td>
+                    <td class="separator">&mdash;</td>
+                    <td class="hebrew-comment">&nbsp;</td>
+                    <td class="hebrew">&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
             </table>

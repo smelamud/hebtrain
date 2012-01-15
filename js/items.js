@@ -2,7 +2,7 @@ function addItem() {
     $.post("/actions/item-modify.php", $("#items-form").serialize(),
         function(data) {
             var newLine = $(".template").clone();
-            newLine.removeClass();
+            newLine.removeClass("template");
             newLine.data("id", data.id);
             newLine.find(".hebrew").text(data.hebrew);
             newLine.find(".russian").text(data.russian);
@@ -70,7 +70,7 @@ function resetAdder() {
     $("#delete").hide();
     $("#reset").hide();
     $("#items input").val("");
-    $("#items input[name='hebrew']").focus();
+    $("#items input[name='russian']").focus();
 }
 
 $(function() {
@@ -79,9 +79,9 @@ $(function() {
     $("#delete").click(deleteItem);
     $("#reset").click(resetAdder);
     $("#items").ajaxStart(function() {
-        $(".spinner img").css("visibility", "visible");
+        $("#spinner").css("visibility", "visible");
     });
     $("#items").ajaxStop(function() {
-        $(".spinner img").css("visibility", "hidden");
+        $("#spinner").css("visibility", "hidden");
     });
 });

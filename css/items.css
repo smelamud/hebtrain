@@ -2,7 +2,7 @@
     border-spacing: 0;
 }
 
-#items tr:hover {
+#items tr.item:hover {
     background-color: #ffffee;
 }
 
@@ -12,18 +12,29 @@
     font: normal 14pt serif;
 }
 
+#items th {
+    padding-left: 10px;
+    padding-right: 10px;
+    font: bold 10pt sans-serif;
+}
+
+#items th.russian {
+    width: 400px;
+    text-align: left;
+}
+
+#items th.hebrew {
+    width: 400px;
+    text-align: right;
+}
+
 #items td {
-    border-left: solid 3px teal;
-    padding-left: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
     font: normal 14pt serif;
 }
 
-#items td.spinner {
-    border-left: 0;
-    width: 16px;
-}
-
-#items td.spinner img {
+#spinner {
     visibility: hidden;
 }
 
@@ -50,4 +61,12 @@
 
 #modify, #delete, #reset {
     display: none;
+}
+
+#editor {
+    background-color: #ccffff;
+}
+
+#editor td {
+    padding: 5px;
 }

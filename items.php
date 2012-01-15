@@ -4,17 +4,17 @@ require_once('parts/header.php');
 ?>
 <html>
     <head>
-        <title>Иврит - Добавить</title>
+        <title>Иврит - Слова</title>
         <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/add.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/items.css"/>
         <script type="text/javascript"
                 src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script type="text/javascript" src="/js/add.js"></script>
+        <script type="text/javascript" src="/js/items.js"></script>
     </head>
     <body>
-        <?php displayMainMenu('add'); ?>
-        <form id="addform">
-            <table id="adder">
+        <?php displayMainMenu('items'); ?>
+        <form id="items-form">
+            <table id="items">
                 <tr>
                     <td class='spinner'>
                         <img src="/pics/ajax.gif">

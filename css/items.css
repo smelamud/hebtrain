@@ -1,50 +1,50 @@
-#adder {
+#items {
     border-spacing: 0;
 }
 
-#adder tr:hover {
+#items tr:hover {
     background-color: #ffffee;
 }
 
-#adder input {
+#items input {
     width: 96%;
     margin: 0;
     font: normal 14pt serif;
 }
 
-#adder td {
+#items td {
     border-left: solid 3px teal;
     padding-left: 2px;
     font: normal 14pt serif;
 }
 
-#adder td.spinner {
+#items td.spinner {
     border-left: 0;
     width: 16px;
 }
 
-#adder td.spinner img {
+#items td.spinner img {
     visibility: hidden;
 }
 
-#adder td.hebrew {
+#items td.hebrew {
     width: 200px;
     direction: rtl;
 }
 
-#adder td.hebrew-comment {
+#items td.hebrew-comment {
     width: 200px;
 }
 
-#adder td.russian {
+#items td.russian {
     width: 200px;
 }
 
-#adder td.russian-comment {
+#items td.russian-comment {
     width: 200px;
 }
 
-#adder tr.template {
+#items tr.template {
     display: none;
 }
 

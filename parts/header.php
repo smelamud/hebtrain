@@ -13,8 +13,7 @@ function displayMainMenu($current) {?>
         <ul id="menu"><?php
           displayMainMenuItem($current, 'index', 'Начало', '/');
           displayMainMenuItem($current, 'run', 'Тест', '/run.php');
-          displayMainMenuItem($current, 'add', 'Добавить', '/add.php');
-          displayMainMenuItem($current, 'list', 'Список', '/list.php');
+          displayMainMenuItem($current, 'items', 'Слова', '/items.php');
       ?></ul>
     </header><?php
 }

@@ -23,7 +23,7 @@ require_once('parts/header.php');
                 </tr>
                 <tr id="editor">
                     <td>
-                        <img id="spinner" src="/pics/ajax.gif">
+                        <img id="spinner" src="/pics/ajax-cyan.gif">
                         <input type="hidden" name="id" value="0">
                     </td>
                     <td class="russian" colspan="2"><input type="text" name="russian" maxlength="63" autofocus/></td>

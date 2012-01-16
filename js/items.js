@@ -1,13 +1,33 @@
+function addLine(data) {
+    var newLine = $(".template").clone();
+    newLine.removeClass("template");
+    newLine.data("id", data.id);
+    newLine.find(".hebrew").text(data.hebrew);
+    newLine.find(".hebrew-comment").text(data.hebrew_comment);
+    newLine.find(".russian").text(data.russian);
+    newLine.find(".russian-comment").text(data.russian_comment);
+    newLine.click(recallItem);
+    $(".template").before(newLine);
+}
+
+function findItems() {
+    $.getJSON("/actions/items-find.php",
+        function(data) {
+            $.each(data, function(index, item) {
+                addLine(item);
+            });
+        }
+    ).error(
+        function() {
+            alert("Error!");
+        }
+    );
+}
+
 function addItem() {
     $.post("/actions/item-modify.php", $("#items-form").serialize(),
         function(data) {
-            var newLine = $(".template").clone();
-            newLine.removeClass("template");
-            newLine.data("id", data.id);
-            newLine.find(".hebrew").text(data.hebrew);
-            newLine.find(".russian").text(data.russian);
-            newLine.click(recallItem);
-            $(".template").before(newLine);
+            addLine(data);
             resetAdder();
         }
     ).error(
@@ -84,4 +104,5 @@ $(function() {
     $("#items").ajaxStop(function() {
         $("#spinner").css("visibility", "hidden");
     });
+    findItems();
 });

@@ -12,10 +12,13 @@
     font: normal 14pt serif;
 }
 
+#items .headline th, #items .headline td {
+    font: bold 10pt sans-serif;
+}
+
 #items th {
     padding-left: 10px;
     padding-right: 10px;
-    font: bold 10pt sans-serif;
 }
 
 #items th.russian {
@@ -59,7 +62,7 @@
     display: none;
 }
 
-#modify, #delete, #reset {
+#modify, #delete, #reset, #found-title, #added-title {
     display: none;
 }
 

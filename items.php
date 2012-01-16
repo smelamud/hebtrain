@@ -15,7 +15,7 @@ require_once('parts/header.php');
         <?php displayMainMenu('items'); ?>
         <form id="items-form">
             <table id="items">
-                <tr>
+                <tr class="headline">
                     <th>&nbsp;</th>
                     <th colspan="2" class="russian">Русский</th>
                     <th>&nbsp;</th>
@@ -35,6 +35,13 @@ require_once('parts/header.php');
                         <button type="button" id="delete">Удалить</button>
                         <button type="reset" id="reset">Сброс</button>
                     </td>
+                </tr>
+                <tr class="headline">
+                    <td colspan="3">
+                        <span id="found-title"><span id="found-loaded">0</span> из <span id="found-total">0</span></span>
+                        <span id="added-title">Добавлено: <span id="added-total">0</span></span>
+                    </td>
+                    <td colspan="3">&nbsp;</td>
                 </tr>
                 <tr class="template item">
                     <td>&nbsp;</td>

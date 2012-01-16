@@ -13,7 +13,10 @@ function addLine(data) {
 function findItems() {
     $.getJSON("/actions/items-find.php",
         function(data) {
-            $.each(data, function(index, item) {
+            $("#found-title").show();
+            $("#found-loaded").text(data.count);
+            $("#found-total").text(data.count);
+            $.each(data.items, function(index, item) {
                 addLine(item);
             });
         }

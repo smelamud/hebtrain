@@ -1,12 +1,15 @@
 <?php
+require_once('lib/post.php');
 require_once('lib/database.php');
 require_once('lib/items.php');
 
-function findItems($keyword) {
+function findItems($keyword, $offset) {
     global $mysqli;
 
     $result = array(
+        'offset' => $offset,
         'count' => 0,
+        'total' => 0,
         'items' => array()
     );
 
@@ -18,7 +21,7 @@ function findItems($keyword) {
     $group = VI_WORD;
     $st->bind_param('i', $group);
     $st->execute();
-    $st->bind_result($result['count']);
+    $st->bind_result($result['total']);
     $st->fetch();
     $st->close();
 
@@ -26,11 +29,16 @@ function findItems($keyword) {
         'select id, hebrew, hebrew_comment, russian, russian_comment
          from items
          where `group` = ?
-         order by hebrew_bare');
+         order by hebrew_bare
+         limit ?, ?');
     dbFailsafe($mysqli);
     $group = VI_WORD;
-    $st->bind_param('i', $group);
+    $limit = 10;
+    $st->bind_param('iii', $group, $offset, $limit);
     $st->execute();
+
+    $st->store_result();
+    $result['count'] = $st->num_rows;
 
     $st->bind_result($id, $hebrew, $hebrew_comment, $russian, $russian_comment);
     while ($st->fetch()) {
@@ -42,6 +50,7 @@ function findItems($keyword) {
                   'russian' => $russian,
                   'russian_comment' => $russian_comment));
     }
+
     $st->close();
 
     return $result;
@@ -49,7 +58,7 @@ function findItems($keyword) {
 
 $mysqli = dbConnect();
 
-$result = findItems($_POST['q']);
+$result = findItems(getVar('q'), getIntVar('offset'));
 
 dbClose($mysqli);
 

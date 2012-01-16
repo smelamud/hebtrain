@@ -10,15 +10,21 @@ function addLine(data) {
     $(".template").before(newLine);
 }
 
-function findItems() {
-    $.getJSON("/actions/items-find.php",
+function findItems(offset) {
+    window.ajaxType = offset == 0 ? "items" : "continue";
+    $.getJSON("/actions/items-find.php", { offset: offset },
         function(data) {
             $("#found-title").show();
-            $("#found-loaded").text(data.count);
-            $("#found-total").text(data.count);
+            $("#found-loaded").text(data.offset + data.count);
+            $("#found-total").text(data.total);
             $.each(data.items, function(index, item) {
                 addLine(item);
             });
+            if (data.offset + data.count == data.total) {
+                $("#continue").hide();
+            } else {
+                $("#continue").show();
+            }
         }
     ).error(
         function() {
@@ -27,7 +33,12 @@ function findItems() {
     );
 }
 
+function continueFind() {
+    findItems(Number($("#found-loaded").text()));
+}
+
 function addItem() {
+    window.ajaxType = "items";
     $.post("/actions/item-modify.php", $("#items-form").serialize(),
         function(data) {
             addLine(data);
@@ -53,6 +64,7 @@ function recallItem() {
 }
 
 function modifyItem() {
+    window.ajaxType = "items";
     $.post("/actions/item-modify.php", $("#items-form").serialize(),
         function(data) {
             var line = $("#items tr").filter(function() {
@@ -71,6 +83,7 @@ function modifyItem() {
 }
 
 function deleteItem() {
+    window.ajaxType = "items";
     $.post("/actions/item-delete.php",
         { "id": $("#items input[name='id']").val() },
         function(data) {
@@ -101,11 +114,17 @@ $(function() {
     $("#modify").click(modifyItem);
     $("#delete").click(deleteItem);
     $("#reset").click(resetAdder);
+    $("#continue").click(continueFind);
     $("#items").ajaxStart(function() {
-        $("#spinner").css("visibility", "visible");
+        if (window.ajaxType == "continue") {
+            $("#spinner-continue").css("visibility", "visible");
+        } else {
+            $("#spinner").css("visibility", "visible");
+        }
     });
     $("#items").ajaxStop(function() {
         $("#spinner").css("visibility", "hidden");
+        $("#spinner-continue").css("visibility", "hidden");
     });
-    findItems();
+    findItems(0);
 });

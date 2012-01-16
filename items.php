@@ -20,6 +20,7 @@ require_once('parts/header.php');
                     <th colspan="2" class="russian">Русский</th>
                     <th>&nbsp;</th>
                     <th colspan="2" class="hebrew">עברית</th>
+                    <th>&nbsp;</th>
                 </tr>
                 <tr id="editor">
                     <td>
@@ -42,6 +43,7 @@ require_once('parts/header.php');
                         <span id="added-title">Добавлено: <span id="added-total">0</span></span>
                     </td>
                     <td colspan="3">&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr class="template item">
                     <td>&nbsp;</td>
@@ -50,6 +52,13 @@ require_once('parts/header.php');
                     <td class="separator">&mdash;</td>
                     <td class="hebrew-comment">&nbsp;</td>
                     <td class="hebrew">&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr id="continue">
+                    <td>
+                        <img id="spinner-continue" src="/pics/ajax.gif">
+                    </td>
+                    <td colspan="6">&#x25be; Больше &#x25be;</td>
                     <td>&nbsp;</td>
                 </tr>
             </table>

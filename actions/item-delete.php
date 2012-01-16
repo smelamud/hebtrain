@@ -23,7 +23,7 @@ $st->close();
 dbClose($mysqli);
 
 $result = array(
-    'id' => $_POST['id']
+    'id' => postIntVar('id')
 );
 
 header('Content-Type: application/json');

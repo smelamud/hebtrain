@@ -1,4 +1,5 @@
 <?php
+require_once('lib/post.php');
 require_once('lib/database.php');
 require_once('lib/items.php');
 require_once('lib/questions.php');
@@ -11,7 +12,7 @@ function insertItem() {
          values(?, ?, ?, ?)');
     dbFailsafe($mysqli);
     $group = VI_WORD;
-    $hebrewBare = bareHebrew($_POST['hebrew']);
+    $hebrewBare = bareHebrew(postVar('hebrew'));
     $st->bind_param('isss', $group, $_POST['hebrew'], $hebrewBare,
         $_POST['russian']);
     $st->execute();
@@ -32,14 +33,14 @@ function insertItem() {
 function modifyItem() {
     global $mysqli, $itemId;
 
-    $itemId = $_POST['id'];
+    $itemId = postIntVar('id');
 
     $st = $mysqli->prepare(
         'update items
          set hebrew = ?, hebrew_bare = ?, russian = ?
          where id = ?');
     dbFailsafe($mysqli);
-    $hebrewBare = bareHebrew($_POST['hebrew']);
+    $hebrewBare = bareHebrew(postVar('hebrew'));
     $st->bind_param('sssi', $_POST['hebrew'], $hebrewBare, $_POST['russian'],
         $itemId);
     $st->execute();
@@ -58,8 +59,8 @@ dbClose($mysqli);
 
 $result = array(
     'id' => $itemId,
-    'hebrew' => $_POST['hebrew'],
-    'russian' => $_POST['russian']
+    'hebrew' => postVar('hebrew'),
+    'russian' => postVar('russian')
 );
 
 header('Content-Type: application/json');

@@ -37,7 +37,7 @@
     font: normal 14pt serif;
 }
 
-#spinner {
+#spinner, #spinner-continue {
     visibility: hidden;
 }
 
@@ -72,4 +72,19 @@
 
 #editor td {
     padding: 5px;
+}
+
+#continue {
+    display: none;
+}
+
+#continue td {
+    text-align: center;
+    color: blue;
+    font: normal 10pt sans-serif;
+    cursor: pointer;
+}
+
+#continue:hover {
+    background-color: #ffffee;
 }

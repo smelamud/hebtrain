@@ -1,5 +1,5 @@
 function addLine(data) {
-    var newLine = $(".template").clone();
+    var newLine = $("#found .template").clone();
     newLine.removeClass("template");
     newLine.addClass("item");
     newLine.data("id", data.id);
@@ -8,7 +8,7 @@ function addLine(data) {
     newLine.find(".russian").text(data.russian);
     newLine.find(".russian-comment").text(data.russian_comment);
     newLine.click(recallItem);
-    $(".template").before(newLine);
+    $("#found .template").before(newLine);
 }
 
 function findItems(keyword, offset) {
@@ -16,7 +16,7 @@ function findItems(keyword, offset) {
     $.getJSON("/actions/items-find.php", { q: keyword, offset: offset },
         function(data) {
             if (offset == 0) {
-                $(".item").remove();
+                $("#found .item").remove();
             }
             $("#added-title").hide();
             $("#found-title").show();
@@ -49,7 +49,7 @@ function addItem() {
             if ($("#added-title").css("display") == "none") {
                 $("#found-title").hide();
                 $("#continue").hide();
-                $(".item").remove();
+                $("#found .item").remove();
                 $("#added-title").show();
                 $("#added-total").text("1");
             } else {
@@ -57,7 +57,7 @@ function addItem() {
             }
             addLine(data);
             resetAdder();
-            resolveSimilar(data.similar);
+            resolveSimilar(data);
         }
     ).error(
         function() {
@@ -88,7 +88,7 @@ function modifyItem() {
             line.find(".hebrew").text(data.hebrew);
             line.find(".russian").text(data.russian);
             resetAdder();
-            resolveSimilar(data.similar);
+            resolveSimilar(data);
         }
     ).error(
         function() {
@@ -134,8 +134,13 @@ function search() {
     return false;
 }
 
-function resolveSimilar(similar) {
-    if (similar.length > 0) {
+function resolveSimilar(data) {
+    if (data.similar.length > 0) {
+        $("#similar .item").remove();
+        similarDialogAddLine(data);
+        $.each(data.similar, function(index, item) {
+            similarDialogAddLine(item);
+        });
         $("#similar-dialog").dialog('open');
     }
 }
@@ -146,6 +151,19 @@ function similarDialogSave() {
 
 function similarDialogCancel() {
     $("#similar-dialog").dialog('close');
+}
+
+function similarDialogAddLine(data) {
+    var newLine = $("#similar .template").clone();
+    newLine.removeClass("template");
+    newLine.addClass("item");
+    newLine.data("id", data.id);
+    newLine.find(".hebrew").text(data.hebrew);
+    newLine.find(".hebrew-comment input").val(data.hebrew_comment);
+    newLine.find(".russian").text(data.russian);
+    newLine.find(".russian-comment input").val(data.russian_comment);
+    newLine.click(recallItem);
+    $("#similar .template").before(newLine);
 }
 
 $(function() {
@@ -174,7 +192,9 @@ $(function() {
         },
         closeText: "Закрыть",
         modal: true,
-        resizable: false
+        resizable: false,
+        minWidth: 1030,
+        maxWidth: 1600
     });
     findItems("", 0);
 });

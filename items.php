@@ -73,7 +73,27 @@ require_once('parts/header.php');
         </table>
 
         <div id="similar-dialog" title="Похожие слова">
-            Найдены похожие слова
+            <table id="similar" class="items">
+                <tr class="headline">
+                    <th colspan="2" class="russian">Русский</th>
+                    <th>&nbsp;</th>
+                    <th colspan="2" class="hebrew">עברית</th>
+                </tr>
+                <form id="similar-form">
+                    <tr class="template">
+                        <input type="hidden" name="id[]"/>
+                        <td class="russian">&nbsp;</td>
+                        <td class="russian-comment">
+                            <input type="text" name="russian-comment[]" maxlength="63"/>
+                        </td>
+                        <td class="separator">&mdash;</td>
+                        <td class="hebrew-comment">
+                            <input type="text" name="hebrew-comment[]" maxlength="63"/>
+                        </td>
+                        <td class="hebrew">&nbsp;</td>
+                    </tr>
+                </form>
+            </table>
         </div>
     </body>
 </html>

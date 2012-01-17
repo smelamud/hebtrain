@@ -129,15 +129,23 @@ function resetAdder() {
     $("#editor input[name='russian']").focus();
 }
 
-function resolveSimilar(similar) {
-    if (similar.length > 0) {
-        $("#similar-dialog").dialog();
-    }
-}
-
 function search() {
     findItems($("#search-form input").val(), 0);
     return false;
+}
+
+function resolveSimilar(similar) {
+    if (similar.length > 0) {
+        $("#similar-dialog").dialog('open');
+    }
+}
+
+function similarDialogSave() {
+    $("#similar-dialog").dialog('close');
+}
+
+function similarDialogCancel() {
+    $("#similar-dialog").dialog('close');
 }
 
 $(function() {
@@ -157,6 +165,16 @@ $(function() {
     $("#editor").ajaxStop(function() {
         $("#spinner").css("visibility", "hidden");
         $("#spinner-continue").css("visibility", "hidden");
+    });
+    $("#similar-dialog").dialog({
+        autoOpen: false,
+        buttons: {
+            'Отмена': similarDialogCancel,
+            'Сохранить': similarDialogSave
+        },
+        closeText: "Закрыть",
+        modal: true,
+        resizable: false
     });
     findItems("", 0);
 });

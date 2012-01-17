@@ -1,5 +1,5 @@
 header {
-    background-color: #000066;
+    background-color: #5c9ccc;
 }
 
 #site-title {
@@ -18,7 +18,7 @@ header {
 #menu li {
     display: inline-block;
     color: yellow;
-    background-color: #000066;
+    background-color: #5c9ccc;
     font: bold 11pt sans-serif;
     width: 100px;
     text-align: center;

@@ -18,6 +18,7 @@ function findItems(keyword, offset) {
             if (offset == 0) {
                 $(".item").remove();
             }
+            $("#added-title").hide();
             $("#found-title").show();
             $("#found-loaded").text(data.offset + data.count);
             $("#found-total").text(data.total);
@@ -45,6 +46,15 @@ function addItem() {
     window.ajaxType = "items";
     $.post("/actions/item-modify.php", $("#items-form").serialize(),
         function(data) {
+            if ($("#added-title").css("display") == "none") {
+                $("#found-title").hide();
+                $("#continue").hide();
+                $(".item").remove();
+                $("#added-title").show();
+                $("#added-total").text("1");
+            } else {
+                $("#added-total").text(Number($("#added-total").text()) + 1);
+            }
             addLine(data);
             resetAdder();
         }

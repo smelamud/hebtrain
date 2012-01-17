@@ -5,7 +5,7 @@ require_once('lib/items.php');
 require_once('lib/questions.php');
 require_once('lib/hebrew.php');
 
-function insertItem($item) {
+function insertItem(&$item) {
     global $mysqli, $VI_VARIANTS;
 
     $st = $mysqli->prepare(
@@ -31,7 +31,7 @@ function insertItem($item) {
     $st->close();
 }
 
-function modifyItem($item) {
+function modifyItem(&$item) {
     global $mysqli;
 
     $st = $mysqli->prepare(

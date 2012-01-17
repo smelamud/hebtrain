@@ -7,13 +7,17 @@ require_once('parts/header.php');
         <title>Иврит - Слова</title>
         <link rel="stylesheet" type="text/css" href="/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="/css/items.css"/>
+        <link rel="stylesheet" type="text/css"
+              href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/redmond/jquery-ui.css"/>
         <script type="text/javascript"
-                src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+                src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript"
+                src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
         <script type="text/javascript" src="/js/items.js"></script>
     </head>
     <body>
         <?php displayMainMenu('items'); ?>
-        <table id="items">
+        <table id="found" class="items">
             <tr class="headline">
                 <th>&nbsp;</th>
                 <th colspan="2" class="russian">Русский</th>
@@ -63,9 +67,13 @@ require_once('parts/header.php');
                 <td>
                     <img id="spinner-continue" src="/pics/ajax.gif">
                 </td>
-                <td colspan="6">&#x25be; Больше &#x25be;</td>
+                <td colspan="5">&#x25be; Больше &#x25be;</td>
                 <td>&nbsp;</td>
             </tr>
         </table>
+
+        <div id="similar-dialog" title="Похожие слова">
+            Найдены похожие слова
+        </div>
     </body>
 </html>

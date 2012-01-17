@@ -57,6 +57,7 @@ function addItem() {
             }
             addLine(data);
             resetAdder();
+            resolveSimilar(data.similar);
         }
     ).error(
         function() {
@@ -68,9 +69,9 @@ function addItem() {
 
 function recallItem() {
     self = $(this);
-    $("#items input[name='id']").val(self.data("id"));
-    $("#items input[name='hebrew']").val(self.find(".hebrew").text()).focus();
-    $("#items input[name='russian']").val(self.find(".russian").text());
+    $("#editor input[name='id']").val(self.data("id"));
+    $("#editor input[name='hebrew']").val(self.find(".hebrew").text()).focus();
+    $("#editor input[name='russian']").val(self.find(".russian").text());
     $("#add").hide();
     $("#modify").show();
     $("#delete").show();
@@ -81,12 +82,13 @@ function modifyItem() {
     window.ajaxType = "items";
     $.post("/actions/item-modify.php", $("#items-form").serialize(),
         function(data) {
-            var line = $("#items tr").filter(function() {
+            var line = $("#found tr").filter(function() {
                 return $(this).data("id") == data.id;
             });
             line.find(".hebrew").text(data.hebrew);
             line.find(".russian").text(data.russian);
             resetAdder();
+            resolveSimilar(data.similar);
         }
     ).error(
         function() {
@@ -99,11 +101,15 @@ function modifyItem() {
 function deleteItem() {
     window.ajaxType = "items";
     $.post("/actions/item-delete.php",
-        { "id": $("#items input[name='id']").val() },
+        { "id": $("#editor input[name='id']").val() },
         function(data) {
-            $("#items tr").filter(function() {
+            $("#found tr").filter(function() {
                 return $(this).data("id") == data.id;
             }).remove();
+            var loaded = Number($("#found-loaded").text());
+            var total = Number($("#found-total").text());
+            $("#found-loaded").text(loaded - 1);
+            $("#found-total").text(total - 1);
             resetAdder();
         }
     ).error(
@@ -119,8 +125,14 @@ function resetAdder() {
     $("#modify").hide();
     $("#delete").hide();
     $("#reset").hide();
-    $("#items input").val("");
-    $("#items input[name='russian']").focus();
+    $("#editor input").val("");
+    $("#editor input[name='russian']").focus();
+}
+
+function resolveSimilar(similar) {
+    if (similar.length > 0) {
+        $("#similar-dialog").dialog();
+    }
 }
 
 function search() {
@@ -135,14 +147,14 @@ $(function() {
     $("#reset").click(resetAdder);
     $("#continue").click(continueFind);
     $("#search-form").submit(search);
-    $("#items").ajaxStart(function() {
+    $("#editor").ajaxStart(function() {
         if (window.ajaxType == "continue") {
             $("#spinner-continue").css("visibility", "visible");
         } else {
             $("#spinner").css("visibility", "visible");
         }
     });
-    $("#items").ajaxStop(function() {
+    $("#editor").ajaxStop(function() {
         $("#spinner").css("visibility", "hidden");
         $("#spinner-continue").css("visibility", "hidden");
     });

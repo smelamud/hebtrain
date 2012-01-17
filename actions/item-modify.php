@@ -5,19 +5,19 @@ require_once('lib/items.php');
 require_once('lib/questions.php');
 require_once('lib/hebrew.php');
 
-function insertItem() {
-    global $mysqli, $itemId, $VI_VARIANTS;
+function insertItem($item) {
+    global $mysqli, $VI_VARIANTS;
 
     $st = $mysqli->prepare(
         'insert into items(`group`, hebrew, hebrew_bare, russian)
          values(?, ?, ?, ?)');
     dbFailsafe($mysqli);
     $group = VI_WORD;
-    $hebrewBare = bareHebrew(postVar('hebrew'));
-    $st->bind_param('isss', $group, $_POST['hebrew'], $hebrewBare,
-        $_POST['russian']);
+    $item['hebrew_bare'] = bareHebrew($item['hebrew']);
+    $st->bind_param('isss', $group, $item['hebrew'], $item['hebrew_bare'],
+        $item['russian']);
     $st->execute();
-    $itemId = $st->insert_id;
+    $item['id'] = $st->insert_id;
     $st->close();
 
     $st = $mysqli->prepare(
@@ -25,45 +25,76 @@ function insertItem() {
          values(?, ?, now())');
     dbFailsafe($mysqli);
     foreach($VI_VARIANTS[VI_WORD] as $variant) {
-        $st->bind_param('ii', $itemId, $variant);
+        $st->bind_param('ii', $item['id'], $variant);
         $st->execute();
     }
     $st->close();
 }
 
-function modifyItem() {
-    global $mysqli, $itemId;
-
-    $itemId = postIntVar('id');
+function modifyItem($item) {
+    global $mysqli;
 
     $st = $mysqli->prepare(
         'update items
          set hebrew = ?, hebrew_bare = ?, russian = ?
          where id = ?');
     dbFailsafe($mysqli);
-    $hebrewBare = bareHebrew(postVar('hebrew'));
-    $st->bind_param('sssi', $_POST['hebrew'], $hebrewBare, $_POST['russian'],
-        $itemId);
+    $item['hebrew_bare'] = bareHebrew($item['hebrew']);
+    $st->bind_param('sssi', $item['hebrew'], $item['hebrew_bare'],
+        $item['russian'], $item['id']);
     $st->execute();
     $st->close();
 }
 
-$mysqli = dbConnect();
+function getSimilarItems($item) {
+    global $mysqli;
 
-if (empty($_POST['id'])) {
-    insertItem();
-} else {
-    modifyItem();
+    $st = $mysqli->prepare(
+        'select id, hebrew, hebrew_comment, russian, russian_comment
+         from items
+         where `group` = ? and (russian = ? or hebrew_bare = ?) and id <> ?
+         order by hebrew_bare');
+    dbFailsafe($mysqli);
+    $group = VI_WORD;
+    $st->bind_param('issi', $group, $item['russian'], $item['hebrew_bare'],
+        $item['id']);
+    $st->execute();
+
+    $st->bind_result($id, $hebrew, $hebrew_comment, $russian, $russian_comment);
+    $similar = array();
+    while ($st->fetch()) {
+        array_push(
+            $similar,
+            array('id' => $id,
+                  'hebrew' => $hebrew,
+                  'hebrew_comment' => $hebrew_comment,
+                  'russian' => $russian,
+                  'russian_comment' => $russian_comment));
+    }
+
+    $st->close();
+
+    return $similar;
 }
 
-dbClose($mysqli);
-
-$result = array(
-    'id' => $itemId,
+$item = array(
+    'id' => postIntVar('id'),
     'hebrew' => postVar('hebrew'),
     'russian' => postVar('russian')
 );
 
+$mysqli = dbConnect();
+
+if (empty($item['id'])) {
+    insertItem($item);
+} else {
+    modifyItem($item);
+}
+
+$item['similar'] = getSimilarItems($item);
+
+dbClose($mysqli);
+
 header('Content-Type: application/json');
-echo json_encode($result);
+echo json_encode($item);
 ?>

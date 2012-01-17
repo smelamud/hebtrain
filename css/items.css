@@ -1,65 +1,59 @@
-#items {
+.items {
     border-spacing: 0;
 }
 
-#items tr.item:hover {
+.items tr.item:hover {
     background-color: #ffffee;
 }
 
-#items-form input {
-    width: 96%;
-    margin: 0;
-    font: normal 14pt serif;
-}
-
-#items .headline th, #items .headline td {
+.items .headline th, .items .headline td {
     font: bold 10pt sans-serif;
 }
 
-#items th {
+.items th {
     padding-left: 10px;
     padding-right: 10px;
 }
 
-#items th.russian {
+.items th.russian {
     width: 400px;
     text-align: left;
 }
 
-#items th.hebrew {
+.items th.hebrew {
     width: 400px;
     text-align: right;
 }
 
-#items td {
+.items td {
     padding-left: 5px;
     padding-right: 5px;
     font: normal 14pt serif;
 }
 
-#spinner, #spinner-continue {
-    visibility: hidden;
-}
-
-#items td.hebrew {
+.items td.hebrew {
     width: 200px;
     direction: rtl;
 }
 
-#items td.hebrew-comment {
+.items td.hebrew-comment {
     width: 200px;
 }
 
-#items td.russian {
+.items td.russian {
     width: 200px;
 }
 
-#items td.russian-comment {
+.items td.russian-comment {
     width: 200px;
 }
 
-#items tr.template {
+.items tr.template {
     display: none;
+}
+
+#spinner, #spinner-continue {
+    visibility: hidden;
 }
 
 #modify, #delete, #reset, #found-title, #added-title {
@@ -72,6 +66,12 @@
 
 #editor td {
     padding: 5px;
+}
+
+#editor input {
+    width: 96%;
+    margin: 0;
+    font: normal 14pt serif;
 }
 
 #search {
@@ -99,4 +99,8 @@
 
 #continue:hover {
     background-color: #ffffee;
+}
+
+#similar-dialog {
+    display: none;
 }

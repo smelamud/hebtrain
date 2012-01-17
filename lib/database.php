@@ -1,6 +1,8 @@
 <?php
+require_once('conf/hebtrain.conf');
+
 function dbConnect() {
-    $mysqli = new mysqli('localhost', 'root', 'mu8dhrse', 'hebtrain');
+    $mysqli = new mysqli(CFG_DB_HOST, CFG_DB_USER, CFG_DB_PASSWORD, CFG_DB_NAME);
     if ($mysqli->connect_error) {
         header('HTTP/1.0 500');
         error_log('Connect Error (' . $mysqli->connect_errno . ') '

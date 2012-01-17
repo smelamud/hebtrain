@@ -1,4 +1,6 @@
 <?php
+require_once('conf/hebtrain.conf');
+
 require_once('lib/post.php');
 require_once('lib/database.php');
 require_once('lib/items.php');
@@ -40,7 +42,7 @@ function findItems($keyword, $offset) {
          order by hebrew_bare
          limit ?, ?');
     dbFailsafe($mysqli);
-    $limit = 10;
+    $limit = CFG_ITEMS_LOAD_LIMIT;
     $st->bind_param('issii', $group, $russian, $hebrew, $offset, $limit);
     $st->execute();
 

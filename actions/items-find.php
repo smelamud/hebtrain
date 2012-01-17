@@ -2,6 +2,7 @@
 require_once('lib/post.php');
 require_once('lib/database.php');
 require_once('lib/items.php');
+require_once('lib/hebrew.php');
 
 function findItems($keyword, $offset) {
     global $mysqli;
@@ -16,10 +17,17 @@ function findItems($keyword, $offset) {
     $st = $mysqli->prepare(
         'select count(*)
          from items
-         where `group` = ?');
+         where `group` = ? and russian like ? and hebrew_bare like ?');
     dbFailsafe($mysqli);
     $group = VI_WORD;
-    $st->bind_param('i', $group);
+    if (isHebrew($keyword)) {
+        $russian = '%';
+        $hebrew = $keyword . '%';
+    } else {
+        $russian = $keyword . '%';
+        $hebrew = '%';
+    }
+    $st->bind_param('iss', $group, $russian, $hebrew);
     $st->execute();
     $st->bind_result($result['total']);
     $st->fetch();
@@ -28,13 +36,12 @@ function findItems($keyword, $offset) {
     $st = $mysqli->prepare(
         'select id, hebrew, hebrew_comment, russian, russian_comment
          from items
-         where `group` = ?
+         where `group` = ? and russian like ? and hebrew_bare like ?
          order by hebrew_bare
          limit ?, ?');
     dbFailsafe($mysqli);
-    $group = VI_WORD;
     $limit = 10;
-    $st->bind_param('iii', $group, $offset, $limit);
+    $st->bind_param('issii', $group, $russian, $hebrew, $offset, $limit);
     $st->execute();
 
     $st->store_result();

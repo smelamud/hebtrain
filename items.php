@@ -50,7 +50,7 @@ require_once('parts/header.php');
                 </td>
                 <td>&nbsp;</td>
             </tr>
-            <tr class="template item">
+            <tr class="template">
                 <td>&nbsp;</td>
                 <td class="russian">&nbsp;</td>
                 <td class="russian-comment">&nbsp;</td>

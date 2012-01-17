@@ -1,6 +1,7 @@
 function addLine(data) {
     var newLine = $(".template").clone();
     newLine.removeClass("template");
+    newLine.addClass("item");
     newLine.data("id", data.id);
     newLine.find(".hebrew").text(data.hebrew);
     newLine.find(".hebrew-comment").text(data.hebrew_comment);
@@ -10,10 +11,13 @@ function addLine(data) {
     $(".template").before(newLine);
 }
 
-function findItems(offset) {
+function findItems(keyword, offset) {
     window.ajaxType = offset == 0 ? "items" : "continue";
-    $.getJSON("/actions/items-find.php", { offset: offset },
+    $.getJSON("/actions/items-find.php", { q: keyword, offset: offset },
         function(data) {
+            if (offset == 0) {
+                $(".item").remove();
+            }
             $("#found-title").show();
             $("#found-loaded").text(data.offset + data.count);
             $("#found-total").text(data.total);
@@ -34,7 +38,7 @@ function findItems(offset) {
 }
 
 function continueFind() {
-    findItems(Number($("#found-loaded").text()));
+    findItems($("#search-form input").val(), Number($("#found-loaded").text()));
 }
 
 function addItem() {
@@ -110,7 +114,7 @@ function resetAdder() {
 }
 
 function search() {
-    alert("Search!");
+    findItems($("#search-form input").val(), 0);
     return false;
 }
 
@@ -132,5 +136,5 @@ $(function() {
         $("#spinner").css("visibility", "hidden");
         $("#spinner-continue").css("visibility", "hidden");
     });
-    findItems(0);
+    findItems("", 0);
 });

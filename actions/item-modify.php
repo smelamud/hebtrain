@@ -3,6 +3,7 @@ require_once('lib/post.php');
 require_once('lib/database.php');
 require_once('lib/items.php');
 require_once('lib/questions.php');
+require_once('lib/hebrew.php');
 
 function insertItem() {
     global $mysqli, $itemId, $VI_VARIANTS;

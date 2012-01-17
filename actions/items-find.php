@@ -23,13 +23,13 @@ function findItems($keyword, $offset) {
     dbFailsafe($mysqli);
     $group = VI_WORD;
     if (isHebrew($keyword)) {
-        $russian = '%';
-        $hebrew = $keyword . '%';
+        $russian_like = '%';
+        $hebrew_like = $keyword . '%';
     } else {
-        $russian = $keyword . '%';
-        $hebrew = '%';
+        $russian_like = $keyword . '%';
+        $hebrew_like = '%';
     }
-    $st->bind_param('iss', $group, $russian, $hebrew);
+    $st->bind_param('iss', $group, $russian_like, $hebrew_like);
     $st->execute();
     $st->bind_result($result['total']);
     $st->fetch();
@@ -43,7 +43,8 @@ function findItems($keyword, $offset) {
          limit ?, ?');
     dbFailsafe($mysqli);
     $limit = CFG_ITEMS_LOAD_LIMIT;
-    $st->bind_param('issii', $group, $russian, $hebrew, $offset, $limit);
+    $st->bind_param('issii', $group, $russian_like, $hebrew_like,
+        $offset, $limit);
     $st->execute();
 
     $st->store_result();

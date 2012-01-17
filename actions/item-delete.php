@@ -1,4 +1,5 @@
 <?php
+require_once('lib/post.php');
 require_once('lib/database.php');
 require_once('lib/items.php');
 

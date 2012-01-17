@@ -109,12 +109,18 @@ function resetAdder() {
     $("#items input[name='russian']").focus();
 }
 
+function search() {
+    alert("Search!");
+    return false;
+}
+
 $(function() {
     $("#add").click(addItem);
     $("#modify").click(modifyItem);
     $("#delete").click(deleteItem);
     $("#reset").click(resetAdder);
     $("#continue").click(continueFind);
+    $("#search-form").submit(search);
     $("#items").ajaxStart(function() {
         if (window.ajaxType == "continue") {
             $("#spinner-continue").css("visibility", "visible");

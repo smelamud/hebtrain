@@ -6,7 +6,7 @@
     background-color: #ffffee;
 }
 
-#items input {
+#items-form input {
     width: 96%;
     margin: 0;
     font: normal 14pt serif;
@@ -72,6 +72,18 @@
 
 #editor td {
     padding: 5px;
+}
+
+#search {
+    text-align: right;
+}
+
+#search-form input {
+    width: 120px;
+    margin: 0;
+    font: normal 14pt serif;
+    background: url(/pics/search.png) no-repeat scroll 123px 7px;
+    padding-right: 20px;
 }
 
 #continue {

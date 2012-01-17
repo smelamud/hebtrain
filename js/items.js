@@ -146,7 +146,33 @@ function resolveSimilar(data) {
 }
 
 function similarDialogSave() {
-    $("#similar-dialog").dialog('close');
+    window.ajaxType = "similar";
+    $.post("/actions/items-comments-modify.php",
+        $("#similar-form").serialize(),
+        function(data) {
+            $("#similar-dialog").dialog('close');
+
+            var dataMap = {};
+            $.each(data, function(index, item) {
+                dataMap[item.id] = item;
+            });
+
+            $("#found .item").each(function(index) {
+                var line = $(this);
+                id = line.data("id");
+                if (dataMap[id]) {
+                    line.find(".hebrew-comment").text(
+                        dataMap[id].hebrew_comment);
+                    line.find(".russian-comment").text(
+                        dataMap[id].russian_comment);
+                }
+            });
+        }
+    ).error(
+        function() {
+            alert("Error!");
+        }
+    );
 }
 
 function similarDialogCancel() {
@@ -157,12 +183,11 @@ function similarDialogAddLine(data) {
     var newLine = $("#similar .template").clone();
     newLine.removeClass("template");
     newLine.addClass("item");
-    newLine.data("id", data.id);
+    newLine.find("input[type=hidden]").val(data.id);
     newLine.find(".hebrew").text(data.hebrew);
     newLine.find(".hebrew-comment input").val(data.hebrew_comment);
     newLine.find(".russian").text(data.russian);
     newLine.find(".russian-comment input").val(data.russian_comment);
-    newLine.click(recallItem);
     $("#similar .template").before(newLine);
 }
 
@@ -176,6 +201,8 @@ $(function() {
     $("#editor").ajaxStart(function() {
         if (window.ajaxType == "continue") {
             $("#spinner-continue").css("visibility", "visible");
+        } else if (window.ajaxType == "similar") {
+            $("#spinner-similar").css("visibility", "visible");
         } else {
             $("#spinner").css("visibility", "visible");
         }
@@ -183,6 +210,7 @@ $(function() {
     $("#editor").ajaxStop(function() {
         $("#spinner").css("visibility", "hidden");
         $("#spinner-continue").css("visibility", "hidden");
+        $("#spinner-similar").css("visibility", "hidden");
     });
     $("#similar-dialog").dialog({
         autoOpen: false,

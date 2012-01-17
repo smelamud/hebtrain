@@ -16,6 +16,9 @@ function bareHebrew($s) {
 
 function isHebrew($s) {
     $ss = iconv('UTF-8', 'UCS-2', $s);
+    if (strlen($ss) < 2) {
+        return false;
+    }
     $fb = ord($ss[0]);
     $sb = ord($ss[1]);
     return $sb == 0x05 && $fb >= 0x91;

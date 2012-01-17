@@ -46,30 +46,36 @@ function modifyItem(&$item) {
     $st->close();
 }
 
-function getSimilarItems($item) {
+function getSimilarItems(&$item) {
     global $mysqli;
 
     $st = $mysqli->prepare(
         'select id, hebrew, hebrew_comment, russian, russian_comment
          from items
-         where `group` = ? and (russian = ? or hebrew_bare = ?) and id <> ?
+         where `group` = ? and (russian = ? or hebrew_bare = ?)
          order by hebrew_bare');
     dbFailsafe($mysqli);
     $group = VI_WORD;
-    $st->bind_param('issi', $group, $item['russian'], $item['hebrew_bare'],
-        $item['id']);
+    $st->bind_param('iss', $group, $item['russian'], $item['hebrew_bare']);
     $st->execute();
 
     $st->bind_result($id, $hebrew, $hebrew_comment, $russian, $russian_comment);
     $similar = array();
     while ($st->fetch()) {
-        array_push(
-            $similar,
-            array('id' => $id,
-                  'hebrew' => $hebrew,
-                  'hebrew_comment' => $hebrew_comment,
-                  'russian' => $russian,
-                  'russian_comment' => $russian_comment));
+        if ($id != $item['id']) {
+            array_push(
+                $similar,
+                array('id' => $id,
+                      'hebrew' => $hebrew,
+                      'hebrew_comment' => $hebrew_comment,
+                      'russian' => $russian,
+                      'russian_comment' => $russian_comment));
+        } else {
+            $item['hebrew'] = $hebrew;
+            $item['hebrew_comment'] = $hebrew_comment;
+            $item['russian'] = $russian;
+            $item['russian_comment'] = $russian_comment;
+        }
     }
 
     $st->close();

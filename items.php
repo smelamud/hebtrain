@@ -76,19 +76,21 @@ require_once('parts/header.php');
             <table id="similar" class="items">
                 <tr class="headline">
                     <th colspan="2" class="russian">Русский</th>
-                    <th>&nbsp;</th>
+                    <th><img id="spinner-similar" src="/pics/ajax.gif"></th>
                     <th colspan="2" class="hebrew">עברית</th>
                 </tr>
                 <form id="similar-form">
                     <tr class="template">
-                        <input type="hidden" name="id[]"/>
+                        <input type="hidden" form="similar-form" name="id[]"/>
                         <td class="russian">&nbsp;</td>
                         <td class="russian-comment">
-                            <input type="text" name="russian-comment[]" maxlength="63"/>
+                            <input type="text" form="similar-form"
+                                   name="russian_comment[]" maxlength="63"/>
                         </td>
                         <td class="separator">&mdash;</td>
                         <td class="hebrew-comment">
-                            <input type="text" name="hebrew-comment[]" maxlength="63"/>
+                            <input type="text" form="similar-form"
+                                   name="hebrew_comment[]" maxlength="63"/>
                         </td>
                         <td class="hebrew">&nbsp;</td>
                     </tr>

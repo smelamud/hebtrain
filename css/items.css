@@ -52,7 +52,7 @@
     display: none;
 }
 
-#spinner, #spinner-continue {
+#spinner, #spinner-continue, #spinner-similar {
     visibility: hidden;
 }
 

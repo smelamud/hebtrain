@@ -45,6 +45,11 @@ require_once('parts/header.php');
                 <p id="buttons-answer">
                     <button id="button-answer">Ответ</button>
                 </p>
+                <p id="answer"></p>
+                <p id="buttons-correct">
+                    <button id="button-incorrect">Неверно</button>
+                    <button id="button-correct">Верно</button>
+                </p>
             </div>
         </div>
     </body>

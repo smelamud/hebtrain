@@ -23,6 +23,6 @@
     display: inline;
 }
 
-#question-word {
+#question-word, #answer {
     font-size: 24pt;
 }

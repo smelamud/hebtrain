@@ -20,6 +20,10 @@ function loadTest() {
     $.getJSON("/actions/test-load.php",
         function(data) {
             window.testData = data;
+            $.each(window.testData, function(index, item) {
+                item.answers_total = 0;
+                item.answers_correct = 0;
+            });
             $("#loading").hide();
             $("#loaded").show();
             $("#buttons-start").show();
@@ -74,17 +78,64 @@ function showQuestion() {
     }
 
     $("#buttons-answer").show();
+    $("#answer").hide();
+    $("#buttons-correct").hide();
 }
 
 function answered() {
     $("#buttons-answer").hide();
 
     var data = window.testData[window.testCurrent];
+    var answer = '';
+    switch(data.question) {
+        case 1: // QV_WORD_HE_RU
+        case 2: // QV_WORD_BARE_HE_RU
+            answer = data.russian;
+            break;
+        case 3: // QV_WORD_RU_HE
+            answer = data.hebrew;
+            break;
+        case 4: // QV_WORD_RU_HE_WRITE
+            answer = data.hebrew_bare;
+            break;
+        case 5: // QV_WORD_RU_HE_NEKUDOT
+            answer = data.hebrew;
+            break;
+    }
+    $("#answer").text(answer);
+    $("#answer").show();
+    $("#buttons-correct").show();
+}
+
+function answerCorrect() {
+    var data = window.testData[window.testCurrent];
+    data.answers_total++;
+    data.answers_correct++;
+
+    nextQuestion();
+}
+
+function answerIncorrect() {
+    var data = window.testData[window.testCurrent];
+    data.answers_total++;
+    
+    nextQuestion();
+}
+
+function nextQuestion() {
+    window.testCurrent++;
+    if (window.testCurrent >= window.testData.length) {
+        shuffle(window.testData);
+        window.testCurrent = 0;
+    }
+    showQuestion();
 }
 
 $(function() {
     $("#button-start").click(startTest);
     $("#button-answer").click(answered);
+    $("#button-correct").click(answerCorrect);
+    $("#button-incorrect").click(answerIncorrect);
     $("#main").ajaxStart(function() {
         $("#spinner").css("visibility", "visible");
     });

@@ -1,0 +1,12 @@
+#main {
+    margin-top: 10ex;
+    text-align: center;
+}
+
+#buttons-start {
+    display: none;
+}
+
+#spinner {
+    visibility: hidden;
+}

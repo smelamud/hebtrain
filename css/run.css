@@ -3,10 +3,26 @@
     text-align: center;
 }
 
+#spinner {
+    visibility: hidden;
+}
+
 #buttons-start {
     display: none;
 }
 
-#spinner {
-    visibility: hidden;
+#run {
+    display: none;
+}
+
+.question-title-hide {
+    display: none;
+}
+
+.question-title-show {
+    display: inline;
+}
+
+#question-word {
+    font-size: 24pt;
 }

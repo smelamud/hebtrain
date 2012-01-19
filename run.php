@@ -51,6 +51,12 @@ require_once('parts/header.php');
                     <button id="button-correct">Верно</button>
                 </p>
             </div>
+            <div id="stop">
+                <span id="finished">Тест завершен</span>
+                <p id="buttons-stop">
+                    <button id="button-save">Записать результаты</button>
+                </p>
+            </div>
         </div>
     </body>
 </html>

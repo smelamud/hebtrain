@@ -41,8 +41,8 @@ function startTest() {
     $("#start").hide();
     $("#run").show();
     shuffle(window.testData);
-    window.testCurrent = 0;
-    showQuestion();
+    window.testCurrent = window.testData.length;
+    nextQuestion();
 }
 
 function showQuestion() {
@@ -55,7 +55,7 @@ function showQuestion() {
     title.removeClass("question-title-hide");
     title.addClass("question-title-show");
 
-    $("#question-word").text(data.word);
+    $("#question-word").text(data.word + " " + data.answers_correct);
     if (data.comment.length > 0) {
         $("#question-comment").text("[" + data.comment + "]");
     } else {
@@ -92,12 +92,37 @@ function answerIncorrect() {
 }
 
 function nextQuestion() {
-    window.testCurrent++;
-    if (window.testCurrent >= window.testData.length) {
-        shuffle(window.testData);
-        window.testCurrent = 0;
+    while (true) {
+        window.testCurrent++;
+        if (window.testCurrent >= window.testData.length) {
+            if (getOpenQuestionsCount() <= window.testMinQuestions) {
+                stopTest();
+                return;
+            }
+            shuffle(window.testData);
+            window.testCurrent = 0;
+        }
+        var data = window.testData[window.testCurrent];
+        if (data.answers_correct < window.testMaxCorrect) {
+            break;
+        }
     }
     showQuestion();
+}
+
+function getOpenQuestionsCount() {
+    count = 0;
+    for (var i = 0; i < window.testData.length; i++) {
+        if (window.testData[i].answers_correct < window.testMaxCorrect) {
+            count++;
+        }
+    }
+    return count;
+}
+
+function stopTest() {
+    $("#run").hide();
+    $("#stop").show();
 }
 
 $(function() {

@@ -55,7 +55,7 @@ function showQuestion() {
     title.removeClass("question-title-hide");
     title.addClass("question-title-show");
 
-    $("#question-word").text(data.word + " " + data.answers_correct);
+    $("#question-word").text(data.word);
     if (data.comment.length > 0) {
         $("#question-comment").text("[" + data.comment + "]");
     } else {

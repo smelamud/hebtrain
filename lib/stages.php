@@ -1,15 +1,15 @@
 <?php
 # Stages of learning
 
-const LS_1_DAY = 1;
-const LS_3_DAYS = 2;
-const LS_1_WEEK = 3;
-const LS_2_WEEKS = 4;
-const LS_1_MONTH = 5;
-const LS_3_MONTHS = 6;
-const LS_6_MONTHS = 7;
-const LS_1_YEAR = 8;
-const LS_PERMANENT = 9;
+const LS_1_DAY = 0;
+const LS_3_DAYS = 1;
+const LS_1_WEEK = 2;
+const LS_2_WEEKS = 3;
+const LS_1_MONTH = 4;
+const LS_3_MONTHS = 5;
+const LS_6_MONTHS = 6;
+const LS_1_YEAR = 7;
+const LS_PERMANENT = 8;
 
 $LS_PARAMS =
     array(
@@ -36,5 +36,8 @@ $LS_PARAMS =
             'period' => 6 * 28 + 3),
         LS_1_YEAR => array(
             'steps' => 3,
-            'period' => 12 * 28 + 6));
+            'period' => 12 * 28 + 6),
+        LS_PERMANENT => array(
+            'steps' => 1000000,
+            'period' => 10 * (12 * 28 + 6)));
 ?>

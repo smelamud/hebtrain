@@ -12,6 +12,7 @@ function shuffle(arr) {
 }
 
 function loadTest() {
+    $("#restart").hide();
     $("#start").show();
     $("#loading").show();
     $("#loaded").hide();
@@ -125,11 +126,30 @@ function stopTest() {
     $("#stop").show();
 }
 
+function restartTest() {
+    $("#stop").hide();
+    $("#restart").show();
+}
+
+function saveResult() {
+    $.post("/actions/test-save.php", { data: window.testData },
+        function(data) {
+            restartTest();
+        }
+    ).error(
+        function() {
+            alert("Error!");
+        }
+    );
+}
+
 $(function() {
     $("#button-start").click(startTest);
     $("#button-answer").click(answered);
     $("#button-correct").click(answerCorrect);
     $("#button-incorrect").click(answerIncorrect);
+    $("#button-save").click(saveResult);
+    $("#button-restart").click(loadTest);
     $("#main").ajaxStart(function() {
         $("#spinner").css("visibility", "visible");
     });

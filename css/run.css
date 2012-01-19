@@ -11,7 +11,7 @@
     display: none;
 }
 
-#run, #stop {
+#run, #stop, #restart {
     display: none;
 }
 

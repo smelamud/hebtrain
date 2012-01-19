@@ -57,6 +57,12 @@ require_once('parts/header.php');
                     <button id="button-save">Записать результаты</button>
                 </p>
             </div>
+            <div id="restart">
+                <span id="saved">Результаты теста сохранены</span>
+                <p id="buttons-restart">
+                    <button id="button-restart">Загрузить новый тест</button>
+                </p>
+            </div>
         </div>
     </body>
 </html>

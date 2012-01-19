@@ -19,7 +19,9 @@ function loadTest() {
 
     $.getJSON("/actions/test-load.php",
         function(data) {
-            window.testData = data;
+            window.testMaxCorrect = data.max_correct;
+            window.testMinQuestions = data.min_questions;
+            window.testData = data.tests;
             $.each(window.testData, function(index, item) {
                 item.answers_total = 0;
                 item.answers_correct = 0;
@@ -53,26 +55,9 @@ function showQuestion() {
     title.removeClass("question-title-hide");
     title.addClass("question-title-show");
 
-    var word = '';
-    switch(data.question) {
-        case 1: // QV_WORD_HE_RU
-            word = data.hebrew;
-            comment = data.hebrew_comment;
-            break;
-        case 2: // QV_WORD_BARE_HE_RU
-            word = data.hebrew_bare;
-            comment = data.hebrew_comment;
-            break;
-        case 3: // QV_WORD_RU_HE
-        case 4: // QV_WORD_RU_HE_WRITE
-        case 5: // QV_WORD_RU_HE_NEKUDOT
-            word = data.russian;
-            comment = data.russian_comment;
-            break;
-    }
-    $("#question-word").text(word);
-    if (comment.length > 0) {
-        $("#question-comment").text("[" + comment + "]");
+    $("#question-word").text(data.word);
+    if (data.comment.length > 0) {
+        $("#question-comment").text("[" + data.comment + "]");
     } else {
         $("#question-comment").text("");
     }
@@ -86,23 +71,7 @@ function answered() {
     $("#buttons-answer").hide();
 
     var data = window.testData[window.testCurrent];
-    var answer = '';
-    switch(data.question) {
-        case 1: // QV_WORD_HE_RU
-        case 2: // QV_WORD_BARE_HE_RU
-            answer = data.russian;
-            break;
-        case 3: // QV_WORD_RU_HE
-            answer = data.hebrew;
-            break;
-        case 4: // QV_WORD_RU_HE_WRITE
-            answer = data.hebrew_bare;
-            break;
-        case 5: // QV_WORD_RU_HE_NEKUDOT
-            answer = data.hebrew;
-            break;
-    }
-    $("#answer").text(answer);
+    $("#answer").text(data.answer);
     $("#answer").show();
     $("#buttons-correct").show();
 }

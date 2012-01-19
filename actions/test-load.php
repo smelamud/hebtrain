@@ -3,9 +3,10 @@ require_once('conf/hebtrain.conf');
 
 require_once('lib/database.php');
 require_once('lib/items.php');
+require_once('lib/questions.php');
 
 function loadTest() {
-    global $mysqli;
+    global $mysqli, $QV_PARAMS;
 
     $st = $mysqli->prepare(
         'select item_id, hebrew, hebrew_bare, hebrew_comment,
@@ -48,9 +49,16 @@ function loadTest() {
     $result = array();
     for ($i = 0; $i < CFG_QUESTIONS_PER_TEST && $i < count($itemIds); $i++) {
         $n = rand(0, count($questions[$itemIds[$i]]) - 1);
+        $q = $questions[$itemIds[$i]][$n];
+        $question = $q['question'];
         array_push(
             $result,
-            $questions[$itemIds[$i]][$n]);
+            array(
+                'item_id' => $q['item_id'],
+                'question' => $question,
+                'word' => $q[$QV_PARAMS[$question]['word']],
+                'comment' => $q[$QV_PARAMS[$question]['comment']],
+                'answer' => $q[$QV_PARAMS[$question]['answer']]));
     }
 
     return $result;
@@ -58,7 +66,10 @@ function loadTest() {
 
 $mysqli = dbConnect();
 
-$result = loadTest();
+$result = array(
+    'max_correct' => CFG_MAX_CORRECT_ANSWERS,
+    'min_questions' => CFG_MIN_QUESTIONS_IN_TEST,
+    'tests' => loadTest());
 
 dbClose($mysqli);
 

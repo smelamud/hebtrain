@@ -1,2 +1,4 @@
 .*.swp
 conf/hebtrain.conf
+htpasswd
+log/

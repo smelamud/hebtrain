@@ -19,7 +19,7 @@ require_once('parts/header.php');
     <body>
         <?php displayMainMenu('items'); ?>
         <div class="container"><div class="content">
-            <table id="found" class="items">
+            <table id="found" class="items condensed-table">
                 <tr class="headline">
                     <th>&nbsp;</th>
                     <th colspan="2" class="russian">Русский</th>
@@ -37,10 +37,10 @@ require_once('parts/header.php');
                         <td class="separator">&mdash;</td>
                         <td class="hebrew" colspan="2"><input type="text" name="hebrew" maxlength="63"/></td>
                         <td>
-                            <button id="add">Добавить</button>
-                            <button id="modify">Изменить</button>
-                            <button type="button" id="delete">Удалить</button>
-                            <button type="reset" id="reset">Сброс</button>
+                            <button id="add" class="btn primary">Добавить</button>
+                            <button id="modify" class="btn primary">Изменить</button>
+                            <button type="button" id="delete" class="btn">Удалить</button>
+                            <button type="reset" id="reset" class="btn">Сброс</button>
                         </td>
                     </tr>
                 </form>

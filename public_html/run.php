@@ -21,7 +21,7 @@ require_once('parts/header.php');
                     <span id="loading">Загрузка теста</span>
                     <span id="loaded">Тест готов</span>
                     <p id="buttons-start">
-                        <button id="button-start">Начать тест</button>
+                        <button id="button-start" class="btn primary">Начать тест</button>
                     </p>
                 </div>
                 <div id="run">
@@ -45,24 +45,24 @@ require_once('parts/header.php');
                         &#x200e;<span id="question-comment">&nbsp;</span>
                     </p>
                     <p id="buttons-answer">
-                        <button id="button-answer">Ответ</button>
+                        <button id="button-answer" class="btn primary">Ответ</button>
                     </p>
                     <p id="answer"></p>
                     <p id="buttons-correct">
-                        <button id="button-incorrect">Неверно</button>
-                        <button id="button-correct">Верно</button>
+                        <button id="button-incorrect" class="btn danger">Неверно</button>
+                        <button id="button-correct" class="btn success">Верно</button>
                     </p>
                 </div>
                 <div id="stop">
                     <span id="finished">Тест завершен</span>
                     <p id="buttons-stop">
-                        <button id="button-save">Записать результаты</button>
+                        <button id="button-save" class="btn primary">Записать результаты</button>
                     </p>
                 </div>
                 <div id="restart">
                     <span id="saved">Результаты теста сохранены</span>
                     <p id="buttons-restart">
-                        <button id="button-restart">Загрузить новый тест</button>
+                        <button id="button-restart" class="btn primary">Загрузить новый тест</button>
                     </p>
                 </div>
             </div>

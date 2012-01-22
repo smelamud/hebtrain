@@ -28,17 +28,11 @@
 }
 
 #button-correct {
-    background-color: #008000;
-    border-color: #008000;
-    color: white;
     font-size: 14pt;
     width: 100px;
 }
 
 #button-incorrect {
-    background-color: #800000;
-    border-color: #800000;
-    color: white;
     margin-right: 3em;
     font-size: 14pt;
     width: 100px;

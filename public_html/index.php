@@ -5,6 +5,7 @@ require_once('parts/header.php');
 <html>
     <head>
         <title>Иврит</title>
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="/css/index.css"/>
         <script type="text/javascript"
@@ -13,18 +14,22 @@ require_once('parts/header.php');
     </head>
     <body>
         <?php displayMainMenu('index'); ?>
-        <img id="spinner" src="/pics/ajax.gif"><br/>
-        <strong>Всего слов в словаре:</strong> <span id="words-total">0</span><br/>
-        <strong>Всего вопросов:</strong> <span id="questions-total">0</span>,
-        <strong>требуют ответа сейчас</strong>:  <span id="questions-now">0</span>
-        <p>
-        <strong>По этапам:</strong>
-        <table id="stages">
-            <tr class="template">
-                <td class="name">&nbsp;</td>
-                <td>&mdash;</td>
-                <td class="count">&nbsp;</td>
-            </tr>
-        </table>
+        <div class="container"><div class="content">
+            <p>
+                <img id="spinner" src="/pics/ajax.gif"><br/>
+                <strong>Всего слов в словаре:</strong> <span id="words-total">0</span><br/>
+                <strong>Всего вопросов:</strong> <span id="questions-total">0</span>,
+                <strong>требуют ответа сейчас</strong>:  <span id="questions-now">0</span>
+            </p>
+            <strong>По этапам:</strong>
+            <table id="stages">
+                <tr class="template">
+                    <td class="name span1">&nbsp;</td>
+                    <td class="span1">&nbsp;</td>
+                    <td class="count span1">&nbsp;</td>
+                    <td class="span13">&nbsp;</td>
+                </tr>
+            </table>
+        </div></div>
     </body>
 </html>

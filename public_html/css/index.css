@@ -2,6 +2,10 @@
     visibility: hidden;
 }
 
+#stages .count {
+    text-align: right;
+}
+
 #stages .template {
     display: none;
 }

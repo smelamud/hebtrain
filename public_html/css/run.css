@@ -28,12 +28,10 @@
 }
 
 #button-correct {
-    font-size: 14pt;
     width: 100px;
 }
 
 #button-incorrect {
     margin-right: 3em;
-    font-size: 14pt;
     width: 100px;
 }

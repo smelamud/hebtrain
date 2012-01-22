@@ -49,8 +49,8 @@ require_once('parts/header.php');
                     </p>
                     <p id="answer"></p>
                     <p id="buttons-correct">
-                        <button id="button-incorrect" class="btn danger">Неверно</button>
-                        <button id="button-correct" class="btn success">Верно</button>
+                        <button id="button-incorrect" class="btn large danger">Неверно</button>
+                        <button id="button-correct" class="btn large success">Верно</button>
                     </p>
                 </div>
                 <div id="stop">

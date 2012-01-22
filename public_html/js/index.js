@@ -21,10 +21,10 @@ function loadStatistics() {
 }
 
 $(function() {
-    $("#main").ajaxStart(function() {
+    $("body").ajaxStart(function() {
         $("#spinner").css("visibility", "visible");
     });
-    $("#main").ajaxStop(function() {
+    $("body").ajaxStop(function() {
         $("#spinner").css("visibility", "hidden");
     });
     loadStatistics();

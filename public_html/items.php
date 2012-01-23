@@ -19,59 +19,67 @@ require_once('parts/header.php');
     <body>
         <?php displayMainMenu('items'); ?>
         <div class="container"><div class="content">
-            <table id="found" class="items condensed-table">
-                <tr class="headline">
-                    <th>&nbsp;</th>
-                    <th colspan="2" class="russian">Русский</th>
-                    <th>&nbsp;</th>
-                    <th colspan="2" class="hebrew">עברית</th>
-                    <th>&nbsp;</th>
-                </tr>
-                <form id="items-form">
-                    <tr id="editor">
-                        <td>
-                            <img id="spinner" src="/pics/ajax-cyan.gif">
-                            <input type="hidden" name="id" value="0">
-                        </td>
-                        <td class="russian" colspan="2"><input type="text" name="russian" maxlength="63" autofocus/></td>
-                        <td class="separator">&mdash;</td>
-                        <td class="hebrew" colspan="2"><input type="text" name="hebrew" maxlength="63"/></td>
-                        <td>
-                            <button id="add" class="btn primary">Добавить</button>
-                            <button id="modify" class="btn primary">Изменить</button>
-                            <button type="button" id="delete" class="btn">Удалить</button>
-                            <button type="reset" id="reset" class="btn">Сброс</button>
-                        </td>
+            <table class="condensed-table">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th class="russian">Русский</th>
+                        <th>&nbsp;</th>
+                        <th class="hebrew">עברית</th>
+                        <th>&nbsp;</th>
                     </tr>
-                </form>
-                <tr class="headline">
-                    <td colspan="3">
-                        <span id="found-title"><span id="found-loaded">0</span> из <span id="found-total">0</span></span>
-                        <span id="added-title">Добавлено: <span id="added-total">0</span></span>
-                    </td>
-                    <td colspan="3" id="search">
-                        <form id="search-form">
-                            <input type="text" name="q" maxlength="63"/>
-                        </form>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr class="template">
-                    <td>&nbsp;</td>
-                    <td class="russian">&nbsp;</td>
-                    <td class="russian-comment">&nbsp;</td>
-                    <td class="separator">&mdash;</td>
-                    <td class="hebrew-comment">&nbsp;</td>
-                    <td class="hebrew">&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr id="continue">
-                    <td>
-                        <img id="spinner-continue" src="/pics/ajax.gif">
-                    </td>
-                    <td colspan="5">&#x25be; Больше &#x25be;</td>
-                    <td>&nbsp;</td>
-                </tr>
+                </thead>
+                <tbody>
+                    <form id="items-form">
+                        <tr id="editor">
+                            <td>
+                                <img id="spinner" src="/pics/ajax-cyan.gif">
+                                <input type="hidden" name="id" value="0">
+                            </td>
+                            <td class="russian span8"><input type="text" name="russian" maxlength="63" autofocus/></td>
+                            <td class="separator">&mdash;</td>
+                            <td class="hebrew span8"><input type="text" name="hebrew" maxlength="63"/></td>
+                            <td class="span7">
+                                <button id="add" class="btn primary">Добавить</button>
+                                <button id="modify" class="btn primary">Изменить</button>
+                                <button type="button" id="delete" class="btn">Удалить</button>
+                                <button type="reset" id="reset" class="btn">Сброс</button>
+                            </td>
+                        </tr>
+                    </form>
+                </tbody>
+            </table>
+
+            <table id="found" class="condensed-table">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            <span id="found-title"><span id="found-loaded">0</span> из <span id="found-total">0</span></span>
+                            <span id="added-title">Добавлено: <span id="added-total">0</span></span>
+                        </th>
+                        <th colspan="3" id="search">
+                            <form id="search-form">
+                                <input type="text" name="q" maxlength="63"/>
+                            </form>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="template">
+                        <td>&nbsp;</td>
+                        <td class="russian span6">&nbsp;</td>
+                        <td class="russian-comment span6">&nbsp;</td>
+                        <td class="separator">&mdash;</td>
+                        <td class="hebrew-comment span6">&nbsp;</td>
+                        <td class="hebrew span6">&nbsp;</td>
+                    </tr>
+                    <tr id="continue">
+                        <td>
+                            <img id="spinner-continue" src="/pics/ajax.gif">
+                        </td>
+                        <td colspan="5">&#x25be; Больше &#x25be;</td>
+                    </tr>
+                </tbody>
             </table>
         </div></div>
 

@@ -24,6 +24,7 @@
 }
 
 #question-word, #answer {
+    font-family: serif;
     font-size: 24pt;
 }
 

@@ -1,5 +1,14 @@
+#totals {
+    font-size: 12pt;
+    margin-bottom: 2ex;
+}
+
 #spinner {
     visibility: hidden;
+}
+
+#stages, #stages td {
+    font-size: 12pt;
 }
 
 #stages .count {

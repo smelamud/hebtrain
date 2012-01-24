@@ -15,21 +15,23 @@ require_once('parts/header.php');
     <body>
         <?php displayMainMenu('index'); ?>
         <div class="container"><div class="content">
-            <p>
+            <div id="totals">
                 <img id="spinner" src="/pics/ajax.gif"><br/>
                 <strong>Всего слов в словаре:</strong> <span id="words-total">0</span><br/>
                 <strong>Всего вопросов:</strong> <span id="questions-total">0</span>,
                 <strong>требуют ответа сейчас</strong>:  <span id="questions-now">0</span>
-            </p>
-            <strong>По этапам:</strong>
-            <table id="stages">
-                <tr class="template">
-                    <td class="name span1">&nbsp;</td>
-                    <td class="span1">&nbsp;</td>
-                    <td class="count span1">&nbsp;</td>
-                    <td class="span13">&nbsp;</td>
-                </tr>
-            </table>
+            </div>
+            <div id="stages">
+                <strong>По этапам:</strong>
+                <table>
+                    <tr class="template">
+                        <td class="name span1">&nbsp;</td>
+                        <td class="span1">&nbsp;</td>
+                        <td class="count span1">&nbsp;</td>
+                        <td class="span13">&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
         </div></div>
     </body>
 </html>

@@ -8,12 +8,9 @@ require_once('parts/header.php');
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="/css/items.css"/>
-        <link rel="stylesheet" type="text/css"
-              href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/redmond/jquery-ui.css"/>
         <script type="text/javascript"
                 src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script type="text/javascript"
-                src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap-modal.js"></script>
         <script type="text/javascript" src="/js/items.js"></script>
     </head>
     <body>
@@ -50,7 +47,7 @@ require_once('parts/header.php');
                 </tbody>
             </table>
 
-            <table id="found" class="condensed-table">
+            <table id="found" class="items condensed-table">
                 <thead>
                     <tr>
                         <th colspan="3">
@@ -66,7 +63,7 @@ require_once('parts/header.php');
                 </thead>
                 <tbody>
                     <tr class="template">
-                        <td>&nbsp;</td>
+                        <td class="spinner-space">&nbsp;</td>
                         <td class="russian span6">&nbsp;</td>
                         <td class="russian-comment span6">&nbsp;</td>
                         <td class="separator">&mdash;</td>
@@ -74,7 +71,7 @@ require_once('parts/header.php');
                         <td class="hebrew span6">&nbsp;</td>
                     </tr>
                     <tr id="continue">
-                        <td>
+                        <td class="spinner-space">
                             <img id="spinner-continue" src="/pics/ajax.gif">
                         </td>
                         <td colspan="5">&#x25be; Больше &#x25be;</td>
@@ -83,30 +80,44 @@ require_once('parts/header.php');
             </table>
         </div></div>
 
-        <div id="similar-dialog" title="Похожие слова">
-            <table id="similar" class="items">
-                <tr class="headline">
-                    <th colspan="2" class="russian">Русский</th>
-                    <th><img id="spinner-similar" src="/pics/ajax.gif"></th>
-                    <th colspan="2" class="hebrew">עברית</th>
-                </tr>
-                <form id="similar-form">
-                    <tr class="template">
-                        <input type="hidden" form="similar-form" name="id[]"/>
-                        <td class="russian">&nbsp;</td>
-                        <td class="russian-comment">
-                            <input type="text" form="similar-form"
-                                   name="russian_comment[]" maxlength="63"/>
-                        </td>
-                        <td class="separator">&mdash;</td>
-                        <td class="hebrew-comment">
-                            <input type="text" form="similar-form"
-                                   name="hebrew_comment[]" maxlength="63"/>
-                        </td>
-                        <td class="hebrew">&nbsp;</td>
-                    </tr>
-                </form>
-            </table>
+        <div id="similar-dialog" class="modal">
+            <div class="modal-header">
+                <a class="close" href="#">×</a>
+                <h3>Похожие слова</h3>
+            </div>
+            <form id="similar-form">
+                <div class="modal-body">
+                    <table id="similar" class="items condensed-table">
+                        <thead>
+                            <tr>
+                                <th colspan="2" class="russian">Русский</th>
+                                <th><img id="spinner-similar" src="/pics/ajax.gif"></th>
+                                <th colspan="2" class="hebrew">עברית</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="template">
+                                <input type="hidden" form="similar-form" name="id[]"/>
+                                <td class="russian span6">&nbsp;</td>
+                                <td class="russian-comment span6">
+                                    <input type="text" form="similar-form"
+                                           name="russian_comment[]" maxlength="63"/>
+                                </td>
+                                <td class="separator">&mdash;</td>
+                                <td class="hebrew-comment span6">
+                                    <input type="text" form="similar-form"
+                                           name="hebrew_comment[]" maxlength="63"/>
+                                </td>
+                                <td class="hebrew span6">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button id="similar-dialog-save" class="btn primary" type="submit">Сохранить</button>
+                    <button id="similar-dialog-cancel" class="btn secondary">Отмена</button>
+                </div>
+            </form>
         </div>
     </body>
 </html>

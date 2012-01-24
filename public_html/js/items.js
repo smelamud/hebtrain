@@ -141,7 +141,7 @@ function resolveSimilar(data) {
         $.each(data.similar, function(index, item) {
             similarDialogAddLine(item);
         });
-        $("#similar-dialog").dialog('open');
+        $("#similar-dialog").modal('show');
     }
 }
 
@@ -150,7 +150,7 @@ function similarDialogSave() {
     $.post("/actions/items-comments-modify.php",
         $("#similar-form").serialize(),
         function(data) {
-            $("#similar-dialog").dialog('close');
+            $("#similar-dialog").modal('hide');
 
             var dataMap = {};
             $.each(data, function(index, item) {
@@ -173,10 +173,12 @@ function similarDialogSave() {
             alert("Error!");
         }
     );
+    return false;
 }
 
 function similarDialogCancel() {
-    $("#similar-dialog").dialog('close');
+    $("#similar-dialog").modal('hide');
+    return false;
 }
 
 function similarDialogAddLine(data) {
@@ -212,17 +214,10 @@ $(function() {
         $("#spinner-continue").css("visibility", "hidden");
         $("#spinner-similar").css("visibility", "hidden");
     });
-    $("#similar-dialog").dialog({
-        autoOpen: false,
-        buttons: {
-            'Отмена': similarDialogCancel,
-            'Сохранить': similarDialogSave
-        },
-        closeText: "Закрыть",
-        modal: true,
-        resizable: false,
-        minWidth: 1030,
-        maxWidth: 1600
+    $("#similar-dialog").modal({
+        keyboard: true
     });
+    $("#similar-dialog-cancel").click(similarDialogCancel);
+    $("#similar-dialog-save").click(similarDialogSave);
     findItems("", 0);
 });

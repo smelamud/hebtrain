@@ -5,13 +5,7 @@ require_once('parts/header.php');
 <html>
     <head>
         <title>Иврит - Слова</title>
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/items.css"/>
-        <script type="text/javascript"
-                src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script type="text/javascript" src="/js/bootstrap-modal.js"></script>
-        <script type="text/javascript" src="/js/items.js"></script>
+        <?php displayPreamble('items', array('modal')); ?>
     </head>
     <body>
         <?php displayMainMenu('items'); ?>

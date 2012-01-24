@@ -5,13 +5,7 @@ require_once('parts/header.php');
 <html>
     <head>
         <title>Иврит - Тест</title>
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/run.css"/>
-        <script type="text/javascript"
-                src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script type="text/javascript" src="/js/bootstrap-buttons.js"></script>
-        <script type="text/javascript" src="/js/run.js"></script>
+        <?php displayPreamble('run', array('buttons')); ?>
     </head>
     <body>
         <?php displayMainMenu('run'); ?>

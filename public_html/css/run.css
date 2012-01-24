@@ -7,6 +7,14 @@
     visibility: hidden;
 }
 
+.message, .word, .buttons {
+    margin-bottom: 2ex;
+}
+
+.message {
+    font-size: 12pt;
+}
+
 #buttons-start {
     display: none;
 }

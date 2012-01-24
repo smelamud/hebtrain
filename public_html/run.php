@@ -18,16 +18,16 @@ require_once('parts/header.php');
             <div id="main" class="content">
                 <img id="spinner" src="/pics/ajax.gif"><br/>
                 <div id="start">
-                    <h3>
+                    <div class="message">
                         <span id="loading">Загрузка теста</span>
                         <span id="loaded">Тест готов</span>
-                    </h3>
-                    <p id="buttons-start">
+                    </div>
+                    <div id="buttons-start" class="buttons">
                         <button id="button-start" class="btn primary">Начать тест</button>
-                    </p>
+                    </div>
                 </div>
                 <div id="run">
-                    <h3>
+                    <div class="message">
                         <span id="question-title-1" class="question-title-hide">
                             Переведите на русский язык
                         </span>
@@ -43,35 +43,35 @@ require_once('parts/header.php');
                         <span id="question-title-5" class="question-title-hide">
                             Напишите на иврите с огласовками
                         </span>
-                    </h3>
-                    <p>
+                    </div>
+                    <div class="word">
                         <span id="question-word">&nbsp;</span>
                         &#x200e;<span id="question-comment">&nbsp;</span>
-                    </p>
-                    <p id="buttons-answer">
+                    </div>
+                    <div id="buttons-answer" class="buttons">
                         <button id="button-answer" class="btn primary">Ответ</button>
-                    </p>
-                    <p id="answer"></p>
-                    <p id="buttons-correct">
+                    </div>
+                    <div id="answer" class="word"></div>
+                    <div id="buttons-correct" class="buttons">
                         <button id="button-incorrect" class="btn large danger">Неверно</button>
                         <button id="button-correct" class="btn large success">Верно</button>
-                    </p>
+                    </div>
                 </div>
                 <div id="stop">
-                    <h3>
+                    <div class="message">
                         <span id="finished">Тест завершен</span>
-                    </h3>
-                    <p id="buttons-stop">
+                    </div>
+                    <div id="buttons-stop" class="buttons">
                         <button id="button-save" class="btn primary">Записать результаты</button>
-                    </p>
+                    </div>
                 </div>
                 <div id="restart">
-                    <h3>
+                    <div class="message">
                         <span id="saved">Результаты теста сохранены</span>
-                    </h3>
-                    <p id="buttons-restart">
+                    </div>
+                    <div id="buttons-restart" class="buttons">
                         <button id="button-restart" class="btn primary">Загрузить новый тест</button>
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>

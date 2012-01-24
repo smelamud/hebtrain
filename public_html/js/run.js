@@ -12,6 +12,7 @@ function shuffle(arr) {
 }
 
 function loadTest() {
+    window.testStatus = "loading";
     $("#restart").hide();
     $("#start").show();
     $("#loading").show();
@@ -27,6 +28,7 @@ function loadTest() {
                 item.answers_total = 0;
                 item.answers_correct = 0;
             });
+            window.testStatus = "loaded";
             $("#loading").hide();
             $("#loaded").show();
             $("#buttons-start").show();
@@ -47,6 +49,7 @@ function startTest() {
 }
 
 function showQuestion() {
+    window.testStatus = "asking";
     var title = $(".question-title-show");
     title.removeClass("question-title-show");
     title.addClass("question-title-hide");
@@ -69,6 +72,7 @@ function showQuestion() {
 }
 
 function answered() {
+    window.testStatus = "answered";
     $("#buttons-answer").hide();
 
     var data = window.testData[window.testCurrent];
@@ -122,11 +126,13 @@ function getOpenQuestionsCount() {
 }
 
 function stopTest() {
+    window.testStatus = "finished";
     $("#run").hide();
     $("#stop").show();
 }
 
 function restartTest() {
+    window.testStatus = "saved";
     $("#stop").hide();
     $("#restart").show();
 }
@@ -143,6 +149,37 @@ function saveResult() {
     );
 }
 
+activeElements = {
+    "loading": {},
+    "loaded": {
+        13: "button-start"
+    },
+    "asking": {
+        13: "button-answer"
+    },
+    "answered": {
+        107: "button-correct",
+        109: "button-incorrect"
+    },
+    "finished": {
+        13: "button-save"
+    },
+    "saved": {
+        13: "button-restart"
+    }
+};
+
+function keyboardNavigation(event) {
+    if (activeElements[window.testStatus][event.which]) {
+        var element = $("#" + activeElements[window.testStatus][event.which]);
+        element.attr("data-loading-text", element.text());
+        element.button("loading");
+        window.setTimeout(function(element) {
+            element.button("reset").click();
+        }, 300, element);
+    }
+}
+
 $(function() {
     $("#button-start").click(startTest);
     $("#button-answer").click(answered);
@@ -156,5 +193,6 @@ $(function() {
     $("#main").ajaxStop(function() {
         $("#spinner").css("visibility", "hidden");
     });
+    $(document).keydown(keyboardNavigation);
     loadTest();
 });

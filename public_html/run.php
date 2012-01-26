@@ -52,6 +52,9 @@ require_once('parts/header.php');
                         <button id="button-correct" class="btn large success">Верно</button>
                     </div>
                 </div>
+                <div id="intermezzo" class="message">
+                    <span id="loop-number">&nbsp;</span>-й проход
+                </div>
                 <div id="stop">
                     <div class="message">
                         <span id="finished">Тест завершен</span>

@@ -45,6 +45,7 @@ function startTest() {
     $("#run").show();
     shuffle(window.testData);
     window.testCurrent = window.testData.length;
+    window.loopNumber = 0;
     nextQuestion();
 }
 
@@ -104,6 +105,11 @@ function nextQuestion() {
                 stopTest();
                 return;
             }
+
+            if (window.loopNumber++ > 0) {
+                showIntermezzo();
+            }
+
             shuffle(window.testData);
             window.testCurrent = 0;
         }
@@ -113,6 +119,17 @@ function nextQuestion() {
         }
     }
     showQuestion();
+}
+
+function showIntermezzo() {
+    $("#run").hide();
+    $("#loop-number").text(window.loopNumber);
+    window.setTimeout(function() {
+        $("#intermezzo").fadeIn("slow").delay(800).fadeOut("slow");
+        window.setTimeout(function() {
+            $("#run").show();
+        }, 2200);
+    }, 200);
 }
 
 function getOpenQuestionsCount() {

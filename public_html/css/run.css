@@ -23,6 +23,13 @@
     display: none;
 }
 
+#intermezzo {
+    display: none;
+    padding-top: 4ex;
+    color: #5c9ccc;
+    font-size: 16pt;
+}
+
 .question-title-hide {
     display: none;
 }

@@ -2,11 +2,11 @@ body {
     padding-top: 50px;
 }
 
-.topbar .fill {
-    background-color: #5c9ccc;
+.topbar .fill, .topbar .dropdown-menu {
+    background-color: #5c9ccc !important;
     background-image: none;
 }
 
 .topbar a {
-    color: #eeeeee;
+    color: #eeeeee !important;
 }

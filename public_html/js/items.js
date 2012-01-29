@@ -201,9 +201,8 @@ $(function() {
     $("#continue").click(continueFind);
     $("#search-form").submit(search);
     $("#editor .hebrew input").focus(function() {
-        showKeyboard("#editor .hebrew input");
-    });
-    $("#editor .hebrew input").blur(function() {
+        showKeyboard($(this));
+    }).blur(function() {
         hideKeyboard();
     });
     $("#editor").ajaxStart(function() {
@@ -214,8 +213,7 @@ $(function() {
         } else {
             $("#spinner").css("visibility", "visible");
         }
-    });
-    $("#editor").ajaxStop(function() {
+    }).ajaxStop(function() {
         $("#spinner").css("visibility", "hidden");
         $("#spinner-continue").css("visibility", "hidden");
         $("#spinner-similar").css("visibility", "hidden");

@@ -23,8 +23,7 @@ function loadStatistics() {
 $(function() {
     $("body").ajaxStart(function() {
         $("#spinner").css("visibility", "visible");
-    });
-    $("body").ajaxStop(function() {
+    }).ajaxStop(function() {
         $("#spinner").css("visibility", "hidden");
     });
     loadStatistics();

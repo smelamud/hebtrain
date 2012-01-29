@@ -4,9 +4,9 @@ function getURLParameter(name) {
     );
 }
 
-function showKeyboard(selector) {
-    window.keyboardElement = $(selector);
-    var off = window.keyboardElement.offset();
+function showKeyboard(element) {
+    window.keyboardElement = element
+    var off = element.offset();
     $("#keyboard").show().offset({left: off.left, top: off.top + 50});
 }
 

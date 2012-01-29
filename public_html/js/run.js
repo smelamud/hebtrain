@@ -209,8 +209,7 @@ $(function() {
     $("#button-restart").click(loadTest);
     $("#main").ajaxStart(function() {
         $("#spinner").css("visibility", "visible");
-    });
-    $("#main").ajaxStop(function() {
+    }).ajaxStop(function() {
         $("#spinner").css("visibility", "hidden");
     });
     $(document).keydown(keyboardNavigation);

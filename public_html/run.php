@@ -46,6 +46,7 @@ require_once('parts/keyboard.php');
                     </div>
                     <div class="word">
                         <input id="answer-input" type="text" class="keyboard-enabled" data-keyboard-positioning="right"/>
+                        <span id="answer-input-text"></span>
                     </div>
                     <div id="buttons-answer" class="buttons">
                         <button id="button-answer" class="btn primary">Ответ</button>

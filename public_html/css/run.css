@@ -38,7 +38,7 @@
     display: inline;
 }
 
-#question-word, #answer {
+#question-word, #answer, #answer-input-text {
     font-family: serif;
     font-size: 24pt;
 }
@@ -48,6 +48,10 @@
     font-size: 24pt;
     direction: rtl;
     height: 26pt;
+}
+
+#answer-input-text {
+    color: #888;
 }
 
 #button-correct {

@@ -70,22 +70,27 @@ function showQuestion() {
 
     $("#buttons-answer").show();
     if (data.input) {
-        $("#answer-input").show().focus();
+        $("#answer-input").val("").show().focus();
     } else {
         $("#answer-input").hide();
     }
+    $("#answer-input-text").hide();
     $("#answer").hide();
     $("#buttons-correct").hide();
 }
 
 function answered() {
     window.testStatus = "answered";
+    $("#answer-input-text").text($("#answer-input").val()).show();
+    $("#answer-input").hide();
+    hideKeyboard();
     $("#buttons-answer").hide();
 
     var data = window.testData[window.testCurrent];
     $("#answer").text(data.answer);
     $("#answer").show();
     $("#buttons-correct").show();
+    $(document).focus();
 }
 
 function answerCorrect() {

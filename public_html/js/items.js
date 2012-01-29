@@ -200,7 +200,6 @@ $(function() {
     $("#reset").click(resetAdder);
     $("#continue").click(continueFind);
     $("#search-form").submit(search);
-    bindKeyboard($("#editor .hebrew input"));
     $("#editor").ajaxStart(function() {
         if (window.ajaxType == "continue") {
             $("#spinner-continue").css("visibility", "visible");

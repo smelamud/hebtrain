@@ -78,8 +78,7 @@ function bindKeyboard(element) {
     });
 }
 
-$(function() {
-    $("#topbar").dropdown();
+function initKeyboard() {
     $(document).keypress(keyboardKeyPress);
     $("#keyboard").mouseover(function() {
         window.mouseInKeyboard = true;
@@ -87,4 +86,12 @@ $(function() {
         window.mouseInKeyboard = false;
     });
     $("#keyboard .key").click(keyboardClick);
+    $("input.keyboard-enabled").each(function() {
+        bindKeyboard($(this));
+    });
+}
+
+$(function() {
+    $("#topbar").dropdown();
+    initKeyboard();
 });

@@ -30,7 +30,7 @@ require_once('parts/keyboard.php');
                             </td>
                             <td class="russian span8"><input type="text" name="russian" maxlength="63" autofocus/></td>
                             <td class="separator">&mdash;</td>
-                            <td class="hebrew span8"><input type="text" name="hebrew" maxlength="63"/></td>
+                            <td class="hebrew span8"><input type="text" class="keyboard-enabled" name="hebrew" maxlength="63"/></td>
                             <td class="span7">
                                 <button id="add" class="btn primary">Добавить</button>
                                 <button id="modify" class="btn primary">Изменить</button>

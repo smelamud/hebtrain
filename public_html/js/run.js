@@ -188,7 +188,9 @@ activeElements = {
     },
     "answered": {
         107: "button-correct",
-        109: "button-incorrect"
+        109: "button-incorrect",
+        220: "button-correct",
+        192: "button-incorrect"
     },
     "finished": {
         13: "button-save"

@@ -55,7 +55,9 @@ function saveResult($data) {
 
 $mysqli = dbConnect();
 
-saveResult($_POST['data']);
+if (isset($_POST['data'])) {
+    saveResult($_POST['data']);
+}
 
 dbClose($mysqli);
 

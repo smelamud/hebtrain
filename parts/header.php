@@ -1,4 +1,6 @@
 <?php
+require_once('lib/questions.php');
+
 function displayPreamble($page, $bootstrapScripts = array()) {
     ?>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
@@ -21,7 +23,9 @@ function displayPreamble($page, $bootstrapScripts = array()) {
 
 function displayMainMenuItem($current, $page, $title, $href, $subMenu = array()) {
     $classes = array();
-    if ($current == $page) {
+    if (substr($current, 0, strlen($page)) == $page &&
+        (strlen($current) == strlen($page) ||
+         substr($current, strlen($page), 1) == '-')) {
         $classes[] = 'active';
     }
     if (count($subMenu) > 0) {
@@ -32,7 +36,9 @@ function displayMainMenuItem($current, $page, $title, $href, $subMenu = array())
     } else {
         echo '<li>';
     }
-    if (count($subMenu) > 0) {
+    if ($title == '-') {
+        echo '<li class="divider"></li>';
+    } elseif (count($subMenu) > 0) {
         echo "<a href=\"$href\" class=\"dropdown-toggle\">$title</a>";
         echo '<ul class="dropdown-menu">';
         foreach ($subMenu as $item) {
@@ -45,17 +51,29 @@ function displayMainMenuItem($current, $page, $title, $href, $subMenu = array())
     echo '</li>';
 }
 
-function displayMainMenu($current) {?>
+function displayMainMenu($current) {
+    global $QV_PARAMS, $QV_IDENTS;
+
+    ?>
     <div class="topbar" data-dropdown="dropdown">
         <div class="fill">
             <div class="container">
                 <a class="brand" href="/">Иврит</a>
                 <ul class="nav"><?php
                     displayMainMenuItem($current, 'index', 'Начало', '/');
-                    displayMainMenuItem($current, 'run', 'Тест', '#', array(
-                        array('', 'Микс', '/run.php'),
-                        array('', 'Случайный', '/run.php')
-                    ));
+                    $testMenu = array(
+                        array('run-mix', 'Микс',
+                            '/run.php?qv=' . QV_WORD_MIX),
+                        array('run-random', 'Случайный',
+                            '/run.php?qv=' . QV_WORD_RANDOM),
+                        array('', '-', '')
+                    );
+                    foreach ($QV_PARAMS as $index => $qv) {
+                        $testMenu[] = array('run-' . $qv['ident'], $qv['title'],
+                            '/run.php?qv=' . $index);
+                    }
+                    displayMainMenuItem($current . '-' . $QV_IDENTS[$_GET['qv']],
+                        'run', 'Тест', '#', $testMenu);
                     displayMainMenuItem($current, 'items', 'Слова', '/items.php');
                 ?></ul>
             </div>

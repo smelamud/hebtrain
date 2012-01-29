@@ -19,7 +19,8 @@ function loadTest() {
     $("#loaded").hide();
     $("#buttons-start").hide();
 
-    $.getJSON("/actions/test-load.php",
+    var qv = getURLParameter('qv') || 0;
+    $.getJSON("/actions/test-load.php?qv=" + qv,
         function(data) {
             window.testMaxCorrect = data.max_correct;
             window.testMinQuestions = data.min_questions;
@@ -194,6 +195,8 @@ function keyboardNavigation(event) {
         window.setTimeout(function(element) {
             element.button("reset").click();
         }, 300, element);
+        event.stopPropagation();
+        event.preventDefault();
     }
 }
 

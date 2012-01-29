@@ -1,25 +1,40 @@
 <?php
 require_once('conf/hebtrain.conf');
 
+require_once('lib/post.php');
 require_once('lib/database.php');
 require_once('lib/items.php');
 require_once('lib/questions.php');
 
-function loadTest() {
+function loadTest($qv) {
     global $mysqli, $QV_PARAMS;
 
+    error_log($qv);
+    if ($qv == QV_WORD_RANDOM) {
+        $qv = rand(QV_WORD_MIN, QV_WORD_MAX);
+    }
+    if ($qv == QV_WORD_MIX) {
+        $qvFilter = '';
+    } else {
+        $qvFilter = 'and question=?';
+    }
     $st = $mysqli->prepare(
-        'select item_id, hebrew, hebrew_bare, hebrew_comment,
+        "select item_id, hebrew, hebrew_bare, hebrew_comment,
                 russian, russian_comment, question
          from questions inner join items
               on questions.item_id = items.id
-         where `group` = ? and next_test <= now()
+         where `group` = ? $qvFilter and next_test <= now()
          order by item_id
-         limit ?');
+         limit ?");
     dbFailsafe($mysqli);
     $group = VI_WORD;
     $limit = CFG_QUESTIONS_LOAD_LIMIT;
-    $st->bind_param('ii', $group, $limit);
+    error_log($qv);
+    if ($qv == QV_WORD_MIX) {
+        $st->bind_param('ii', $group, $limit);
+    } else {
+        $st->bind_param('iii', $group, $qv, $limit);
+    }
     $st->execute();
 
     $itemIds = array();
@@ -69,7 +84,7 @@ $mysqli = dbConnect();
 $result = array(
     'max_correct' => CFG_MAX_CORRECT_ANSWERS,
     'min_questions' => CFG_MIN_QUESTIONS_IN_TEST,
-    'tests' => loadTest());
+    'tests' => loadTest(getIntVar('qv')));
 
 dbClose($mysqli);
 

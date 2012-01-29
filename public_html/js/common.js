@@ -25,8 +25,13 @@ function enterHebrewChar(key) {
     var input = window.keyboardElement.get(0);
     var st = s.substring(0, input.selectionStart);
     var se = s.substring(input.selectionEnd);
-    window.keyboardElement.val(st + getKeyHebrewChar(key) + se);
-    input.selectionStart = st.length + 1;
+    if (key.attr("data-special") != "BS") {
+        window.keyboardElement.val(st + getKeyHebrewChar(key) + se);
+        input.selectionStart = st.length + 1;
+    } else {
+        window.keyboardElement.val(st.slice(0, -1) + se);
+        input.selectionStart = st.length - 1;
+    }
     input.selectionEnd = input.selectionStart;
     key.removeClass("key-depressed").addClass("key-pressed");
     window.setTimeout(function() {

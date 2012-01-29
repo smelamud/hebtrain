@@ -69,12 +69,12 @@ function showQuestion() {
     }
 
     $("#buttons-answer").show();
+    $("#answer-input-text").hide();
     if (data.input) {
         $("#answer-input").val("").show().focus();
     } else {
         $("#answer-input").hide();
     }
-    $("#answer-input-text").hide();
     $("#answer").hide();
     $("#buttons-correct").hide();
 }

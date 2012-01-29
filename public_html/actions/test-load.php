@@ -73,7 +73,8 @@ function loadTest($qv) {
                 'question' => $question,
                 'word' => $q[$QV_PARAMS[$question]['word']],
                 'comment' => $q[$QV_PARAMS[$question]['comment']],
-                'answer' => $q[$QV_PARAMS[$question]['answer']]));
+                'answer' => $q[$QV_PARAMS[$question]['answer']],
+                'input' => $QV_PARAMS[$question]['input']));
     }
 
     return $result;

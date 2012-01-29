@@ -43,6 +43,13 @@
     font-size: 24pt;
 }
 
+#answer-input {
+    font-family: serif;
+    font-size: 24pt;
+    direction: rtl;
+    height: 26pt;
+}
+
 #button-correct {
     width: 100px;
 }

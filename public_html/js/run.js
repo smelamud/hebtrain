@@ -69,6 +69,11 @@ function showQuestion() {
     }
 
     $("#buttons-answer").show();
+    if (data.input) {
+        $("#answer-input").show().focus();
+    } else {
+        $("#answer-input").hide();
+    }
     $("#answer").hide();
     $("#buttons-correct").hide();
 }

@@ -5,9 +5,15 @@ function getURLParameter(name) {
 }
 
 function showKeyboard(element) {
-    window.keyboardElement = element
+    window.keyboardElement = element;
+    var positioning = element.attr("data-keyboard-positioning") || "bottom";
     var off = element.offset();
-    $("#keyboard").show().offset({left: off.left, top: off.top + 50});
+    if (positioning == "bottom") {
+        var position = {left: off.left, top: off.top + element.outerHeight()};
+    } else if (positioning == "right") {
+        var position = {left: off.left + element.outerWidth() + 5, top: off.top};
+    }
+    $("#keyboard").show().offset(position);
 }
 
 function hideKeyboard() {

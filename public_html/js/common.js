@@ -20,6 +20,20 @@ function getKeyHebrewChar(key) {
     return hch.charAt(hch.length - 1);
 }
 
+function enterHebrewChar(key) {
+    var s = window.keyboardElement.val();
+    var input = window.keyboardElement.get(0);
+    var st = s.substring(0, input.selectionStart);
+    var se = s.substring(input.selectionEnd);
+    window.keyboardElement.val(st + getKeyHebrewChar(key) + se);
+    input.selectionStart = st.length + 1;
+    input.selectionEnd = input.selectionStart;
+    key.removeClass("key-depressed").addClass("key-pressed");
+    window.setTimeout(function() {
+        key.removeClass("key-pressed").addClass("key-depressed");
+    }, 200);
+}
+
 function keyboardKeyPress(event) {
     if (!window.keyboardElement) {
         return;
@@ -32,8 +46,7 @@ function keyboardKeyPress(event) {
     $("#keyboard .key").each(function() {
         var latin = $(this).find(".latin-letter");
         if (latin.text() == ch || latin.attr("data-second") == ch) {
-            var s = window.keyboardElement.val();
-            window.keyboardElement.val(s + getKeyHebrewChar($(this)));
+            enterHebrewChar($(this));
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -41,7 +54,32 @@ function keyboardKeyPress(event) {
     });
 }
 
+function keyboardClick(event) {
+    window.keyboardElement.focus();
+    enterHebrewChar($(this));
+    return false;
+}
+
+function bindKeyboard(element) {
+    element.focus(function() {
+        if (window.keyboardElement == null) {
+            showKeyboard($(this));
+            window.mouseInKeyboard = false;
+        }
+    }).blur(function() {
+        if (!window.mouseInKeyboard) {
+            hideKeyboard();
+        }
+    });
+}
+
 $(function() {
     $("#topbar").dropdown();
     $(document).keypress(keyboardKeyPress);
+    $("#keyboard").mouseover(function() {
+        window.mouseInKeyboard = true;
+    }).mouseout(function() {
+        window.mouseInKeyboard = false;
+    });
+    $("#keyboard .key").click(keyboardClick);
 });

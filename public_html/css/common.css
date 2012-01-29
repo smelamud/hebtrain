@@ -27,15 +27,23 @@ body {
     width: 32px;
     height: 32px;
     margin: 2px;
-    color: #999;
     font: 12pt sans-serif;
     text-align: center;
     cursor: default;
-    background-color: white;
 }
 
-.key:hover {
+.key-depressed {
+    background-color: white;
+    color: #999;
+}
+
+.key-depressed:hover {
     background-color: #ffffcc;
+}
+
+.key-pressed {
+    background-color: #318ce7;
+    color: white;
 }
 
 .key-newline {

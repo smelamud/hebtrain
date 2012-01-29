@@ -28,6 +28,7 @@ td.separator {
     width: 96%;
     margin: 0;
     font: normal 14pt serif;
+    height: 16pt; /* to fit hebrew vowels */
 }
 
 #search {

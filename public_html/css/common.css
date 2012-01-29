@@ -44,6 +44,7 @@ body {
 
 .latin-letter {
     position: relative;
+    text-transform: uppercase;
     top: -2px;
 }
 

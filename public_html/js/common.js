@@ -15,13 +15,29 @@ function hideKeyboard() {
     $("#keyboard").hide();
 }
 
-function keyboardKeyDown(event) {
+function keyboardKeyPress(event) {
     if (!window.keyboardElement) {
         return;
     }
+    if (event.ctrlKey || event.altKey || event.metaKey) {
+        return;
+    }
+
+    var ch = String.fromCharCode(event.charCode);
+    $("#keyboard .key").each(function() {
+        var latin = $(this).find(".latin-letter");
+        if (latin.text() == ch || latin.attr("data-second") == ch) {
+            var hch = $(this).find(".hebrew-letter").text();
+            var s = window.keyboardElement.val();
+            window.keyboardElement.val(s + hch.charAt(hch.length - 1));
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+    });
 }
 
 $(function() {
     $("#topbar").dropdown();
-    $(document).keydown(keyboardKeyDown);
+    $(document).keypress(keyboardKeyPress);
 });

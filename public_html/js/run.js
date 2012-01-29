@@ -134,6 +134,7 @@ function nextQuestion() {
 
 function showIntermezzo() {
     $("#run").hide();
+    hideKeyboard();
     $("#loop-number").text(window.loopNumber);
     window.setTimeout(function() {
         $("#intermezzo").fadeIn("slow").delay(800).fadeOut("slow");

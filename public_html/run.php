@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 require_once('parts/header.php');
+require_once('parts/keyboard.php');
 ?>
 <html>
     <head>
@@ -71,6 +72,7 @@ require_once('parts/header.php');
                         <button id="button-restart" class="btn primary">Загрузить новый тест</button>
                     </div>
                 </div>
+                <?php displayKeyboard(); ?>
             </div>
         </div>
     </body>

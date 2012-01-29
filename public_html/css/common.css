@@ -1,3 +1,60 @@
 body {
     padding-top: 50px;
 }
+
+/* Keyboard */ 
+
+#keyboard {
+    display: none;
+    position: fixed;
+    border: solid 1px #ccc;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    padding: 5px;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.25);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.25);
+    box-shadow: 0 1px 3px rgba(0,0,0,.25);
+    background-color: #eeeeee;
+}
+
+.key {
+    float: left;
+    border: solid 1px #ccc;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    width: 32px;
+    height: 32px;
+    margin: 2px;
+    color: #999;
+    font: 12pt sans-serif;
+    text-align: center;
+    cursor: default;
+    background-color: white;
+}
+
+.key:hover {
+    background-color: #ffffcc;
+}
+
+.key-newline {
+    clear: both;
+}
+
+.latin-letter {
+    position: relative;
+    top: -2px;
+}
+
+.hebrew-letter {
+    color: black;
+    font: 14pt sans-serif;
+    position: relative;
+    top: 8px;
+}
+
+.special-key {
+    position: relative;
+    top: 6px;
+}

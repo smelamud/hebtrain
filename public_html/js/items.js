@@ -200,6 +200,12 @@ $(function() {
     $("#reset").click(resetAdder);
     $("#continue").click(continueFind);
     $("#search-form").submit(search);
+    $("#editor .hebrew input").focus(function() {
+        showKeyboard("#editor .hebrew input");
+    });
+    $("#editor .hebrew input").blur(function() {
+        hideKeyboard();
+    });
     $("#editor").ajaxStart(function() {
         if (window.ajaxType == "continue") {
             $("#spinner-continue").css("visibility", "visible");

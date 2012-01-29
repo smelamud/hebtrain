@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 require_once('parts/header.php');
+require_once('parts/keyboard.php');
 ?>
 <html>
     <head>
@@ -72,6 +73,7 @@ require_once('parts/header.php');
                     </tr>
                 </tbody>
             </table>
+            <?php displayKeyboard(); ?>
         </div></div>
 
         <div id="similar-dialog" class="modal">

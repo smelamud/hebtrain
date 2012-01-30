@@ -51,7 +51,7 @@ require_once('parts/keyboard.php');
                         </th>
                         <th colspan="3" id="search">
                             <form id="search-form">
-                                <input type="text" name="q" maxlength="63"/>
+                                <input type="text" name="q" maxlength="63" class="keyboard-enabled" data-keyboard-positioning="bottom-left"/>
                             </form>
                         </th>
                     </tr>

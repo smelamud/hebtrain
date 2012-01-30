@@ -9,9 +9,14 @@ function showKeyboard(element) {
     var positioning = element.attr("data-keyboard-positioning") || "bottom";
     var off = element.offset();
     if (positioning == "bottom") {
-        var position = {left: off.left, top: off.top + element.outerHeight()};
+        var position = {left: off.left,
+                        top: off.top + element.outerHeight() + 5};
     } else if (positioning == "right") {
-        var position = {left: off.left + element.outerWidth() + 5, top: off.top};
+        var position = {left: off.left + element.outerWidth() + 5,
+                        top: off.top};
+    } else if (positioning == "bottom-left") {
+        var position = {left: off.left - 440,
+                        top: off.top + element.outerHeight() + 5};
     }
     $("#keyboard").show().offset(position);
 }

@@ -14,6 +14,7 @@ function shuffle(arr) {
 function loadTest() {
     window.testStatus = "loading";
     $("#restart").hide();
+    $("#underflow").hide();
     $("#start").show();
     $("#loading").show();
     $("#loaded").hide();
@@ -31,8 +32,12 @@ function loadTest() {
             });
             window.testStatus = "loaded";
             $("#loading").hide();
-            $("#loaded").show();
-            $("#buttons-start").show();
+            if (window.testData.length > window.testMinQuestions) {
+                $("#loaded").show();
+                $("#buttons-start").show();
+            } else {
+                $("#underflow").show();
+            }
         }
     ).error(
         function() {

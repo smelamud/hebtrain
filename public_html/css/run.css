@@ -19,7 +19,7 @@
     display: none;
 }
 
-#run, #stop, #restart {
+#underflow, #run, #stop, #restart {
     display: none;
 }
 

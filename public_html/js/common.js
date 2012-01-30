@@ -6,6 +6,7 @@ function getURLParameter(name) {
 
 function showKeyboard(element) {
     window.keyboardElement = element;
+    window.mouseInKeyboard = false;
     var positioning = element.attr("data-keyboard-positioning") || "bottom";
     var off = element.offset();
     if (positioning == "bottom") {
@@ -80,7 +81,6 @@ function bindKeyboard(element) {
     element.focus(function() {
         if (window.keyboardElement == null && element.is(":visible")) {
             showKeyboard($(this));
-            window.mouseInKeyboard = false;
         }
     }).blur(function() {
         if (!window.mouseInKeyboard) {

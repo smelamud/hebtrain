@@ -76,7 +76,9 @@ function showQuestion() {
     $("#buttons-answer").show();
     $("#answer-input-text").hide();
     if (data.input) {
-        $("#answer-input").val("").show().focus();
+        var answerInput = $("#answer-input");
+        answerInput.val("").show().focus();
+        showKeyboard(answerInput);
     } else {
         $("#answer-input").hide();
     }
@@ -86,14 +88,14 @@ function showQuestion() {
 
 function answered() {
     window.testStatus = "answered";
-    $("#answer-input-text").text($("#answer-input").val()).show();
+    var data = window.testData[window.testCurrent];
+    if (data.input) {
+        $("#answer-input-text").text($("#answer-input").val()).show();
+    }
     $("#answer-input").hide();
     hideKeyboard();
     $("#buttons-answer").hide();
-
-    var data = window.testData[window.testCurrent];
-    $("#answer").text(data.answer);
-    $("#answer").show();
+    $("#answer").text(data.answer).show();
     $("#buttons-correct").show();
     $(document).focus();
 }

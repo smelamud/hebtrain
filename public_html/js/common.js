@@ -73,7 +73,7 @@ function keyboardClick(event) {
 
 function bindKeyboard(element) {
     element.focus(function() {
-        if (window.keyboardElement == null) {
+        if (window.keyboardElement == null && element.is(":visible")) {
             showKeyboard($(this));
             window.mouseInKeyboard = false;
         }

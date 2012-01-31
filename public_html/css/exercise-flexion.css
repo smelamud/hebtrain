@@ -1,0 +1,34 @@
+.content {
+    font-family: serif;
+    font-size: 16pt;
+    text-align: center;
+}
+
+#example {
+    margin-top: 5ex;
+    margin-bottom: 2ex;
+    font-style: italic;
+}
+
+#example-text {
+    position: relative;
+    top: 6px;
+}
+
+#progress {
+    margin-bottom: 1ex;
+    font: bold 10pt sans-serif;
+}
+
+#prev-example, #next-example {
+    visibility: hidden;
+}
+
+#roots li {
+    margin-bottom: .5ex;
+    padding: 5px;
+}
+
+#roots li:hover {
+    background-color: #ffffcc;
+}

@@ -5,7 +5,7 @@ require_once('parts/keyboard.php');
 ?>
 <html>
     <head>
-        <title>Иврит - Тренажер клавиатуры</title>
+        <title>Иврит - Клавиатурный тренажер</title>
         <?php displayPreamble('exercise-keyboard'); ?>
     </head>
     <body>

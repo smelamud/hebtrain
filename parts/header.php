@@ -85,7 +85,8 @@ function displayMainMenu($current) {
                     displayMainMenuItem($current . '-' . $QV_IDENTS[$_GET['qv']],
                         'run', 'Тест', '#', $testMenu);
                     displayMainMenuItem($current, 'exercise', 'Упражнения', '#', array(
-                        array('exercise-keyboard', 'Клавиатура', '/exercise-keyboard.php')
+                        array('exercise-keyboard', 'Клавиатура', '/exercise-keyboard.php'),
+                        array('exercise-flexion', 'Внутренняя флексия', '/exercise-flexion.php')
                     ));
                     displayMainMenuItem($current, 'items', 'Словарь', '/items.php');
                 ?></ul>

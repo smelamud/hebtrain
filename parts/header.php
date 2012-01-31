@@ -1,5 +1,6 @@
 <?php
 require_once('lib/questions.php');
+require_once('lib/util.php');
 
 function displayPreamble($page, $bootstrapScripts = array()) {
     ?>
@@ -51,6 +52,15 @@ function displayMainMenuItem($current, $page, $title, $href, $subMenu = array())
     echo '</li>';
 }
 
+function displayCountdown() {
+    $currentDate = new DateTime();
+    $alyahDate = new DateTime('2012-12-01');
+    $diffDays = $alyahDate->diff($currentDate)->days;
+    ?>
+    <p class="pull-right">осталось примерно <?php echo getPlural($diffDays, 'день', 'дня', 'дней'); ?></p>
+    <?php
+}
+
 function displayMainMenu($current) {
     global $QV_PARAMS, $QV_IDENTS;
 
@@ -76,6 +86,7 @@ function displayMainMenu($current) {
                         'run', 'Тест', '#', $testMenu);
                     displayMainMenuItem($current, 'items', 'Слова', '/items.php');
                 ?></ul>
+                <?php displayCountdown(); ?>
             </div>
         </div>
     </div><?php

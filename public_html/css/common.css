@@ -2,6 +2,10 @@ body {
     padding-top: 50px;
 }
 
+.topbar p {
+    color: #aaaaaa;
+}
+
 /* Keyboard */ 
 
 #keyboard {

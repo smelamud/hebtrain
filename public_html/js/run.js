@@ -1,16 +1,3 @@
-function getRandomInt(min, max) {  
-    return Math.floor(Math.random() * (max - min)) + min;  
-}
-
-function shuffle(arr) {
-    for (var i = 0; i < arr.length; i++) {
-        j = getRandomInt(0, arr.length);
-        k = arr[i];
-        arr[i] = arr[j];
-        arr[j] = k;
-    }
-}
-
 function loadTest() {
     window.testStatus = "loading";
     $("#restart").hide();

@@ -84,7 +84,10 @@ function displayMainMenu($current) {
                     }
                     displayMainMenuItem($current . '-' . $QV_IDENTS[$_GET['qv']],
                         'run', 'Тест', '#', $testMenu);
-                    displayMainMenuItem($current, 'items', 'Слова', '/items.php');
+                    displayMainMenuItem($current, 'exercise', 'Упражнения', '#', array(
+                        array('exercise-keyboard', 'Клавиатура', '/exercise-keyboard.php')
+                    ));
+                    displayMainMenuItem($current, 'items', 'Словарь', '/items.php');
                 ?></ul>
                 <?php displayCountdown(); ?>
             </div>

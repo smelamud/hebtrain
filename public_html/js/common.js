@@ -1,3 +1,16 @@
+function getRandomInt(min, max) {  
+    return Math.floor(Math.random() * (max - min)) + min;  
+}
+
+function shuffle(arr) {
+    for (var i = 0; i < arr.length; i++) {
+        j = getRandomInt(0, arr.length);
+        k = arr[i];
+        arr[i] = arr[j];
+        arr[j] = k;
+    }
+}
+
 function getURLParameter(name) {
     return decodeURI(
         (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
@@ -18,6 +31,9 @@ function showKeyboard(element) {
     } else if (positioning == "bottom-left") {
         var position = {left: off.left - 440,
                         top: off.top + element.outerHeight() + 5};
+    } else if (positioning == "bottom-center") {
+        var position = {left: off.left + (element.outerWidth() - 568) / 2,
+                        top: off.top + element.outerHeight() + 5};
     }
     $("#keyboard").show().offset(position);
 }
@@ -33,18 +49,25 @@ function getKeyHebrewChar(key) {
 }
 
 function enterHebrewChar(key) {
-    var s = window.keyboardElement.val();
-    var input = window.keyboardElement.get(0);
-    var st = s.substring(0, input.selectionStart);
-    var se = s.substring(input.selectionEnd);
-    if (key.attr("data-special") != "BS") {
-        window.keyboardElement.val(st + getKeyHebrewChar(key) + se);
-        input.selectionStart = st.length + 1;
+    if (window.keyboardElement.is("input")) {
+        var s = window.keyboardElement.val();
+        var input = window.keyboardElement.get(0);
+        var st = s.substring(0, input.selectionStart);
+        var se = s.substring(input.selectionEnd);
+        if (key.attr("data-special") != "BS") {
+            window.keyboardElement.val(st + getKeyHebrewChar(key) + se);
+            input.selectionStart = st.length + 1;
+        } else {
+            window.keyboardElement.val(st.slice(0, -1) + se);
+            input.selectionStart = st.length - 1;
+        }
+        input.selectionEnd = input.selectionStart;
     } else {
-        window.keyboardElement.val(st.slice(0, -1) + se);
-        input.selectionStart = st.length - 1;
+        window.keyboardElement.text(getKeyHebrewChar(key));
     }
-    input.selectionEnd = input.selectionStart;
+    if (keyboardCallback) {
+        keyboardCallback(key);
+    }
     key.removeClass("key-depressed").addClass("key-pressed");
     window.setTimeout(function() {
         key.removeClass("key-pressed").addClass("key-depressed");
@@ -78,15 +101,19 @@ function keyboardClick(event) {
 }
 
 function bindKeyboard(element) {
-    element.focus(function() {
-        if (window.keyboardElement == null && element.is(":visible")) {
-            showKeyboard($(this));
-        }
-    }).blur(function() {
-        if (!window.mouseInKeyboard) {
-            hideKeyboard();
-        }
-    });
+    if (element.is("input")) {
+        element.focus(function() {
+            if (window.keyboardElement == null && element.is(":visible")) {
+                showKeyboard($(this));
+            }
+        }).blur(function() {
+            if (!window.mouseInKeyboard) {
+                hideKeyboard();
+            }
+        });
+    } else {
+        showKeyboard(element);
+    }
 }
 
 function initKeyboard() {
@@ -97,7 +124,7 @@ function initKeyboard() {
         window.mouseInKeyboard = false;
     });
     $("#keyboard .key").click(keyboardClick);
-    $("input.keyboard-enabled").each(function() {
+    $(".keyboard-enabled").each(function() {
         bindKeyboard($(this));
     });
 }

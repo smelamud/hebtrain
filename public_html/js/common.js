@@ -65,7 +65,7 @@ function enterHebrewChar(key) {
     } else {
         window.keyboardElement.text(getKeyHebrewChar(key));
     }
-    if (keyboardCallback) {
+    if (typeof keyboardCallback == "function") {
         keyboardCallback(key);
     }
     key.removeClass("key-depressed").addClass("key-pressed");

@@ -27,8 +27,8 @@ require_once('parts/header.php');
                     <tr class="template">
                         <td class="title span4">&nbsp;</td>
                         <td class="span1">&nbsp;</td>
-                        <td class="total span1">&nbsp;</td>
-                        <td class="now span1">&nbsp;</td>
+                        <td class="total span1">0</td>
+                        <td class="now span1">0</td>
                         <td class="span9">&nbsp;</td>
                     </tr>
                     <tr>

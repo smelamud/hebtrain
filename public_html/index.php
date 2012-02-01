@@ -13,8 +13,32 @@ require_once('parts/header.php');
             <div id="totals">
                 <img id="spinner" src="/pics/ajax.gif"><br/>
                 <strong>Всего слов в словаре:</strong> <span id="words-total">0</span><br/>
-                <strong>Всего вопросов:</strong> <span id="questions-total">0</span>,
-                <strong>требуют ответа сейчас</strong>:  <span id="questions-now">0</span>
+            </div>
+            <div id="questions">
+                <strong>По вопросам:</strong>
+                <table>
+                    <tr>
+                        <th class="span4">&nbsp;</th>
+                        <th class="span1">&nbsp;</th>
+                        <th class="span1">Всего</th>
+                        <th class="span1">Сейчас</th>
+                        <th class="span9">&nbsp;</th>
+                    </tr>
+                    <tr class="template">
+                        <td class="title span4">&nbsp;</td>
+                        <td class="span1">&nbsp;</td>
+                        <td class="total span1">&nbsp;</td>
+                        <td class="now span1">&nbsp;</td>
+                        <td class="span9">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th class="span4">Все вопросы</td>
+                        <td class="span1">&nbsp;</td>
+                        <td id="questions-total" class="span1">&nbsp;</td>
+                        <td id="questions-now" class="span1">&nbsp;</td>
+                        <td class="span9">&nbsp;</td>
+                    </tr>
+                </table>
             </div>
             <div id="stages">
                 <strong>По этапам:</strong>

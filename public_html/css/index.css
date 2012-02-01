@@ -7,6 +7,10 @@
     visibility: hidden;
 }
 
+#stages {
+    margin-top: 4ex;
+}
+
 #stages, #stages td {
     font-size: 12pt;
 }
@@ -16,5 +20,21 @@
 }
 
 #stages .template {
+    display: none;
+}
+
+#questions {
+    margin-top: 4ex;
+}
+
+#questions, #questions td {
+    font-size: 12pt;
+}
+
+#questions .count {
+    text-align: right;
+}
+
+#questions .template {
     display: none;
 }

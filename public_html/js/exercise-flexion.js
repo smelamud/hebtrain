@@ -47,6 +47,7 @@ function generateRoots() {
             s += consonants[k];
         }
         var newLine = template.clone();
+        newLine.removeClass("template");
         newLine.text(s);
         template.before(newLine);
     }

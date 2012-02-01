@@ -2,9 +2,10 @@
 require_once('lib/database.php');
 require_once('lib/items.php');
 require_once('lib/stages.php');
+require_once('lib/questions.php');
 
 function getStatistics() {
-    global $mysqli, $LS_PARAMS;
+    global $mysqli, $LS_PARAMS, $QV_PARAMS;
 
     $result = array();
 
@@ -20,29 +21,51 @@ function getStatistics() {
     $st->fetch();
     $st->close();
 
-    $st = $mysqli->prepare(
-        'select count(*)
-         from questions left join items
-              on questions.item_id = items.id
-         where `group` = ?');
-    dbFailsafe($mysqli);
-    $group = VI_WORD;
-    $st->bind_param('i', $group);
-    $st->execute();
-    $st->bind_result($result['questions_total']);
-    $st->fetch();
-    $st->close();
+    $result['questions'] = array();
+
+    $result['questions_total'] = 0;
 
     $st = $mysqli->prepare(
-        'select count(*)
+        'select question, count(*)
          from questions left join items
               on questions.item_id = items.id
-         where `group` = ? and next_test <= now()');
+         where `group` = ?
+         group by question
+         order by question');
     dbFailsafe($mysqli);
     $group = VI_WORD;
     $st->bind_param('i', $group);
     $st->execute();
-    $st->bind_result($result['questions_now']);
+    $st->bind_result($question, $count);
+    while ($st->fetch()) {
+        array_push(
+            $result['questions'],
+            array(
+                'title' => $QV_PARAMS[$question]['title'],
+                'total' => $count
+            ));
+        $result['questions_total'] += $count;
+    }
+    $st->close();
+
+    $result['questions_now'] = 0;
+
+    $st = $mysqli->prepare(
+        'select question, count(*)
+         from questions left join items
+              on questions.item_id = items.id
+         where `group` = ? and next_test <= now()
+         group by question
+         order by question');
+    dbFailsafe($mysqli);
+    $group = VI_WORD;
+    $st->bind_param('i', $group);
+    $st->execute();
+    $st->bind_result($question, $count);
+    while ($st->fetch()) {
+        $result['questions'][$question - 1]['now'] = $count;
+        $result['questions_now'] += $count;
+    }
     $st->fetch();
     $st->close();
 

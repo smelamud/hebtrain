@@ -4,7 +4,16 @@ function loadStatistics() {
             $("#words-total").text(data.words_total);
             $("#questions-total").text(data.questions_total);
             $("#questions-now").text(data.questions_now);
-            var template = $("#stages .template");
+            var template = $("#questions .template");
+            $.each(data.questions, function(index, question) {
+                var newLine = template.clone();
+                newLine.removeClass("template");
+                newLine.find(".title").text(question.title);
+                newLine.find(".total").text(question.total);
+                newLine.find(".now").text(question.now);
+                template.before(newLine);
+            });
+            template = $("#stages .template");
             $.each(data.stages, function(index, stage) {
                 var newLine = template.clone();
                 newLine.removeClass("template");

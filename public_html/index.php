@@ -22,8 +22,11 @@ require_once('parts/header.php');
                     <tr class="template">
                         <td class="name span1">&nbsp;</td>
                         <td class="span1">&nbsp;</td>
-                        <td class="count span1">&nbsp;</td>
-                        <td class="span13">&nbsp;</td>
+                        <td class="count0 span1">&nbsp;</td>
+                        <td class="count1 span1">&nbsp;</td>
+                        <td class="count2 span1">&nbsp;</td>
+                        <td class="count3 span1">&nbsp;</td>
+                        <td class="span10">&nbsp;</td>
                     </tr>
                 </table>
             </div>

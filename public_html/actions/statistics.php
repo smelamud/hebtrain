@@ -47,24 +47,39 @@ function getStatistics() {
     $st->close();
 
     $st = $mysqli->prepare(
-        'select stage, count(*)
+        'select stage, step, count(*)
          from questions left join items
               on questions.item_id = items.id
          where `group` = ?
-         group by stage
-         order by stage');
+         group by stage, step
+         order by stage, step');
     dbFailsafe($mysqli);
     $group = VI_WORD;
     $st->bind_param('i', $group);
     $st->execute();
-    $st->bind_result($stage, $count);
+    $st->bind_result($stage, $step, $count);
     $result['stages'] = array();
+    $info = array('stage' => -1);
     while ($st->fetch()) {
+        if ($stage != $info['stage']) {
+            if ($info['stage'] >= 0) {
+                array_push(
+                    $result['stages'],
+                    $info);
+            }
+            $info = array(
+                'stage' => $stage,
+                'name' => $LS_PARAMS[$stage]['name'],
+                'count' => 0,
+                'steps' => array_fill(0, $LS_PARAMS[$stage]['steps'], 0));
+        }
+        $info['count'] += $count;
+        $info['steps'][$step] = $count;
+    }
+    if ($info['stage'] >= 0) {
         array_push(
             $result['stages'],
-            array(
-                'name' => $LS_PARAMS[$stage]['name'],
-                'count' => $count));
+            $info);
     }
     $st->close();
 

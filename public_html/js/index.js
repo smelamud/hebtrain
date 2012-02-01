@@ -9,7 +9,9 @@ function loadStatistics() {
                 var newLine = template.clone();
                 newLine.removeClass("template");
                 newLine.find(".name").text(stage.name);
-                newLine.find(".count").text(stage.count);
+                $.each(stage.steps, function(step, count) {
+                    newLine.find(".count" + step).text(count);
+                });
                 template.before(newLine);
             });
         }

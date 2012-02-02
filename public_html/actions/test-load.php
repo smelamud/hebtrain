@@ -9,7 +9,6 @@ require_once('lib/questions.php');
 function loadTest($qv) {
     global $mysqli, $QV_PARAMS;
 
-    error_log($qv);
     if ($qv == QV_WORD_RANDOM) {
         $qv = rand(QV_WORD_MIN, QV_WORD_MAX);
     }
@@ -29,7 +28,6 @@ function loadTest($qv) {
     dbFailsafe($mysqli);
     $group = VI_WORD;
     $limit = CFG_QUESTIONS_LOAD_LIMIT;
-    error_log($qv);
     if ($qv == QV_WORD_MIX) {
         $st->bind_param('ii', $group, $limit);
     } else {

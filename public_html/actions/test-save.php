@@ -23,12 +23,13 @@ function saveResult($data) {
         $st->fetch();
         $st->close();
 
-        if ($item['answers_correct'] == $item['answers_total'] &&
-            $item['answers_correct'] >= CFG_MAX_CORRECT_ANSWERS) {
-            $step++;
-            if ($step >= $LS_PARAMS[$stage]['steps']) {
-                $step = 0;
-                $stage++;
+        if ($item['answers_correct'] == $item['answers_total']) {
+            if ($item['answers_correct'] >= CFG_MAX_CORRECT_ANSWERS) {
+                $step++;
+                if ($step >= $LS_PARAMS[$stage]['steps']) {
+                    $step = 0;
+                    $stage++;
+                }
             }
         } else if ($item['answers_correct'] < CFG_MIN_CORRECT_ANSWERS) {
             $step--;

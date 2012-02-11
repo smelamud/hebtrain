@@ -42,31 +42,6 @@ function continueFind() {
     findItems($("#search-form input").val(), Number($("#found-loaded").text()));
 }
 
-function addItem() {
-    window.ajaxType = "items";
-    $.post("/actions/item-modify.php", $("#items-form").serialize(),
-        function(data) {
-            if ($("#added-title").css("display") == "none") {
-                $("#found-title").hide();
-                $("#continue").hide();
-                $("#found .item").remove();
-                $("#added-title").show();
-                $("#added-total").text("1");
-            } else {
-                $("#added-total").text(Number($("#added-total").text()) + 1);
-            }
-            addLine(data);
-            resetAdder();
-            resolveSimilar(data);
-        }
-    ).error(
-        function() {
-            alert("Error!");
-        }
-    );
-    return false;
-}
-
 function recallItem() {
     self = $(this);
     $("#editor input[name='id']").val(self.data("id"));
@@ -78,15 +53,28 @@ function recallItem() {
     $("#reset").show();
 }
 
-function modifyItem() {
+function addOrModifyItem() {
     window.ajaxType = "items";
     $.post("/actions/item-modify.php", $("#items-form").serialize(),
         function(data) {
             var line = $("#found tr").filter(function() {
                 return $(this).data("id") == data.id;
             });
-            line.find(".hebrew").text(data.hebrew);
-            line.find(".russian").text(data.russian);
+            if (line.length > 0) {
+                line.find(".hebrew").text(data.hebrew);
+                line.find(".russian").text(data.russian);
+            } else {
+                if ($("#added-title").css("display") == "none") {
+                    $("#found-title").hide();
+                    $("#continue").hide();
+                    $("#found .item").remove();
+                    $("#added-title").show();
+                    $("#added-total").text("1");
+                } else {
+                    $("#added-total").text(Number($("#added-total").text()) + 1);
+                }
+                addLine(data);
+            }
             resetAdder();
             resolveSimilar(data);
         }
@@ -194,8 +182,8 @@ function similarDialogAddLine(data) {
 }
 
 $(function() {
-    $("#add").click(addItem);
-    $("#modify").click(modifyItem);
+    $("#add").click(addOrModifyItem);
+    $("#modify").click(addOrModifyItem);
     $("#delete").click(deleteItem);
     $("#reset").click(resetAdder);
     $("#continue").click(continueFind);

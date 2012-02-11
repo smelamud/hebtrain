@@ -10,6 +10,5 @@ $VI_VARIANTS = array(
         QV_WORD_HE_RU,
         QV_WORD_BARE_HE_RU,
         QV_WORD_RU_HE,
-        QV_WORD_RU_HE_WRITE,
-        QV_WORD_RU_HE_NEKUDOT));
+        QV_WORD_RU_HE_WRITE));
 ?>

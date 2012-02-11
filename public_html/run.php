@@ -40,9 +40,6 @@ require_once('parts/keyboard.php');
                         <span id="question-title-4" class="question-title-hide">
                             Напишите на иврите без огласовок
                         </span>
-                        <span id="question-title-5" class="question-title-hide">
-                            Напишите на иврите с огласовками
-                        </span>
                     </div>
                     <div class="word">
                         <span id="question-word">&nbsp;</span>

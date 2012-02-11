@@ -63,16 +63,26 @@ function loadTest($qv) {
     for ($i = 0; $i < CFG_QUESTIONS_PER_TEST && $i < count($itemIds); $i++) {
         $n = rand(0, count($questions[$itemIds[$i]]) - 1);
         $q = $questions[$itemIds[$i]][$n];
+
         $question = $q['question'];
-        array_push(
-            $result,
-            array(
-                'item_id' => $q['item_id'],
-                'question' => $question,
-                'word' => $q[$QV_PARAMS[$question]['word']],
-                'comment' => $q[$QV_PARAMS[$question]['comment']],
-                'answer' => $q[$QV_PARAMS[$question]['answer']],
-                'input' => $QV_PARAMS[$question]['input']));
+        $test = array(
+            'item_id' => $q['item_id'],
+            'question' => $question,
+            'word' => $q[$QV_PARAMS[$question]['word']],
+            'comment' => $q[$QV_PARAMS[$question]['comment']],
+            'input' => $QV_PARAMS[$question]['input']);
+        
+        $answers = $QV_PARAMS[$question]['answer'];
+        if (is_array($answers)) {
+            $test['answer'] = array();
+            foreach ($answers as $answer) {
+                $test['answer'][] = $q[$answer];
+            }
+        } else {
+            $test['answer'] = $q[$answers];
+        }
+        
+        array_push($result, $test);
     }
 
     return $result;

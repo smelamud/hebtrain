@@ -82,7 +82,11 @@ function answered() {
     $("#answer-input").hide();
     hideKeyboard();
     $("#buttons-answer").hide();
-    $("#answer").text(data.answer).show();
+    if (!$.isArray(data.answer)) {
+        $("#answer").text(data.answer).show();
+    } else {
+        $("#answer").html(data.answer.join("<br/>")).show();
+    }
     $("#buttons-correct").show();
     $(document).focus();
 }

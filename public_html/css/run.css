@@ -43,6 +43,10 @@
     font-size: 24pt;
 }
 
+#answer {
+    line-height: 26pt;
+}
+
 #answer-input {
     font-family: serif;
     font-size: 24pt;

@@ -7,10 +7,9 @@ const QV_WORD_HE_RU = 1;
 const QV_WORD_BARE_HE_RU = 2;
 const QV_WORD_RU_HE = 3;
 const QV_WORD_RU_HE_WRITE = 4;
-const QV_WORD_RU_HE_NEKUDOT = 5;
 
 const QV_WORD_MIN = QV_WORD_HE_RU;
-const QV_WORD_MAX = QV_WORD_RU_HE_NEKUDOT;
+const QV_WORD_MAX = QV_WORD_RU_HE_WRITE;
 
 $QV_PARAMS = array(
     QV_WORD_HE_RU => array(
@@ -25,7 +24,7 @@ $QV_PARAMS = array(
         'title' => 'Иврит б/о → русский',
         'word' => 'hebrew_bare',
         'comment' => 'hebrew_comment',
-        'answer' => 'russian',
+        'answer' => array('hebrew', 'russian'),
         'input' => false),
     QV_WORD_RU_HE => array(
         'ident' => 'ru_he',
@@ -39,13 +38,6 @@ $QV_PARAMS = array(
         'title' => 'Русский → иврит б/о',
         'word' => 'russian',
         'comment' => 'russian_comment',
-        'answer' => 'hebrew_bare',
-        'input' => true),
-    QV_WORD_RU_HE_NEKUDOT => array(
-        'ident' => 'ru_he_nekudot',
-        'title' => 'Русский → иврит с/о',
-        'word' => 'russian',
-        'comment' => 'russian_comment',
         'answer' => 'hebrew',
         'input' => true));
 
@@ -55,7 +47,6 @@ $QV_IDENTS = array(
     QV_WORD_HE_RU => 'he_ru',
     QV_WORD_BARE_HE_RU => 'bare_he_ru',
     QV_WORD_RU_HE => 'ru_he',
-    QV_WORD_RU_HE_WRITE => 'ru_he_write',
-    QV_WORD_RU_HE_NEKUDOT => 'ru_he_nekudot'
+    QV_WORD_RU_HE_WRITE => 'ru_he_write'
 );
 ?>

@@ -19,6 +19,11 @@ function getURLParameter(name) {
 
 function showKeyboard(element) {
     window.keyboardElement = element;
+    redisplayKeyboard();
+}
+
+function redisplayKeyboard() {
+    var element = window.keyboardElement;
     window.mouseInKeyboard = false;
     var positioning = element.attr("data-keyboard-positioning") || "bottom";
     var off = element.offset();
@@ -103,8 +108,12 @@ function keyboardClick(event) {
 function bindKeyboard(element) {
     if (element.is("input")) {
         element.focus(function() {
-            if (window.keyboardElement == null && element.is(":visible")) {
-                showKeyboard($(this));
+            if (window.keyboardElement == null) {
+                if (element.is(":visible")) {
+                    showKeyboard($(this));
+                }
+            } else {
+                redisplayKeyboard();
             }
         }).blur(function() {
             if (!window.mouseInKeyboard) {

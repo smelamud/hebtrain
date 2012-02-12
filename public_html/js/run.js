@@ -115,12 +115,15 @@ function nextQuestion() {
                 return;
             }
 
-            if (window.loopNumber++ > 0) {
-                showIntermezzo();
-            }
-
             shuffle(window.testData);
-            window.testCurrent = 0;
+
+            if (window.loopNumber++ > 0) {
+                window.testCurrent = -1;
+                showIntermezzo();
+                return;
+            } else {
+                window.testCurrent = 0;
+            }
         }
         var data = window.testData[window.testCurrent];
         if (data.answers_correct < window.testMaxCorrect) {
@@ -137,6 +140,7 @@ function showIntermezzo() {
         $("#intermezzo").fadeIn("slow").delay(800).fadeOut("slow");
         window.setTimeout(function() {
             $("#run").show();
+            nextQuestion();
         }, 2200);
     }, 200);
 }

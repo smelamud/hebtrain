@@ -49,4 +49,18 @@ $LS_PARAMS =
             'name' => 'навсегда',
             'steps' => 1000000,
             'period' => 10 * (12 * 28 + 6)));
+
+function getStageByPeriod($period) {
+    global $LS_PARAMS;
+
+    $maxStage = LS_1_DAY;
+    foreach ($LS_PARAMS as $stage => $info) {
+        if ($info['period'] > $period) {
+            return $maxStage;
+        } else {
+            $maxStage = $stage;
+        }
+    }
+    return $maxStage;
+}
 ?>

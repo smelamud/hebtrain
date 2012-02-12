@@ -13,22 +13,28 @@ function saveResult($data) {
         }
 
         $st = $mysqli->prepare(
-            'select stage, step
+            'select stage, step, datediff(now(), next_test)
              from questions
              where item_id = ? and question = ?');
         dbFailsafe($mysqli);
         $st->bind_param('ii', $item['item_id'], $item['question']);
         $st->execute();
-        $st->bind_result($stage, $step);
+        $st->bind_result($stage, $step, $period);
         $st->fetch();
         $st->close();
 
         if ($item['answers_correct'] == $item['answers_total']) {
             if ($item['answers_correct'] >= CFG_MAX_CORRECT_ANSWERS) {
-                $step++;
-                if ($step >= $LS_PARAMS[$stage]['steps']) {
+                $realStage = getStageByPeriod($period);
+                if ($realStage > $stage) {
                     $step = 0;
-                    $stage++;
+                    $stage = $realStage;
+                } else {
+                    $step++;
+                    if ($step >= $LS_PARAMS[$stage]['steps']) {
+                        $step = 0;
+                        $stage++;
+                    }
                 }
             }
         } else if ($item['answers_correct'] < CFG_MIN_CORRECT_ANSWERS) {

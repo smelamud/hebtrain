@@ -60,7 +60,12 @@ td.separator {
 }
 
 .items td {
-    font: normal 14pt serif;
+    font: normal 11pt serif;
+    vertical-align: middle;
+}
+
+.items td.hebrew {
+    font: normal 16pt serif;
 }
 
 .items tr.template {

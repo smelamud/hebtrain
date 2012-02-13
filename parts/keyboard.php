@@ -28,8 +28,8 @@ function displayKeyboard() {?>
         <div class="key key-depressed"><span class="latin-letter">i</span> <span class="hebrew-letter">ן</span></div>
         <div class="key key-depressed"><span class="latin-letter">o</span> <span class="hebrew-letter">ם</span></div>
         <div class="key key-depressed"><span class="latin-letter">p</span> <span class="hebrew-letter">פ</span></div>
-        <div class="key key-depressed"><span class="latin-letter" data-second="[">{</span> <span class="hebrew-letter">]</span></div>
-        <div class="key key-depressed"><span class="latin-letter" data-second="]">}</span> <span class="hebrew-letter">[</span></div>
+        <div class="key key-depressed"><span class="latin-letter" data-second="[">{</span> <span class="hebrew-letter">אֿ</span></div>
+        <div class="key key-depressed"><span class="latin-letter" data-second="]">}</span> <span class="hebrew-letter">אֽ</span></div>
         <div class="key key-depressed" style="width: 54px"><span class="special-key"></span></div>
         <div class="key-newline"></div>
         <div class="key key-depressed" style="width: 60px"><span class="special-key">Caps</span></div>

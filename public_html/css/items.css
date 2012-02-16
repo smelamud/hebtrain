@@ -1,4 +1,4 @@
-.hebrew {
+.table td.hebrew, .table th.hebrew {
     text-align: right;
     direction: rtl;
 }
@@ -29,6 +29,10 @@ td.separator {
     margin: 0;
     font: normal 14pt serif;
     height: 16pt; /* to fit hebrew vowels */
+}
+
+#editor .btn {
+    margin-top: 1px;
 }
 
 #search {

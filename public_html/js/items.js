@@ -201,9 +201,9 @@ $(function() {
         $("#spinner-continue").css("visibility", "hidden");
         $("#spinner-similar").css("visibility", "hidden");
     });
-    $("#similar-dialog").modal({
+    /*$("#similar-dialog").modal({
         keyboard: true
-    });
+    });*/
     $("#similar-dialog-cancel").click(similarDialogCancel);
     $("#similar-dialog-save").click(similarDialogSave);
     findItems("", 0);

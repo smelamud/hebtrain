@@ -11,7 +11,7 @@ require_once('parts/keyboard.php');
     <body>
         <?php displayMainMenu('items'); ?>
         <div class="container"><div class="content">
-            <table class="condensed-table">
+            <table class="table table-condensed">
                 <thead>
                     <tr>
                         <th>&nbsp;</th>
@@ -28,12 +28,12 @@ require_once('parts/keyboard.php');
                                 <img id="spinner" src="/pics/ajax-cyan.gif">
                                 <input type="hidden" name="id" value="0">
                             </td>
-                            <td class="russian span8"><input type="text" name="russian" maxlength="63" autofocus/></td>
+                            <td class="russian span6"><input type="text" name="russian" maxlength="63" autofocus/></td>
                             <td class="separator">&mdash;</td>
-                            <td class="hebrew span8"><input type="text" class="keyboard-enabled" name="hebrew" maxlength="63"/></td>
-                            <td class="span7">
-                                <button id="add" class="btn primary">Добавить</button>
-                                <button id="modify" class="btn primary">Изменить</button>
+                            <td class="hebrew span6"><input type="text" class="keyboard-enabled" name="hebrew" maxlength="63"/></td>
+                            <td class="span5">
+                                <button id="add" class="btn btn-primary">Добавить</button>
+                                <button id="modify" class="btn btn-primary">Изменить</button>
                                 <button type="button" id="delete" class="btn">Удалить</button>
                                 <button type="reset" id="reset" class="btn">Сброс</button>
                             </td>
@@ -42,7 +42,7 @@ require_once('parts/keyboard.php');
                 </tbody>
             </table>
 
-            <table id="found" class="items condensed-table">
+            <table id="found" class="items table table-condensed">
                 <thead>
                     <tr>
                         <th colspan="3">
@@ -59,11 +59,11 @@ require_once('parts/keyboard.php');
                 <tbody>
                     <tr class="template">
                         <td class="spinner-space">&nbsp;</td>
-                        <td class="russian span6">&nbsp;</td>
-                        <td class="russian-comment span6">&nbsp;</td>
+                        <td class="russian span4">&nbsp;</td>
+                        <td class="russian-comment span4">&nbsp;</td>
                         <td class="separator">&mdash;</td>
-                        <td class="hebrew-comment span6">&nbsp;</td>
-                        <td class="hebrew span6">&nbsp;</td>
+                        <td class="hebrew-comment span4">&nbsp;</td>
+                        <td class="hebrew span4">&nbsp;</td>
                     </tr>
                     <tr id="continue">
                         <td class="spinner-space">
@@ -83,7 +83,7 @@ require_once('parts/keyboard.php');
             </div>
             <form id="similar-form">
                 <div class="modal-body">
-                    <table id="similar" class="items condensed-table">
+                    <table id="similar" class="items table table-condensed">
                         <thead>
                             <tr>
                                 <th colspan="2" class="russian">Русский</th>
@@ -110,8 +110,8 @@ require_once('parts/keyboard.php');
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button id="similar-dialog-save" class="btn primary" type="submit">Сохранить</button>
-                    <button id="similar-dialog-cancel" class="btn secondary">Отмена</button>
+                    <button id="similar-dialog-save" class="btn btn-primary" type="submit">Сохранить</button>
+                    <button id="similar-dialog-cancel" class="btn">Отмена</button>
                 </div>
             </form>
         </div>

@@ -139,6 +139,6 @@ function initKeyboard() {
 }
 
 $(function() {
-    $("#topbar").dropdown();
+    $("#navbar").dropdown();
     initKeyboard();
 });

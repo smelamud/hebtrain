@@ -16,41 +16,37 @@ require_once('parts/header.php');
             </div>
             <div id="questions">
                 <strong>По вопросам:</strong>
-                <table>
+                <table class="table">
                     <tr>
-                        <th class="span4">&nbsp;</th>
-                        <th class="span1">&nbsp;</th>
+                        <th class="span3">&nbsp;</th>
                         <th class="span1">Всего</th>
                         <th class="span1">Сейчас</th>
-                        <th class="span9">&nbsp;</th>
+                        <th class="span7">&nbsp;</th>
                     </tr>
                     <tr class="template">
-                        <td class="title span4">&nbsp;</td>
-                        <td class="span1">&nbsp;</td>
+                        <td class="title span3">&nbsp;</td>
                         <td class="total span1">0</td>
                         <td class="now span1">0</td>
-                        <td class="span9">&nbsp;</td>
+                        <td class="span7">&nbsp;</td>
                     </tr>
                     <tr>
-                        <th class="span4">Все вопросы</td>
-                        <td class="span1">&nbsp;</td>
+                        <th class="span3">Все вопросы</td>
                         <td id="questions-total" class="span1">&nbsp;</td>
                         <td id="questions-now" class="span1">&nbsp;</td>
-                        <td class="span9">&nbsp;</td>
+                        <td class="span7">&nbsp;</td>
                     </tr>
                 </table>
             </div>
             <div id="stages">
                 <strong>По этапам:</strong>
-                <table>
+                <table class="table">
                     <tr class="template">
-                        <td class="name span1">&nbsp;</td>
-                        <td class="span1">&nbsp;</td>
+                        <td class="name span2">&nbsp;</td>
                         <td class="count0 span1">&nbsp;</td>
                         <td class="count1 span1">&nbsp;</td>
                         <td class="count2 span1">&nbsp;</td>
                         <td class="count3 span1">&nbsp;</td>
-                        <td class="span10">&nbsp;</td>
+                        <td class="span6">&nbsp;</td>
                     </tr>
                 </table>
             </div>

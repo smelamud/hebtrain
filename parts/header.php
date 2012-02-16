@@ -40,7 +40,8 @@ function displayMainMenuItem($current, $page, $title, $href, $subMenu = array())
     if ($title == '-') {
         echo '<li class="divider"></li>';
     } elseif (count($subMenu) > 0) {
-        echo "<a href=\"$href\" class=\"dropdown-toggle\">$title</a>";
+        echo "<a href=\"$href\" class=\"dropdown-toggle\""
+            ." data-toggle=\"dropdown\">$title <b class=\"caret\"></b></a>";
         echo '<ul class="dropdown-menu">';
         foreach ($subMenu as $item) {
             displayMainMenuItem($current, $item[0], $item[1], $item[2]);
@@ -65,8 +66,8 @@ function displayMainMenu($current) {
     global $QV_PARAMS, $QV_IDENTS;
 
     ?>
-    <div class="topbar" data-dropdown="dropdown">
-        <div class="fill">
+    <div class="navbar navbar-fixed-top" data-dropdown="dropdown">
+        <div class="navbar-inner">
             <div class="container">
                 <a class="brand" href="/">Иврит</a>
                 <ul class="nav"><?php

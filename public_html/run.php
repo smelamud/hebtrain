@@ -19,7 +19,7 @@ require_once('parts/keyboard.php');
                         <span id="loaded">Тест готов</span>
                     </div>
                     <div id="buttons-start" class="buttons">
-                        <button id="button-start" class="btn primary">Начать тест</button>
+                        <button id="button-start" class="btn btn-primary">Начать тест</button>
                     </div>
                 </div>
                 <div id="underflow" class="alert-message block-message info">
@@ -50,12 +50,12 @@ require_once('parts/keyboard.php');
                         <span id="answer-input-text"></span>
                     </div>
                     <div id="buttons-answer" class="buttons">
-                        <button id="button-answer" class="btn primary">Ответ</button>
+                        <button id="button-answer" class="btn btn-primary">Ответ</button>
                     </div>
                     <div id="answer" class="word"></div>
                     <div id="buttons-correct" class="buttons">
-                        <button id="button-incorrect" class="btn large danger">Неверно</button>
-                        <button id="button-correct" class="btn large success">Верно</button>
+                        <button id="button-incorrect" class="btn btn-large btn-danger">Неверно</button>
+                        <button id="button-correct" class="btn btn-large btn-success">Верно</button>
                     </div>
                 </div>
                 <div id="intermezzo" class="message">
@@ -66,7 +66,7 @@ require_once('parts/keyboard.php');
                         <span id="finished">Тест завершен</span>
                     </div>
                     <div id="buttons-stop" class="buttons">
-                        <button id="button-save" class="btn primary">Записать результаты</button>
+                        <button id="button-save" class="btn btn-primary">Записать результаты</button>
                     </div>
                 </div>
                 <div id="restart">
@@ -74,7 +74,7 @@ require_once('parts/keyboard.php');
                         <span id="saved">Результаты теста сохранены</span>
                     </div>
                     <div id="buttons-restart" class="buttons">
-                        <button id="button-restart" class="btn primary">Загрузить новый тест</button>
+                        <button id="button-restart" class="btn btn-primary">Загрузить новый тест</button>
                     </div>
                 </div>
                 <?php displayKeyboard(); ?>

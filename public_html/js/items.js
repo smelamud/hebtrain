@@ -129,7 +129,9 @@ function resolveSimilar(data) {
         $.each(data.similar, function(index, item) {
             similarDialogAddLine(item);
         });
-        $("#similar-dialog").modal('show');
+        $("#similar-dialog").modal({
+            keyboard: true
+        });
     }
 }
 
@@ -201,9 +203,7 @@ $(function() {
         $("#spinner-continue").css("visibility", "hidden");
         $("#spinner-similar").css("visibility", "hidden");
     });
-    /*$("#similar-dialog").modal({
-        keyboard: true
-    });*/
+    $("#similar-dialog .close").click(similarDialogCancel);
     $("#similar-dialog-cancel").click(similarDialogCancel);
     $("#similar-dialog-save").click(similarDialogSave);
     findItems("", 0);

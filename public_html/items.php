@@ -50,8 +50,8 @@ require_once('parts/keyboard.php');
                             <span id="added-title">Добавлено: <span id="added-total">0</span></span>
                         </th>
                         <th colspan="3" id="search">
-                            <form id="search-form">
-                                <input type="text" name="q" maxlength="63" class="keyboard-enabled" data-keyboard-positioning="bottom-left"/>
+                            <form id="search-form" class="form-search">
+                                <input type="text" name="q" maxlength="63" class="keyboard-enabled search-query" data-keyboard-positioning="bottom-left"/>
                             </form>
                         </th>
                     </tr>

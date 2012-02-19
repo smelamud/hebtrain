@@ -47,8 +47,8 @@ td.separator {
     width: 120px;
     margin: 0;
     font: normal 14pt serif;
-    background: url(/pics/search.png) no-repeat scroll 123px 7px;
-    padding-right: 20px;
+    background: url(/pics/search.png) no-repeat scroll 137px 7px;
+    padding-right: 30px;
 }
 
 #found > thead > tr > th {

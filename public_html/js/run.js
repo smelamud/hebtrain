@@ -74,8 +74,12 @@ function showQuestion() {
 }
 
 function answered() {
-    window.testStatus = "answered";
     var data = window.testData[window.testCurrent];
+    if (data.input && $("#answer-input").val().length == 0) {
+        return;
+    }
+
+    window.testStatus = "answered";
     if (data.input) {
         $("#answer-input-text").text($("#answer-input").val()).show();
     }

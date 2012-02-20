@@ -22,8 +22,8 @@ require_once('parts/keyboard.php');
                         <button id="button-start" class="btn btn-primary">Начать тест</button>
                     </div>
                 </div>
-                <div id="underflow" class="alert-message block-message info">
-                    <strong>Недостаточно вопросов для теста.</strong><br/>
+                <div id="underflow" class="alert alert-block alert-info">
+                    <strong class="alert-heading">Недостаточно вопросов для теста.</strong><br/>
                     Ваши успехи в изучении иврита несомненны. Предлагаю пополнить словарь новыми словами.
                 </div>
                 <div id="run">

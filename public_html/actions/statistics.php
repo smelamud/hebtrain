@@ -54,7 +54,8 @@ function getStatistics() {
         'select question, count(*)
          from questions left join items
               on questions.item_id = items.id
-         where `group` = ? and next_test <= now()
+         where `group` = ? and items.next_test <= now()
+               and questions.next_test <= now()
          group by question
          order by question');
     dbFailsafe($mysqli);
@@ -63,7 +64,7 @@ function getStatistics() {
     $st->execute();
     $st->bind_result($question, $count);
     while ($st->fetch()) {
-        $result['questions'][$question - 1]['now'] = $count;
+        $result['questions'][$question - QV_WORD_MIN]['now'] = $count;
         $result['questions_now'] += $count;
     }
     $st->fetch();

@@ -57,6 +57,16 @@ function saveResult($data) {
             $item['item_id'], $item['question']);
         $st->execute();
         $st->close();
+
+        $st = $mysqli->prepare(
+            'update items
+             set next_test = now() + interval ? minute
+             where id = ?');
+        dbFailsafe($mysqli);
+        $period = CFG_ITEM_QUESTIONS_PERIOD;
+        $st->bind_param('ii', $period, $item['item_id']);
+        $st->execute();
+        $st->close();
     }
 }
 

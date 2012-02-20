@@ -30,11 +30,13 @@ CREATE TABLE `items` (
   `hebrew_comment` varchar(255) COLLATE utf8_bin NOT NULL,
   `russian` varchar(63) COLLATE utf8_bin NOT NULL,
   `russian_comment` varchar(255) COLLATE utf8_bin NOT NULL,
+  `next_test` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `group` (`group`),
   KEY `hebrew_bare` (`hebrew_bare`),
-  KEY `russian` (`russian`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `russian` (`russian`),
+  KEY `next_test` (`next_test`)
+) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,4 +78,4 @@ CREATE TABLE `versions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-01-10 13:19:46
+-- Dump completed on 2012-02-20 22:25:20

@@ -9,8 +9,8 @@ function insertItem(&$item) {
     global $mysqli, $VI_VARIANTS;
 
     $st = $mysqli->prepare(
-        'insert into items(`group`, hebrew, hebrew_bare, russian)
-         values(?, ?, ?, ?)');
+        'insert into items(`group`, hebrew, hebrew_bare, russian, next_test)
+         values(?, ?, ?, ?, now())');
     dbFailsafe($mysqli);
     $group = VI_WORD;
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);

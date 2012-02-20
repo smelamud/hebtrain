@@ -22,7 +22,8 @@ function loadTest($qv) {
                 russian, russian_comment, question
          from questions inner join items
               on questions.item_id = items.id
-         where `group` = ? $qvFilter and next_test <= now()
+         where `group` = ? $qvFilter and items.next_test <= now()
+               and questions.next_test <= now()
          order by item_id
          limit ?");
     dbFailsafe($mysqli);

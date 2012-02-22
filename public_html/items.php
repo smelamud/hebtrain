@@ -11,36 +11,7 @@ require_once('parts/keyboard.php');
     <body>
         <?php displayMainMenu('items'); ?>
         <div class="container"><div class="content">
-            <table class="table table-condensed">
-                <thead>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <th class="russian">Русский</th>
-                        <th>&nbsp;</th>
-                        <th class="hebrew">עברית</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <form id="items-form">
-                        <tr id="editor">
-                            <td>
-                                <img id="spinner" src="/pics/ajax-cyan.gif">
-                                <input type="hidden" name="id" value="0">
-                            </td>
-                            <td class="russian span6"><input type="text" name="russian" maxlength="63" autofocus/></td>
-                            <td class="separator">&mdash;</td>
-                            <td class="hebrew span6"><input type="text" class="keyboard-enabled" name="hebrew" maxlength="63"/></td>
-                            <td class="span5">
-                                <button id="add" class="btn btn-primary">Добавить</button>
-                                <button id="modify" class="btn btn-primary">Изменить</button>
-                                <button type="button" id="delete" class="btn">Удалить</button>
-                                <button type="reset" id="reset" class="btn">Сброс</button>
-                            </td>
-                        </tr>
-                    </form>
-                </tbody>
-            </table>
+            <button id="add-item" class="btn btn-primary">Добавить слово</button>
 
             <table id="found" class="items table table-condensed">
                 <thead>
@@ -51,6 +22,7 @@ require_once('parts/keyboard.php');
                         </th>
                         <th colspan="3" id="search">
                             <form id="search-form" class="form-search">
+                                <img id="spinner" src="/pics/ajax.gif">
                                 <input type="text" name="q" maxlength="63" class="keyboard-enabled search-query" data-keyboard-positioning="bottom-left"/>
                             </form>
                         </th>
@@ -75,6 +47,32 @@ require_once('parts/keyboard.php');
             </table>
             <?php displayKeyboard(); ?>
         </div></div>
+
+        <div id="edit-dialog" class="modal">
+            <div class="modal-header">
+                <a class="close" href="#">×</a>
+                <h3>Слово</h3>
+            </div>
+            <form id="edit-form" class="form-inline">
+                <div class="modal-body">
+                    <input type="hidden" name="id" value="0">
+                    <label>
+                        <span class="main-label">עברית</span>
+                        <input type="text" class="hebrew keyboard-enabled" name="hebrew" maxlength="63"/>
+                    </label><br/>
+                    <label>
+                        <span class="main-label">Русский</span>
+                        <input type="text" name="russian" maxlength="63"/>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button id="edit-dialog-add" class="btn btn-primary">Добавить</button>
+                    <button id="edit-dialog-modify" class="btn btn-primary">Изменить</button>
+                    <button type="button" id="edit-dialog-delete" class="btn">Удалить</button>
+                    <button id="edit-dialog-cancel" class="btn">Отмена</button>
+                </div>
+            </form>
+        </div>
 
         <div id="similar-dialog" class="modal">
             <div class="modal-header">

@@ -1,4 +1,4 @@
-.table td.hebrew, .table th.hebrew {
+.hebrew, .table td.hebrew {
     text-align: right;
     direction: rtl;
 }
@@ -12,27 +12,8 @@ td.separator {
     visibility: hidden;
 }
 
-#modify, #delete, #reset, #found-title, #added-title {
+#found-title, #added-title {
     display: none;
-}
-
-#editor {
-    background-color: #ccffff;
-}
-
-#editor td {
-    padding: 5px;
-}
-
-#editor input, .items input {
-    width: 96%;
-    margin: 0;
-    font: normal 14pt serif;
-    height: 16pt; /* to fit hebrew vowels */
-}
-
-#editor .btn {
-    margin-top: 1px;
 }
 
 #search {
@@ -47,6 +28,7 @@ td.separator {
     width: 120px;
     margin: 0;
     font: normal 14pt serif;
+    height: 16pt; /* to fit hebrew vowels */
     background: url(/pics/search.png) no-repeat scroll 137px 7px;
     padding-right: 30px;
 }
@@ -89,6 +71,29 @@ td.separator {
 
 #continue:hover {
     background-color: #ffffee;
+}
+
+#edit-dialog {
+    display: none;
+}
+
+#edit-dialog label {
+    font-size: 11pt;
+}
+
+#edit-dialog .main-label {
+    display: inline-block;
+    width: 4em;
+}
+
+#edit-dialog input {
+    font: normal 14pt serif;
+    height: 16pt; /* to fit hebrew vowels */
+    margin-left: 1em;
+}
+
+#edit-dialog-modify, #edit-dialog-delete {
+    display: none;
 }
 
 #similar-dialog {

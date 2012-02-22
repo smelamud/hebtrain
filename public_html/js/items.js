@@ -7,7 +7,7 @@ function addLine(data) {
     newLine.find(".hebrew-comment").text(data.hebrew_comment);
     newLine.find(".russian").text(data.russian);
     newLine.find(".russian-comment").text(data.russian_comment);
-    newLine.click(recallItem);
+    newLine.click(editDialogOpenEdit);
     $("#found .template").before(newLine);
 }
 
@@ -42,21 +42,17 @@ function continueFind() {
     findItems($("#search-form input").val(), Number($("#found-loaded").text()));
 }
 
-function recallItem() {
-    self = $(this);
-    $("#editor input[name='id']").val(self.data("id"));
-    $("#editor input[name='hebrew']").val(self.find(".hebrew").text()).focus();
-    $("#editor input[name='russian']").val(self.find(".russian").text());
-    $("#add").hide();
-    $("#modify").show();
-    $("#delete").show();
-    $("#reset").show();
+function search() {
+    findItems($("#search-form input").val(), 0);
+    return false;
 }
 
 function addOrModifyItem() {
     window.ajaxType = "items";
-    $.post("/actions/item-modify.php", $("#items-form").serialize(),
+    $.post("/actions/item-modify.php", $("#edit-form").serialize(),
         function(data) {
+            editDialogHide();
+
             var line = $("#found tr").filter(function() {
                 return $(this).data("id") == data.id;
             });
@@ -75,7 +71,6 @@ function addOrModifyItem() {
                 }
                 addLine(data);
             }
-            resetAdder();
             resolveSimilar(data);
         }
     ).error(
@@ -89,16 +84,19 @@ function addOrModifyItem() {
 function deleteItem() {
     window.ajaxType = "items";
     $.post("/actions/item-delete.php",
-        { "id": $("#editor input[name='id']").val() },
+        { "id": $("#edit-dialog input[name='id']").val() },
         function(data) {
+            editDialogHide();
+
             $("#found tr").filter(function() {
                 return $(this).data("id") == data.id;
             }).remove();
             var loaded = Number($("#found-loaded").text());
             var total = Number($("#found-total").text());
+            var added = Number($("#added-total").text());
             $("#found-loaded").text(loaded - 1);
             $("#found-total").text(total - 1);
-            resetAdder();
+            $("#added-total").text(added - 1);
         }
     ).error(
         function() {
@@ -108,18 +106,40 @@ function deleteItem() {
     return false;
 }
 
-function resetAdder() {
-    $("#add").show();
-    $("#modify").hide();
-    $("#delete").hide();
-    $("#reset").hide();
-    $("#editor input").val("");
-    $("#editor input[name='russian']").focus();
+function editDialogOpenAdd() {
+    $("#edit-dialog input").val("");
+    $("#edit-dialog-add").show();
+    $("#edit-dialog-modify").hide();
+    $("#edit-dialog-delete").hide();
+    editDialogShow();
+    return false;
 }
 
-function search() {
-    findItems($("#search-form input").val(), 0);
+function editDialogOpenEdit() {
+    self = $(this);
+    $("#edit-dialog input[name='id']").val(self.data("id"));
+    $("#edit-dialog input[name='hebrew']").val(self.find(".hebrew").text());
+    $("#edit-dialog input[name='russian']").val(self.find(".russian").text());
+    $("#edit-dialog-add").hide();
+    $("#edit-dialog-modify").show();
+    $("#edit-dialog-delete").show();
+    editDialogShow();
+}
+
+function editDialogCancel() {
+    editDialogHide();
     return false;
+}
+
+function editDialogShow() {
+    $("#edit-dialog").modal({
+        keyboard: true
+    });
+    $("#edit-dialog input[name='hebrew']").focus();
+}
+
+function editDialogHide() {
+    $("#edit-dialog").modal('hide');
 }
 
 function resolveSimilar(data) {
@@ -184,13 +204,10 @@ function similarDialogAddLine(data) {
 }
 
 $(function() {
-    $("#add").click(addOrModifyItem);
-    $("#modify").click(addOrModifyItem);
-    $("#delete").click(deleteItem);
-    $("#reset").click(resetAdder);
+    $("#add-item").click(editDialogOpenAdd);
     $("#continue").click(continueFind);
     $("#search-form").submit(search);
-    $("#editor").ajaxStart(function() {
+    $("body").ajaxStart(function() {
         if (window.ajaxType == "continue") {
             $("#spinner-continue").css("visibility", "visible");
         } else if (window.ajaxType == "similar") {
@@ -203,6 +220,12 @@ $(function() {
         $("#spinner-continue").css("visibility", "hidden");
         $("#spinner-similar").css("visibility", "hidden");
     });
+    $("#edit-dialog .close").click(editDialogCancel);
+    $("#edit-dialog-cancel").click(editDialogCancel);
+    $('#edit-dialog').on('hide', hideKeyboard);
+    $("#edit-dialog-add").click(addOrModifyItem);
+    $("#edit-dialog-modify").click(addOrModifyItem);
+    $("#edit-dialog-delete").click(deleteItem);
     $("#similar-dialog .close").click(similarDialogCancel);
     $("#similar-dialog-cancel").click(similarDialogCancel);
     $("#similar-dialog-save").click(similarDialogSave);

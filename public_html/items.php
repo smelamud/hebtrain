@@ -23,7 +23,7 @@ require_once('parts/keyboard.php');
                         <th colspan="3" id="search">
                             <form id="search-form" class="form-search">
                                 <img id="spinner" src="/pics/ajax.gif">
-                                <input type="text" name="q" maxlength="63" class="keyboard-enabled search-query" data-keyboard-positioning="bottom-left"/>
+                                <input type="text" name="q" maxlength="63" class="keyboard-enabled search-query"/>
                             </form>
                         </th>
                     </tr>

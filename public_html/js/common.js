@@ -25,9 +25,13 @@ function showKeyboard(element) {
 function redisplayKeyboard() {
     var element = window.keyboardElement;
     window.mouseInKeyboard = false;
-    var positioning = element.attr("data-keyboard-positioning") || "bottom";
+    
+    var positioning = element.attr("data-keyboard-positioning") || "fixed";
     var off = element.offset();
-    if (positioning == "bottom") {
+    if (positioning == "fixed") {
+        var position = {left: ($(window).width() - 568) / 2,
+                        top: $(window).height()};
+    } else if (positioning == "bottom") {
         var position = {left: off.left,
                         top: off.top + element.outerHeight() + 5};
     } else if (positioning == "right") {
@@ -40,12 +44,30 @@ function redisplayKeyboard() {
         var position = {left: off.left + (element.outerWidth() - 568) / 2,
                         top: off.top + element.outerHeight() + 5};
     }
+
     $("#keyboard").show().offset(position);
+    
+    if (positioning == "fixed") {
+        $("#keyboard").animate({top: $(window).height() - 170}, 100);
+    }
 }
 
 function hideKeyboard() {
-    window.keyboardElement = null;
-    $("#keyboard").hide();
+    var positioning = null;
+    if (window.keyboardElement != null) {
+        positioning = window.keyboardElement.attr("data-keyboard-positioning")
+            || "fixed";
+        window.keyboardElement = null;
+    }
+    if (positioning == "fixed") {
+        $("#keyboard").animate({top: $(window).height()}, 100,
+            function() {
+                $("#keyboard").hide();
+            }
+        );
+    } else {
+        $("#keyboard").hide();
+    }
 }
 
 function getKeyHebrewChar(key) {

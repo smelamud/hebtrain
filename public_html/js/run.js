@@ -150,7 +150,7 @@ function showIntermezzo() {
 }
 
 function isEndOfTest() {
-    return getOpenQuestionsCount() <= window.testMinQuestions;
+    return getOpenQuestionsCount() == 0;
 }
 
 function getOpenQuestionsCount() {

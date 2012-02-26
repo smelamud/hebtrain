@@ -114,7 +114,7 @@ function nextQuestion() {
     while (true) {
         window.testCurrent++;
         if (window.testCurrent >= window.testData.length) {
-            if (getOpenQuestionsCount() <= window.testMinQuestions) {
+            if (isEndOfTest()) {
                 stopTest();
                 return;
             }
@@ -147,6 +147,10 @@ function showIntermezzo() {
             nextQuestion();
         }, 2200);
     }, 200);
+}
+
+function isEndOfTest() {
+    return getOpenQuestionsCount() <= window.testMinQuestions;
 }
 
 function getOpenQuestionsCount() {

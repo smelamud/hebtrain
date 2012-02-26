@@ -37,7 +37,7 @@ function saveResult($data) {
                     }
                 }
             }
-        } else if ($item['answers_correct'] < CFG_MIN_CORRECT_ANSWERS) {
+        } else if ($item['answers_total'] - $item['answers_correct'] > CFG_MAX_INCORRECT_ANSWERS) {
             $step--;
             if ($step < 0) {
                 $step = 0;

@@ -9,13 +9,14 @@ function insertItem(&$item) {
     global $mysqli, $VI_VARIANTS;
 
     $st = $mysqli->prepare(
-        'insert into items(`group`, hebrew, hebrew_bare, russian, next_test)
-         values(?, ?, ?, ?, now())');
+        'insert into items(`group`, hebrew, hebrew_bare, hebrew_comment,
+                           russian, russian_comment, next_test)
+         values(?, ?, ?, ?, ?, ?, now())');
     dbFailsafe($mysqli);
     $group = VI_WORD;
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);
-    $st->bind_param('isss', $group, $item['hebrew'], $item['hebrew_bare'],
-        $item['russian']);
+    $st->bind_param('isssss', $group, $item['hebrew'], $item['hebrew_bare'],
+        $item['hebrew_comment'], $item['russian'], $item['russian_comment']);
     $st->execute();
     $item['id'] = $st->insert_id;
     $st->close();
@@ -36,12 +37,14 @@ function modifyItem(&$item) {
 
     $st = $mysqli->prepare(
         'update items
-         set hebrew = ?, hebrew_bare = ?, russian = ?
+         set hebrew = ?, hebrew_bare = ?, hebrew_comment = ?, russian = ?,
+             russian_comment = ?
          where id = ?');
     dbFailsafe($mysqli);
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);
-    $st->bind_param('sssi', $item['hebrew'], $item['hebrew_bare'],
-        $item['russian'], $item['id']);
+    $st->bind_param('sssssi', $item['hebrew'], $item['hebrew_bare'],
+        $item['hebrew_comment'], $item['russian'], $item['russian_comment'],
+        $item['id']);
     $st->execute();
     $st->close();
 }
@@ -86,7 +89,9 @@ function getSimilarItems(&$item) {
 $item = array(
     'id' => postIntVar('id'),
     'hebrew' => postVar('hebrew'),
-    'russian' => postVar('russian')
+    'hebrew_comment' => postVar('hebrew_comment'),
+    'russian' => postVar('russian'),
+    'russian_comment' => postVar('russian_comment')
 );
 
 $mysqli = dbConnect();

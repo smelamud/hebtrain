@@ -58,7 +58,9 @@ function addOrModifyItem() {
             });
             if (line.length > 0) {
                 line.find(".hebrew").text(data.hebrew);
+                line.find(".hebrew-comment").text(data.hebrew_comment);
                 line.find(".russian").text(data.russian);
+                line.find(".russian-comment").text(data.russian_comment);
             } else {
                 if ($("#added-title").css("display") == "none") {
                     $("#found-title").hide();
@@ -119,7 +121,9 @@ function editDialogOpenEdit() {
     self = $(this);
     $("#edit-dialog input[name='id']").val(self.data("id"));
     $("#edit-dialog input[name='hebrew']").val(self.find(".hebrew").text());
+    $("#edit-dialog input[name='hebrew_comment']").val(self.find(".hebrew-comment").text());
     $("#edit-dialog input[name='russian']").val(self.find(".russian").text());
+    $("#edit-dialog input[name='russian_comment']").val(self.find(".russian-comment").text());
     $("#edit-dialog-add").hide();
     $("#edit-dialog-modify").show();
     $("#edit-dialog-delete").show();

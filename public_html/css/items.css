@@ -75,6 +75,7 @@ td.separator {
 
 #edit-dialog {
     display: none;
+    width: 600px;
 }
 
 #edit-dialog label {

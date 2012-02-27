@@ -59,11 +59,13 @@ require_once('parts/keyboard.php');
                     <label>
                         <span class="main-label">עברית</span>
                         <input type="text" class="hebrew keyboard-enabled" name="hebrew" maxlength="63"/>
-                    </label><br/>
+                    </label>
+                    <input type="text" name="hebrew_comment" maxlength="63"/><br/>
                     <label>
                         <span class="main-label">Русский</span>
                         <input type="text" name="russian" maxlength="63"/>
                     </label>
+                    <input type="text" name="russian_comment" maxlength="63"/>
                 </div>
                 <div class="modal-footer">
                     <button id="edit-dialog-add" class="btn btn-primary">Добавить</button>

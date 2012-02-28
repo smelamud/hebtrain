@@ -19,10 +19,10 @@ function getURLParameter(name) {
 
 function showKeyboard(element) {
     window.keyboardElement = element;
-    redisplayKeyboard();
+    redisplayKeyboard(true);
 }
 
-function redisplayKeyboard() {
+function redisplayKeyboard(animate) {
     var element = window.keyboardElement;
     window.mouseInKeyboard = false;
     
@@ -30,7 +30,7 @@ function redisplayKeyboard() {
     var off = element.offset();
     if (positioning == "fixed") {
         var position = {left: ($(window).width() - 568) / 2,
-                        top: $(window).height()};
+                        top: $(window).height() - (animate ? 0 : 170)};
     } else if (positioning == "bottom") {
         var position = {left: off.left,
                         top: off.top + element.outerHeight() + 5};
@@ -47,8 +47,10 @@ function redisplayKeyboard() {
 
     $("#keyboard").show().offset(position);
     
-    if (positioning == "fixed") {
-        $("#keyboard").animate({top: $(window).height() - 170}, 100);
+    if (animate) {
+        if (positioning == "fixed") {
+            $("#keyboard").animate({top: $(window).height() - 170}, 100);
+        }
     }
 }
 
@@ -135,7 +137,7 @@ function bindKeyboard(element) {
                     showKeyboard($(this));
                 }
             } else {
-                redisplayKeyboard();
+                redisplayKeyboard(false);
             }
         }).blur(function() {
             if (!window.mouseInKeyboard) {

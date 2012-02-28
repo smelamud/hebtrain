@@ -87,6 +87,11 @@ td.separator {
     width: 4em;
 }
 
+#edit-dialog .checkbox-label {
+    position: relative;
+    top: 3px;
+}
+
 #edit-dialog input {
     font: normal 14pt serif;
     height: 16pt; /* to fit hebrew vowels */

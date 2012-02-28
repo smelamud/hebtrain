@@ -4,6 +4,7 @@ require_once('lib/database.php');
 require_once('lib/items.php');
 require_once('lib/questions.php');
 require_once('lib/hebrew.php');
+require_once('lib/stages.php');
 
 function insertItem(&$item) {
     global $mysqli, $VI_VARIANTS;
@@ -22,11 +23,18 @@ function insertItem(&$item) {
     $st->close();
 
     $st = $mysqli->prepare(
-        'insert into questions(item_id, question, next_test)
-         values(?, ?, now())');
+        'insert into questions(item_id, question, stage, next_test)
+         values(?, ?, ?, now() + interval ? day)');
     dbFailsafe($mysqli);
     foreach($VI_VARIANTS[VI_WORD] as $variant) {
-        $st->bind_param('ii', $item['id'], $variant);
+        if (!$item['familiar']) {
+            $stage = LS_1_DAY;
+            $delay = 0;
+        } else {
+            $stage = LS_2_WEEKS;
+            $delay = rand(0, 13);
+        }
+        $st->bind_param('iiii', $item['id'], $variant, $stage, $delay);
         $st->execute();
     }
     $st->close();
@@ -91,7 +99,8 @@ $item = array(
     'hebrew' => postVar('hebrew'),
     'hebrew_comment' => postVar('hebrew_comment'),
     'russian' => postVar('russian'),
-    'russian_comment' => postVar('russian_comment')
+    'russian_comment' => postVar('russian_comment'),
+    'familiar' => postBoolVar('familiar')
 );
 
 $mysqli = dbConnect();

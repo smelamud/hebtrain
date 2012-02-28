@@ -65,7 +65,11 @@ require_once('parts/keyboard.php');
                         <span class="main-label">Русский</span>
                         <input type="text" name="russian" maxlength="63"/>
                     </label>
-                    <input type="text" name="russian_comment" maxlength="63"/>
+                    <input type="text" name="russian_comment" maxlength="63"/><br/>
+                    <label id="edit-dialog-familiar">
+                        <input type="checkbox" name="familiar" value="1"/>
+                        <span class="checkbox-label">Знакомое слово</span>
+                    </label>
                 </div>
                 <div class="modal-footer">
                     <button id="edit-dialog-add" class="btn btn-primary">Добавить</button>

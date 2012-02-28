@@ -109,7 +109,9 @@ function deleteItem() {
 }
 
 function editDialogOpenAdd() {
-    $("#edit-dialog input").val("");
+    $("#edit-dialog input:text").val("");
+    $("#edit-dialog input:checkbox").val([]);
+    $("#edit-dialog-familiar").show();
     $("#edit-dialog-add").show();
     $("#edit-dialog-modify").hide();
     $("#edit-dialog-delete").hide();
@@ -119,11 +121,13 @@ function editDialogOpenAdd() {
 
 function editDialogOpenEdit() {
     self = $(this);
+    $("#edit-dialog input:text").val("");
     $("#edit-dialog input[name='id']").val(self.data("id"));
     $("#edit-dialog input[name='hebrew']").val(self.find(".hebrew").text());
     $("#edit-dialog input[name='hebrew_comment']").val(self.find(".hebrew-comment").text());
     $("#edit-dialog input[name='russian']").val(self.find(".russian").text());
     $("#edit-dialog input[name='russian_comment']").val(self.find(".russian-comment").text());
+    $("#edit-dialog-familiar").hide();
     $("#edit-dialog-add").hide();
     $("#edit-dialog-modify").show();
     $("#edit-dialog-delete").show();

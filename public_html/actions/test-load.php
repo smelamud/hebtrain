@@ -30,6 +30,9 @@ function loadTest($qv) {
     $group = VI_WORD;
     $limit = CFG_QUESTIONS_LOAD_LIMIT;
     if ($qv == QV_WORD_MIX) {
+        $limit *= QV_WORD_MAX - QV_WORD_MIN + 1;
+    }
+    if ($qv == QV_WORD_MIX) {
         $st->bind_param('ii', $group, $limit);
     } else {
         $st->bind_param('iii', $group, $qv, $limit);

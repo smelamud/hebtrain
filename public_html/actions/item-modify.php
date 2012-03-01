@@ -23,8 +23,8 @@ function insertItem(&$item) {
     $st->close();
 
     $st = $mysqli->prepare(
-        'insert into questions(item_id, question, stage, next_test)
-         values(?, ?, ?, now() + interval ? day)');
+        'insert into questions(item_id, question, stage, next_test, active)
+         values(?, ?, ?, now() + interval ? day, 1)');
     dbFailsafe($mysqli);
     foreach($VI_VARIANTS[VI_WORD] as $variant) {
         if (!$item['familiar']) {
@@ -63,11 +63,10 @@ function getSimilarItems(&$item) {
     $st = $mysqli->prepare(
         'select id, hebrew, hebrew_comment, russian, russian_comment
          from items
-         where `group` = ? and (russian = ? or hebrew_bare = ?)
+         where russian = ? or hebrew_bare = ?
          order by hebrew_bare');
     dbFailsafe($mysqli);
-    $group = VI_WORD;
-    $st->bind_param('iss', $group, $item['russian'], $item['hebrew_bare']);
+    $st->bind_param('ss', $item['russian'], $item['hebrew_bare']);
     $st->execute();
 
     $st->bind_result($id, $hebrew, $hebrew_comment, $russian, $russian_comment);

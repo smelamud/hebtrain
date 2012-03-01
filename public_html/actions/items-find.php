@@ -19,9 +19,8 @@ function findItems($keyword, $offset) {
     $st = $mysqli->prepare(
         'select count(*)
          from items
-         where `group` = ? and russian like ? and hebrew_bare like ?');
+         where russian like ? and hebrew_bare like ?');
     dbFailsafe($mysqli);
-    $group = VI_WORD;
     if (isHebrew($keyword)) {
         $russian_like = '%';
         $hebrew_like = $keyword . '%';
@@ -29,7 +28,7 @@ function findItems($keyword, $offset) {
         $russian_like = $keyword . '%';
         $hebrew_like = '%';
     }
-    $st->bind_param('iss', $group, $russian_like, $hebrew_like);
+    $st->bind_param('ss', $russian_like, $hebrew_like);
     $st->execute();
     $st->bind_result($result['total']);
     $st->fetch();
@@ -38,13 +37,12 @@ function findItems($keyword, $offset) {
     $st = $mysqli->prepare(
         'select id, hebrew, hebrew_comment, russian, russian_comment
          from items
-         where `group` = ? and russian like ? and hebrew_bare like ?
+         where russian like ? and hebrew_bare like ?
          order by hebrew_bare
          limit ?, ?');
     dbFailsafe($mysqli);
     $limit = CFG_ITEMS_LOAD_LIMIT;
-    $st->bind_param('issii', $group, $russian_like, $hebrew_like,
-        $offset, $limit);
+    $st->bind_param('ssii', $russian_like, $hebrew_like, $offset, $limit);
     $st->execute();
 
     $st->store_result();

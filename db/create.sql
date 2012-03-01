@@ -31,12 +31,19 @@ CREATE TABLE `items` (
   `russian` varchar(63) COLLATE utf8_bin NOT NULL,
   `russian_comment` varchar(255) COLLATE utf8_bin NOT NULL,
   `next_test` datetime NOT NULL,
+  `root` varchar(10) COLLATE utf8_bin NOT NULL,
+  `gender` tinyint(4) NOT NULL,
+  `feminine` varchar(63) COLLATE utf8_bin NOT NULL,
+  `plural` varchar(63) COLLATE utf8_bin NOT NULL,
+  `smihut` varchar(63) COLLATE utf8_bin NOT NULL,
+  `abbrev` varchar(63) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   KEY `group` (`group`),
   KEY `hebrew_bare` (`hebrew_bare`),
   KEY `russian` (`russian`),
-  KEY `next_test` (`next_test`)
-) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `next_test` (`next_test`),
+  KEY `root` (`root`)
+) ENGINE=MyISAM AUTO_INCREMENT=75 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,8 +59,10 @@ CREATE TABLE `questions` (
   `stage` tinyint(4) NOT NULL,
   `step` tinyint(4) NOT NULL,
   `next_test` datetime NOT NULL,
+  `active` tinyint(4) NOT NULL,
   PRIMARY KEY (`item_id`,`question`),
-  KEY `next_test` (`next_test`)
+  KEY `next_test` (`next_test`),
+  KEY `active` (`active`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -78,4 +87,4 @@ CREATE TABLE `versions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-02-20 22:25:20
+-- Dump completed on 2012-03-01  1:25:18

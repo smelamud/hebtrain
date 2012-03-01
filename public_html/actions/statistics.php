@@ -11,11 +11,8 @@ function getStatistics() {
 
     $st = $mysqli->prepare(
         'select count(*)
-         from items
-         where `group` = ?');
+         from items');
     dbFailsafe($mysqli);
-    $group = VI_WORD;
-    $st->bind_param('i', $group);
     $st->execute();
     $st->bind_result($result['words_total']);
     $st->fetch();
@@ -29,12 +26,10 @@ function getStatistics() {
         'select question, count(*)
          from questions left join items
               on questions.item_id = items.id
-         where `group` = ?
+         where active = 1
          group by question
          order by question');
     dbFailsafe($mysqli);
-    $group = VI_WORD;
-    $st->bind_param('i', $group);
     $st->execute();
     $st->bind_result($question, $count);
     while ($st->fetch()) {
@@ -54,13 +49,11 @@ function getStatistics() {
         'select question, count(*)
          from questions left join items
               on questions.item_id = items.id
-         where `group` = ? and items.next_test <= now()
+         where active = 1 and items.next_test <= now()
                and questions.next_test <= now()
          group by question
          order by question');
     dbFailsafe($mysqli);
-    $group = VI_WORD;
-    $st->bind_param('i', $group);
     $st->execute();
     $st->bind_result($question, $count);
     while ($st->fetch()) {
@@ -74,12 +67,10 @@ function getStatistics() {
         'select stage, step, count(*)
          from questions left join items
               on questions.item_id = items.id
-         where `group` = ?
+         where active = 1
          group by stage, step
          order by stage, step');
     dbFailsafe($mysqli);
-    $group = VI_WORD;
-    $st->bind_param('i', $group);
     $st->execute();
     $st->bind_result($stage, $step, $count);
     $result['stages'] = array();

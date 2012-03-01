@@ -22,20 +22,17 @@ function loadTest($qv) {
                 russian, russian_comment, question
          from questions inner join items
               on questions.item_id = items.id
-         where `group` = ? $qvFilter and items.next_test <= now()
+         where active = 1 $qvFilter and items.next_test <= now()
                and questions.next_test <= now()
          order by item_id
          limit ?");
     dbFailsafe($mysqli);
-    $group = VI_WORD;
     $limit = CFG_QUESTIONS_LOAD_LIMIT;
     if ($qv == QV_WORD_MIX) {
         $limit *= QV_WORD_MAX - QV_WORD_MIN + 1;
-    }
-    if ($qv == QV_WORD_MIX) {
-        $st->bind_param('ii', $group, $limit);
+        $st->bind_param('i', $limit);
     } else {
-        $st->bind_param('iii', $group, $qv, $limit);
+        $st->bind_param('ii', $qv, $limit);
     }
     $st->execute();
 

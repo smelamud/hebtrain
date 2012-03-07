@@ -111,6 +111,7 @@ function deleteItem() {
 function editDialogOpenAdd() {
     $("#edit-dialog input:text").val("");
     $("#edit-dialog input:checkbox").val([]);
+    $("#edit-dialog input[name='id']").val("");
     $("#edit-dialog-familiar").show();
     $("#edit-dialog-add").show();
     $("#edit-dialog-modify").hide();

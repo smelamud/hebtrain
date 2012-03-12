@@ -7,7 +7,7 @@ require_once('lib/hebrew.php');
 require_once('lib/stages.php');
 
 function insertItem(&$item) {
-    global $mysqli, $VI_VARIANTS;
+    global $mysqli;
 
     $st = $mysqli->prepare(
         'insert into items(`group`, hebrew, hebrew_bare, hebrew_comment,
@@ -26,7 +26,7 @@ function insertItem(&$item) {
         'insert into questions(item_id, question, stage, next_test, active)
          values(?, ?, ?, now() + interval ? day, 1)');
     dbFailsafe($mysqli);
-    foreach($VI_VARIANTS[VI_WORD] as $variant) {
+    for($variant = QV_WORD_MIN; $variant <= QV_WORD_MAX; $variant++) {
         if (!$item['familiar']) {
             $stage = LS_1_DAY;
             $delay = 0;

@@ -69,6 +69,10 @@ require_once('parts/keyboard.php');
                     <label id="edit-dialog-familiar">
                         <input type="checkbox" name="familiar" value="1"/>
                         <span class="checkbox-label">Знакомое слово</span>
+                    </label><br/>
+                    <label>
+                        Корень&nbsp;
+                        <input type="text" class="hebrew keyboard-enabled input-mini" name="root" maxlength="10"/>
                     </label>
                 </div>
                 <div class="modal-footer">

@@ -25,7 +25,7 @@ function saveResult($data) {
 
         if ($item['answers_correct'] == $item['answers_total']) {
             if ($item['answers_correct'] >= CFG_MAX_CORRECT_ANSWERS) {
-                $realStage = getStageByPeriod($period);
+                $realStage = getStageByPeriod($period, $stage, $step);
                 if ($realStage > $stage) {
                     $step = 0;
                     $stage = $realStage;

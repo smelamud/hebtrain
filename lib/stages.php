@@ -50,12 +50,18 @@ $LS_PARAMS =
             'steps' => 1000000,
             'period' => 10 * (12 * 28 + 6)));
 
-function getStageByPeriod($period) {
+function getStageByPeriod($period, $currentStage, $currentStep) {
     global $LS_PARAMS;
+
+    if ($currentStage == 0 && $currentStep == 0) {
+        $fullPeriod = $period;
+    } else {
+        $fullPeriod = $period + $LS_PARAMS[$currentStage]['period'];
+    }
 
     $maxStage = LS_1_DAY;
     foreach ($LS_PARAMS as $stage => $info) {
-        if ($info['period'] > $period) {
+        if ($info['period'] > $fullPeriod) {
             return $maxStage;
         } else {
             $maxStage = $stage;

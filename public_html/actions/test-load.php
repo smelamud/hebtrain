@@ -5,6 +5,7 @@ require_once('lib/post.php');
 require_once('lib/database.php');
 require_once('lib/items.php');
 require_once('lib/questions.php');
+require_once('lib/stages.php');
 
 function loadTest($qv) {
     global $mysqli, $QV_PARAMS;
@@ -19,7 +20,7 @@ function loadTest($qv) {
     }
     $st = $mysqli->prepare(
         "select item_id, hebrew, hebrew_bare, hebrew_comment,
-                russian, russian_comment, question
+                russian, russian_comment, question, priority
          from questions inner join items
               on questions.item_id = items.id
          where active = 1 $qvFilter and items.next_test <= now()
@@ -39,7 +40,7 @@ function loadTest($qv) {
     $itemIds = array();
     $questions = array();
     $st->bind_result($itemId, $hebrew, $hebrewBare, $hebrewComment,
-        $russian, $russianComment, $question);
+        $russian, $russianComment, $question, $priority);
     while ($st->fetch()) {
         $count = count($itemIds);
         if ($count == 0 || $itemIds[$count - 1] != $itemId) {
@@ -55,38 +56,54 @@ function loadTest($qv) {
                 'hebrew_comment' => $hebrewComment,
                 'russian' => $russian,
                 'russian_comment' => $russianComment,
-                'question' => $question));
+                'question' => $question,
+                'priority' => $priority));
     }
     
     srand();
     shuffle($itemIds);
     $result = array();
-    for ($i = 0; $i < CFG_QUESTIONS_PER_TEST && $i < count($itemIds); $i++) {
-        $n = rand(0, count($questions[$itemIds[$i]]) - 1);
-        $q = $questions[$itemIds[$i]][$n];
-
-        $question = $q['question'];
-        $test = array(
-            'item_id' => $q['item_id'],
-            'question' => $question,
-            'word' => $q[$QV_PARAMS[$question]['word']],
-            'comment' => $q[$QV_PARAMS[$question]['comment']],
-            'input' => $QV_PARAMS[$question]['input']);
-        
-        $answers = $QV_PARAMS[$question]['answer'];
-        if (is_array($answers)) {
-            $test['answer'] = array();
-            foreach ($answers as $answer) {
-                $test['answer'][] = $q[$answer];
+    $usedIds = array();
+    while (true) {
+        for ($i = 0; $i < count($itemIds); $i++) {
+            if (count($result) >= CFG_QUESTIONS_PER_TEST
+                || count($result) >= count($itemIds)) {
+                return $result;
             }
-        } else {
-            $test['answer'] = $q[$answers];
-        }
-        
-        array_push($result, $test);
-    }
+            
+            $itemId = $itemIds[$i];
+            if (!isset($usedIds[$itemId]) || !$usedIds[$itemId]) {
+                $n = rand(0, count($questions[$itemId]) - 1);
+                $q = $questions[$itemId][$n];
 
-    return $result;
+                // Penalty for lower-priority questions
+                if (rand(0, LS_PRIORITY_MAX + 1) < $q['priority']) {
+                    continue;
+                }
+
+                $question = $q['question'];
+                $test = array(
+                    'item_id' => $q['item_id'],
+                    'question' => $question,
+                    'word' => $q[$QV_PARAMS[$question]['word']],
+                    'comment' => $q[$QV_PARAMS[$question]['comment']],
+                    'input' => $QV_PARAMS[$question]['input']);
+                
+                $answers = $QV_PARAMS[$question]['answer'];
+                if (is_array($answers)) {
+                    $test['answer'] = array();
+                    foreach ($answers as $answer) {
+                        $test['answer'][] = $q[$answer];
+                    }
+                } else {
+                    $test['answer'] = $q[$answers];
+                }
+                
+                array_push($result, $test);
+                $usedIds[$itemId] = true;
+            }
+        }
+    }
 }
 
 $mysqli = dbConnect();

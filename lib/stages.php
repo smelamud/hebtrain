@@ -11,6 +11,8 @@ const LS_6_MONTHS = 6;
 const LS_1_YEAR = 7;
 const LS_PERMANENT = 8;
 
+const LS_PRIORITY_MAX = 8;
+
 $LS_PARAMS =
     array(
         LS_1_DAY => array(

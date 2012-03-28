@@ -50,11 +50,12 @@ function saveResult($data) {
 
         $st = $mysqli->prepare(
             'update questions
-             set stage = ?, step = ?, next_test = now() + interval ? day
+             set stage = ?, step = ?, next_test = now() + interval ? day,
+                 priority = ?
              where item_id = ? and question = ?');
         dbFailsafe($mysqli);
-        $st->bind_param('iiiii', $stage, $step, $LS_PARAMS[$stage]['period'],
-            $item['item_id'], $item['question']);
+        $st->bind_param('iiiiii', $stage, $step, $LS_PARAMS[$stage]['period'],
+            $LS_PARAMS[$stage]['priority'], $item['item_id'], $item['question']);
         $st->execute();
         $st->close();
 

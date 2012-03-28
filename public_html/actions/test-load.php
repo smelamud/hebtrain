@@ -24,7 +24,7 @@ function loadTest($qv) {
               on questions.item_id = items.id
          where active = 1 $qvFilter and items.next_test <= now()
                and questions.next_test <= now()
-         order by item_id
+         order by priority
          limit ?");
     dbFailsafe($mysqli);
     $limit = CFG_QUESTIONS_LOAD_LIMIT;

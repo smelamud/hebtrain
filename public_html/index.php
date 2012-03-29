@@ -40,13 +40,22 @@ require_once('parts/header.php');
             <div id="stages">
                 <strong>По этапам:</strong>
                 <table class="table">
+                    <tr>
+                        <th class="span2">&nbsp;</th>
+                        <th class="span1">Сейчас</th>
+                        <th class="count0 span1">0</td>
+                        <th class="count1 span1">1</td>
+                        <th class="count2 span1">2</td>
+                        <th class="span6" colspan="2">&nbsp;</th>
+                    </tr>
                     <tr class="template">
                         <td class="name span2">&nbsp;</td>
+                        <td class="count-ready span1">&nbsp;</td>
                         <td class="count0 span1">&nbsp;</td>
                         <td class="count1 span1">&nbsp;</td>
                         <td class="count2 span1">&nbsp;</td>
                         <td class="count3 span1">&nbsp;</td>
-                        <td class="span6">&nbsp;</td>
+                        <td class="span5">&nbsp;</td>
                     </tr>
                 </table>
             </div>

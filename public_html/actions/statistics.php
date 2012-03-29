@@ -98,6 +98,28 @@ function getStatistics() {
     }
     $st->close();
 
+    $st = $mysqli->prepare(
+        'select stage, count(*)
+         from questions left join items
+              on questions.item_id = items.id
+         where active = 1 and items.next_test <= now()
+               and questions.next_test <= now()
+         group by stage
+         order by stage');
+    dbFailsafe($mysqli);
+    $st->execute();
+    $st->bind_result($stage, $count);
+    $result['ready'] = array();
+    while ($st->fetch()) {
+        $info = array(
+            'stage' => $stage,
+            'count' => $count);
+        array_push(
+            $result['ready'],
+            $info);
+    }
+    $st->close();
+
     return $result;
 }
 

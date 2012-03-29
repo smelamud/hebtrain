@@ -20,6 +20,11 @@ function loadStatistics() {
                 var newLine = template.clone();
                 newLine.removeClass("template").addClass("item");
                 newLine.find(".name").text(stage.name);
+                $.each(data.ready, function(index, info) {
+                    if (info.stage == stage.stage) {
+                        newLine.find(".count-ready").text(info.count);
+                    }
+                });
                 $.each(stage.steps, function(step, count) {
                     newLine.find(".count" + step).text(count);
                 });

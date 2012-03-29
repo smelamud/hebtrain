@@ -21,6 +21,7 @@ function getStatistics() {
     $result['questions'] = array();
 
     $result['questions_total'] = 0;
+    $result['questions_per_test'] = CFG_QUESTIONS_PER_TEST;
 
     $st = $mysqli->prepare(
         'select question, count(*)
@@ -85,6 +86,7 @@ function getStatistics() {
             $info = array(
                 'stage' => $stage,
                 'name' => $LS_PARAMS[$stage]['name'],
+                'period' => $LS_PARAMS[$stage]['period'],
                 'count' => 0,
                 'steps' => array_fill(0, $LS_PARAMS[$stage]['steps'], 0));
         }

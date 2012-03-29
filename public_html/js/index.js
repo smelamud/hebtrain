@@ -16,7 +16,9 @@ function loadStatistics() {
             });
             $("#stages .item").remove();
             template = $("#stages .template");
+            var questionsDay = 0;
             $.each(data.stages, function(index, stage) {
+                questionsDay += stage.count / stage.period;
                 var newLine = template.clone();
                 newLine.removeClass("template").addClass("item");
                 newLine.find(".name").text(stage.name);
@@ -30,6 +32,9 @@ function loadStatistics() {
                 });
                 template.before(newLine);
             });
+            $("#questions-day").text(Math.round(questionsDay * 100) / 100);
+            var testsDay = questionsDay / data.questions_per_test;
+            $("#tests-day").text(Math.round(testsDay * 100) / 100);
         }
     ).error(
         function() {

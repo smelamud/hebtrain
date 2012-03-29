@@ -13,6 +13,8 @@ require_once('parts/header.php');
             <div id="totals">
                 <img id="spinner" src="/pics/ajax.gif"><br/>
                 <strong>Всего слов в словаре:</strong> <span id="words-total">0</span><br/>
+                <strong>Вопросов в день:</strong> <span id="questions-day">0</span><br/>
+                <strong>Тестов в день:</strong> <span id="tests-day">0</span><br/>
             </div>
             <div id="questions">
                 <strong>По вопросам:</strong>

@@ -22,6 +22,7 @@ function loadStatistics() {
                 var newLine = template.clone();
                 newLine.removeClass("template").addClass("item");
                 newLine.find(".name").text(stage.name);
+                newLine.find(".count-total").text(stage.count);
                 $.each(data.ready, function(index, info) {
                     if (info.stage == stage.stage) {
                         newLine.find(".count-ready").text(info.count);

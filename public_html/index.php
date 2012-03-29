@@ -45,19 +45,21 @@ require_once('parts/header.php');
                     <tr>
                         <th class="span2">&nbsp;</th>
                         <th class="span1">Сейчас</th>
+                        <th class="span1">Всего</th>
                         <th class="count0 span1">0</td>
                         <th class="count1 span1">1</td>
                         <th class="count2 span1">2</td>
-                        <th class="span6" colspan="2">&nbsp;</th>
+                        <th class="span5" colspan="2">&nbsp;</th>
                     </tr>
                     <tr class="template">
                         <td class="name span2">&nbsp;</td>
                         <td class="count-ready span1">0</td>
+                        <td class="count-total span1">0</td>
                         <td class="count0 span1">&nbsp;</td>
                         <td class="count1 span1">&nbsp;</td>
                         <td class="count2 span1">&nbsp;</td>
                         <td class="count3 span1">&nbsp;</td>
-                        <td class="span5">&nbsp;</td>
+                        <td class="span4">&nbsp;</td>
                     </tr>
                 </table>
             </div>

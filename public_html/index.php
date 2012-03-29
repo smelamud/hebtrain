@@ -52,7 +52,7 @@ require_once('parts/header.php');
                     </tr>
                     <tr class="template">
                         <td class="name span2">&nbsp;</td>
-                        <td class="count-ready span1">&nbsp;</td>
+                        <td class="count-ready span1">0</td>
                         <td class="count0 span1">&nbsp;</td>
                         <td class="count1 span1">&nbsp;</td>
                         <td class="count2 span1">&nbsp;</td>

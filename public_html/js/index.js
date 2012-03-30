@@ -16,13 +16,16 @@ function loadStatistics() {
             });
             $("#stages .item").remove();
             template = $("#stages .template");
-            var questionsDay = 0;
+            var questionsDayTotal = 0;
             $.each(data.stages, function(index, stage) {
-                questionsDay += stage.count / stage.period;
+                var questionsDay = stage.count / stage.period;
+                questionsDayTotal += questionsDay;
                 var newLine = template.clone();
                 newLine.removeClass("template").addClass("item");
                 newLine.find(".name").text(stage.name);
                 newLine.find(".count-total").text(stage.count);
+                newLine.find(".count-day").text(
+                    Math.round(questionsDay * 100) / 100);
                 $.each(data.ready, function(index, info) {
                     if (info.stage == stage.stage) {
                         newLine.find(".count-ready").text(info.count);
@@ -33,8 +36,8 @@ function loadStatistics() {
                 });
                 template.before(newLine);
             });
-            $("#questions-day").text(Math.round(questionsDay * 100) / 100);
-            var testsDay = questionsDay / data.questions_per_test;
+            $("#questions-day").text(Math.round(questionsDayTotal * 100) / 100);
+            var testsDay = questionsDayTotal / data.questions_per_test;
             $("#tests-day").text(Math.round(testsDay * 100) / 100);
         }
     ).error(

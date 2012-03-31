@@ -23,7 +23,6 @@ function loadStatistics() {
                 var newLine = template.clone();
                 newLine.removeClass("template").addClass("item");
                 newLine.find(".name").text(stage.name);
-                newLine.find(".count-total").text(stage.count);
                 newLine.find(".count-day").text(
                     Math.round(questionsDay * 100) / 100);
                 $.each(data.ready, function(index, info) {

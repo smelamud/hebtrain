@@ -37,14 +37,11 @@ function loadTest($qv) {
     }
     $st->execute();
 
-    $itemIds = array();
     $questions = array();
     $st->bind_result($itemId, $hebrew, $hebrewBare, $hebrewComment,
         $russian, $russianComment, $question, $priority);
     while ($st->fetch()) {
-        $count = count($itemIds);
-        if ($count == 0 || $itemIds[$count - 1] != $itemId) {
-            $itemIds[] = $itemId;
+        if (!array_key_exists($itemId, $questions)) {
             $questions[$itemId] = array();
         }
         array_push(
@@ -61,6 +58,7 @@ function loadTest($qv) {
     }
     
     srand();
+    $itemIds = array_keys($questions);
     shuffle($itemIds);
     $result = array();
     $usedIds = array();

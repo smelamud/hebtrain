@@ -13,8 +13,6 @@ require_once('parts/header.php');
             <div id="totals">
                 <img id="spinner" src="/pics/ajax.gif"><br/>
                 <strong>Всего слов в словаре:</strong> <span id="words-total">0</span><br/>
-                <strong>Вопросов в день:</strong> <span id="questions-day">0</span><br/>
-                <strong>Тестов в день:</strong> <span id="tests-day">0</span><br/>
             </div>
             <div id="questions">
                 <strong>По вопросам:</strong>
@@ -32,9 +30,9 @@ require_once('parts/header.php');
                         <td class="span7">&nbsp;</td>
                     </tr>
                     <tr>
-                        <th class="span3">Все вопросы</td>
+                        <th class="span3">Все вопросы</th>
                         <td id="questions-total" class="span1">&nbsp;</td>
-                        <td id="questions-now" class="span1">&nbsp;</td>
+                        <td class="questions-now span1">&nbsp;</td>
                         <td class="span7">&nbsp;</td>
                     </tr>
                 </table>
@@ -62,6 +60,14 @@ require_once('parts/header.php');
                         <td class="count2 span1">&nbsp;</td>
                         <td class="count3 span1">&nbsp;</td>
                         <td class="span3">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th class="span2">Всего</th>
+                        <td class="questions-now span1">0</td>
+                        <td id="questions-day" class="span1">0</td>
+                        <td class="span8" colspan="6">
+                            = <span id="tests-day">0</span> тестов
+                        </td>
                     </tr>
                 </table>
             </div>

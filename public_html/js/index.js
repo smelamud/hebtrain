@@ -3,7 +3,7 @@ function loadStatistics() {
         function(data) {
             $("#words-total").text(data.words_total);
             $("#questions-total").text(data.questions_total);
-            $("#questions-now").text(data.questions_now);
+            $(".questions-now").text(data.questions_now);
             $("#questions .item").remove();
             var template = $("#questions .template");
             $.each(data.questions, function(index, question) {

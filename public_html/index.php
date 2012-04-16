@@ -20,20 +20,24 @@ require_once('parts/header.php');
                     <tr>
                         <th class="span3">&nbsp;</th>
                         <th class="span1">Всего</th>
-                        <th class="span1">Сейчас</th>
-                        <th class="span7">&nbsp;</th>
+                        <th class="span3">Сейчас</th>
+                        <th class="span5">&nbsp;</th>
                     </tr>
                     <tr class="template">
                         <td class="title span3">&nbsp;</td>
                         <td class="total span1">0</td>
-                        <td class="now span1">0</td>
-                        <td class="span7">&nbsp;</td>
+                        <td class="now span3">0</td>
+                        <td class="span5">&nbsp;</td>
                     </tr>
                     <tr>
                         <th class="span3">Все вопросы</th>
                         <td id="questions-total" class="span1">&nbsp;</td>
-                        <td class="questions-now span1">&nbsp;</td>
-                        <td class="span7">&nbsp;</td>
+                        <td class="span3">
+                            <span class="questions-now">0</span>
+                            (<span id="items-now">0</span> слов
+                             = <span id="tests-now">0</span> тестов)
+                        </td>
+                        <td class="span5">&nbsp;</td>
                     </tr>
                 </table>
             </div>

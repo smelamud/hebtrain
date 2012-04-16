@@ -9,6 +9,7 @@ function getStatistics() {
 
     $result = array();
 
+    /* Total number of items */
     $st = $mysqli->prepare(
         'select count(*)
          from items');
@@ -18,6 +19,7 @@ function getStatistics() {
     $st->fetch();
     $st->close();
 
+    /* Number of questions per type */
     $result['questions'] = array();
 
     $result['questions_total'] = 0;
@@ -44,6 +46,7 @@ function getStatistics() {
     }
     $st->close();
 
+    /* Number of questions to ask per type */
     $result['questions_now'] = 0;
 
     $st = $mysqli->prepare(
@@ -61,9 +64,22 @@ function getStatistics() {
         $result['questions'][$question - QV_WORD_MIN]['now'] = $count;
         $result['questions_now'] += $count;
     }
+    $st->close();
+
+    /* Total number of distinct items in questions to ask */
+    $st = $mysqli->prepare(
+        'select count(distinct questions.item_id)
+         from questions left join items
+              on questions.item_id = items.id
+         where active = 1 and items.next_test <= now()
+               and questions.next_test <= now()');
+    dbFailsafe($mysqli);
+    $st->execute();
+    $st->bind_result($result['items_now']);
     $st->fetch();
     $st->close();
 
+    /* Number of questions per stage */
     $st = $mysqli->prepare(
         'select stage, step, count(*)
          from questions left join items
@@ -100,6 +116,7 @@ function getStatistics() {
     }
     $st->close();
 
+    /* Number of questions to ask per stage */
     $st = $mysqli->prepare(
         'select stage, count(*)
          from questions left join items

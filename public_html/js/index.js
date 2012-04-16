@@ -4,6 +4,9 @@ function loadStatistics() {
             $("#words-total").text(data.words_total);
             $("#questions-total").text(data.questions_total);
             $(".questions-now").text(data.questions_now);
+            $("#items-now").text(data.items_now);
+            var testsNow = data.items_now / data.questions_per_test;
+            $("#tests-now").text(Math.round(testsNow));
             $("#questions .item").remove();
             var template = $("#questions .template");
             $.each(data.questions, function(index, question) {

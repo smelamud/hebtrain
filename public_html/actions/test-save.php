@@ -13,8 +13,12 @@ function saveResult($data) {
         }
 
         $st = $mysqli->prepare(
-            'select stage, step, datediff(now(), next_test)
+            'select stage, step,
+                    least(datediff(now(), questions.next_test),
+                          datediff(now(), items.next_test))
              from questions
+                  left join items
+                       on questions.item_id = items.id
              where item_id = ? and question = ?');
         dbFailsafe($mysqli);
         $st->bind_param('ii', $item['item_id'], $item['question']);

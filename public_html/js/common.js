@@ -17,36 +17,51 @@ function getURLParameter(name) {
     );
 }
 
-function showKeyboard(element) {
-    window.keyboardElement = element;
-    redisplayKeyboard(true);
-}
-
-function redisplayKeyboard(animate) {
-    var element = window.keyboardElement;
-    window.mouseInKeyboard = false;
-    
-    var position = {left: ($(window).width() - 568) / 2,
-                    top: $(window).height() - (animate ? 0 : 170)};
-
-    $("#keyboard").show().offset(position);
-    
-    if (animate) {
-        $("#keyboard").animate({top: $(window).height() - 170}, 100);
+function displayKeyboard() {
+    if (window.keyboardState == "animate") {
+        window.setTimeout(displayKeyboard, 100);
+        return;
     }
-}
 
-function hideKeyboard() {
-    if (window.keyboardElement != null) {
-        window.keyboardElement = null;
+    window.keyboardRefresh = false;
+
+    if (window.keyboardElement != null
+            && window.keyboardState == "hidden") {
+        window.keyboardState = "animate";
+        $("#keyboard").show().offset(
+            {left: ($(window).width() - 568) / 2,
+             top: $(window).height()});
+        $("#keyboard").animate({top: $(window).height() - 170}, 100,
+            function() {
+                window.keyboardState = "shown";
+            });
+    } else if (window.keyboardElement == null
+                    && window.keyboardState == "shown") {
+        window.keyboardState = "animate";
         $("#keyboard").animate({top: $(window).height()}, 100,
             function() {
                 $("#keyboard").hide();
+                window.keyboardState = "hidden";
             }
         );
-    } else {
-        $("#keyboard").hide();
     }
+}
+
+function refreshKeyboard() {
+    if (!window.keyboardRefresh) {
+        window.keyboardRefresh = true;
+        window.setTimeout(displayKeyboard, 100);
+    }
+}
+
+function showKeyboard(element) {
+    window.keyboardElement = element;
+    refreshKeyboard();
+}
+
+function hideKeyboard() {
+    window.keyboardElement = null;
+    refreshKeyboard();
 }
 
 function getKeyHebrewChar(key) {
@@ -109,12 +124,8 @@ function keyboardClick(event) {
 function bindKeyboard(element) {
     if (element.is("input")) {
         element.focus(function() {
-            if (window.keyboardElement == null) {
-                if (element.is(":visible")) {
-                    showKeyboard($(this));
-                }
-            } else {
-                redisplayKeyboard(false);
+            if (element.is(":visible")) {
+                showKeyboard($(this));
             }
         }).blur(function() {
             if (!window.mouseInKeyboard) {
@@ -127,6 +138,8 @@ function bindKeyboard(element) {
 }
 
 function initKeyboard() {
+    window.keyboardState = "hidden";
+    window.keyboardRefresh = false;
     $(document).keypress(keyboardKeyPress);
     $("#keyboard").mouseover(function() {
         window.mouseInKeyboard = true;

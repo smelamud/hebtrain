@@ -15,7 +15,7 @@ require_once('parts/keyboard.php');
                 <div id="not-entered"></div>
                 <div id="entered"></div>
             </div>
-            <div id="entering" class="keyboard-enabled" data-keyboard-positioning="bottom-center"><div>
+            <div id="entering" class="keyboard-enabled"><div>
         </div></div>
         <?php displayKeyboard(); ?>
     </body>

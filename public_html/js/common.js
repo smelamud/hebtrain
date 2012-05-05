@@ -26,42 +26,19 @@ function redisplayKeyboard(animate) {
     var element = window.keyboardElement;
     window.mouseInKeyboard = false;
     
-    var positioning = element.attr("data-keyboard-positioning") || "fixed";
-    var off = element.offset();
-    if (positioning == "fixed") {
-        var position = {left: ($(window).width() - 568) / 2,
-                        top: $(window).height() - (animate ? 0 : 170)};
-    } else if (positioning == "bottom") {
-        var position = {left: off.left,
-                        top: off.top + element.outerHeight() + 5};
-    } else if (positioning == "right") {
-        var position = {left: off.left + element.outerWidth() + 5,
-                        top: off.top};
-    } else if (positioning == "bottom-left") {
-        var position = {left: off.left - 440,
-                        top: off.top + element.outerHeight() + 5};
-    } else if (positioning == "bottom-center") {
-        var position = {left: off.left + (element.outerWidth() - 568) / 2,
-                        top: off.top + element.outerHeight() + 5};
-    }
+    var position = {left: ($(window).width() - 568) / 2,
+                    top: $(window).height() - (animate ? 0 : 170)};
 
     $("#keyboard").show().offset(position);
     
     if (animate) {
-        if (positioning == "fixed") {
-            $("#keyboard").animate({top: $(window).height() - 170}, 100);
-        }
+        $("#keyboard").animate({top: $(window).height() - 170}, 100);
     }
 }
 
 function hideKeyboard() {
-    var positioning = null;
     if (window.keyboardElement != null) {
-        positioning = window.keyboardElement.attr("data-keyboard-positioning")
-            || "fixed";
         window.keyboardElement = null;
-    }
-    if (positioning == "fixed") {
         $("#keyboard").animate({top: $(window).height()}, 100,
             function() {
                 $("#keyboard").hide();

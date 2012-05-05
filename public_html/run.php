@@ -46,7 +46,7 @@ require_once('parts/keyboard.php');
                         &#x200e;<span id="question-comment">&nbsp;</span>
                     </div>
                     <div class="word">
-                        <input id="answer-input" type="text" class="keyboard-enabled" data-keyboard-positioning="right"/>
+                        <input id="answer-input" type="text" class="keyboard-enabled"/>
                         <span id="answer-input-text"></span>
                     </div>
                     <div id="buttons-answer" class="buttons">

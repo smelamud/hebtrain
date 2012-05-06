@@ -17,7 +17,7 @@ function enableQuestions($item_id, $group) {
     $st = $mysqli->prepare(
         'update questions
          set active = 1
-         where item_id = ? and ' . join(' or ', $conds));
+         where item_id = ? and (' . join(' or ', $conds) . ')');
     dbFailsafe($mysqli);
     $st->bind_param('i', $item_id);
     $st->execute();

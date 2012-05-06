@@ -18,7 +18,7 @@ function displayKeyboard() {?>
         <div class="key key-depressed" style="width: 30px" data-special="BS"><span class="special-key">&#x2190;</span></div>
         <div class="key-newline"></div>
         <div class="key key-depressed" style="width: 45px"><span class="special-key">Tab</span></div>
-        <div class="key key-depressed"><span class="latin-letter">q</span> <span class="hebrew-letter">/</span></div>
+        <div class="key key-depressed"><span class="latin-letter">q</span> <span class="hebrew-letter">"</span></div>
         <div class="key key-depressed"><span class="latin-letter">w</span> <span class="hebrew-letter">'</span></div>
         <div class="key key-depressed"><span class="latin-letter">e</span> <span class="hebrew-letter">ק</span></div>
         <div class="key key-depressed"><span class="latin-letter">r</span> <span class="hebrew-letter">ר</span></div>

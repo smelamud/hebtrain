@@ -17,7 +17,7 @@ function insertItem(&$item) {
     dbFailsafe($mysqli);
     $group = VI_WORD;
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);
-    $st->bind_param('issssssiisss', $group,
+    $st->bind_param('issssssissss', $group,
         $item['hebrew'], $item['hebrew_bare'], $item['hebrew_comment'],
         $item['russian'], $item['russian_comment'],
         $item['root'], $item['gender'], $item['feminine'], $item['plural'],
@@ -56,7 +56,7 @@ function modifyItem(&$item) {
          where id = ?');
     dbFailsafe($mysqli);
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);
-    $st->bind_param('ssssssiisssi',
+    $st->bind_param('ssssssissssi',
         $item['hebrew'], $item['hebrew_bare'], $item['hebrew_comment'],
         $item['russian'], $item['russian_comment'],
         $item['root'], $item['gender'], $item['feminine'], $item['plural'],

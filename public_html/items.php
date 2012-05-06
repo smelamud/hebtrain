@@ -69,6 +69,34 @@ require_once('parts/keyboard.php');
                     <label id="edit-dialog-familiar">
                         <input type="checkbox" name="familiar" value="1"/>
                         <span class="checkbox-label">Знакомое слово</span>
+                    </label><br/><br/>
+                    <label>
+                        <select name="group">
+                            <option value="0">Прочее</option>
+                            <option value="1">Существительное однополое</option>
+                            <option value="2">Существительное двуполое</option>
+                            <option value="3">Прилагательное</option>
+                            <option value="4">Глагол</option>
+                            <option value="5">Наречие</option>
+                            <option value="6">Наречие-оборот</option>
+                            <option value="7">Предлог</option>
+                            <option value="8">Вопросительное слово</option>
+                            <option value="9">Числительное</option>
+                            <option value="10">Иностранное слово</option>
+                            <option value="11">Географическое название</option>
+                            <option value="12">Оборот</option>
+                            <option value="13">Сленг</option>
+                        </select>
+                    </label>
+                    <label>
+                        &nbsp;&nbsp;&nbsp;Род&nbsp;
+                        <select name="gender">
+                            <option value="0">Нет</option>
+                            <option value="1">Мужской</option>
+                            <option value="2">Женский</option>
+                            <option value="3">Мужской множественный</option>
+                            <option value="4">Женский множественный</option>
+                        </select>
                     </label><br/>
                     <label>
                         <span class="main-label">Корень</span>

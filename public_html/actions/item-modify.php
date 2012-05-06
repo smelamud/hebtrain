@@ -15,9 +15,8 @@ function insertItem(&$item) {
                            root, gender, feminine, plural, smihut, abbrev)
          values(?, ?, ?, ?, ?, ?, now(), ?, ?, ?, ?, ?, ?)');
     dbFailsafe($mysqli);
-    $group = VI_WORD;
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);
-    $st->bind_param('issssssissss', $group,
+    $st->bind_param('issssssissss', $item['group'],
         $item['hebrew'], $item['hebrew_bare'], $item['hebrew_comment'],
         $item['russian'], $item['russian_comment'],
         $item['root'], $item['gender'], $item['feminine'], $item['plural'],
@@ -49,14 +48,14 @@ function modifyItem(&$item) {
 
     $st = $mysqli->prepare(
         'update items
-         set hebrew = ?, hebrew_bare = ?, hebrew_comment = ?,
+         set `group` = ?, hebrew = ?, hebrew_bare = ?, hebrew_comment = ?,
              russian = ?, russian_comment = ?,
              root = ?, gender = ?, feminine = ?, plural = ?, smihut = ?,
              abbrev = ?
          where id = ?');
     dbFailsafe($mysqli);
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);
-    $st->bind_param('ssssssissssi',
+    $st->bind_param('issssssissssi', $item['group'],
         $item['hebrew'], $item['hebrew_bare'], $item['hebrew_comment'],
         $item['russian'], $item['russian_comment'],
         $item['root'], $item['gender'], $item['feminine'], $item['plural'],

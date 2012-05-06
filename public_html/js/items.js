@@ -141,6 +141,8 @@ function editDialogOpenEdit() {
     $("#edit-dialog input[name='plural']").val(self.data("plural"));
     $("#edit-dialog input[name='smihut']").val(self.data("smihut"));
     $("#edit-dialog input[name='abbrev']").val(self.data("abbrev"));
+    $("#edit-dialog select[name='group']").val(self.data("group"));
+    $("#edit-dialog select[name='gender']").val(self.data("gender"));
     $("#edit-dialog-familiar").hide();
     $("#edit-dialog-add").hide();
     $("#edit-dialog-modify").show();

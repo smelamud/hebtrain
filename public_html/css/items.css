@@ -3,6 +3,10 @@
     direction: rtl;
 }
 
+.group-none {
+    color: red;
+}
+
 td.separator {
     text-align: center;
     vertical-align: middle;

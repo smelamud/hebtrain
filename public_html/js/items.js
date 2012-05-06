@@ -20,6 +20,11 @@ function assignLine(line, data) {
     line.data("plural", data.plural);
     line.data("smihut", data.smihut);
     line.data("abbrev", data.abbrev);
+    if (data.group == 0) {
+        line.find(".hebrew").addClass("group-none");
+    } else {
+        line.find(".hebrew").removeClass("group-none");
+    }
 }
 
 function findItems(keyword, offset) {

@@ -11,13 +11,17 @@ function insertItem(&$item) {
 
     $st = $mysqli->prepare(
         'insert into items(`group`, hebrew, hebrew_bare, hebrew_comment,
-                           russian, russian_comment, next_test)
-         values(?, ?, ?, ?, ?, ?, now())');
+                           russian, russian_comment, next_test,
+                           root, gender, feminine, plural, smihut, abbrev)
+         values(?, ?, ?, ?, ?, ?, now(), ?, ?, ?, ?, ?, ?)');
     dbFailsafe($mysqli);
     $group = VI_WORD;
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);
-    $st->bind_param('isssss', $group, $item['hebrew'], $item['hebrew_bare'],
-        $item['hebrew_comment'], $item['russian'], $item['russian_comment']);
+    $st->bind_param('issssssiisss', $group,
+        $item['hebrew'], $item['hebrew_bare'], $item['hebrew_comment'],
+        $item['russian'], $item['russian_comment'],
+        $item['root'], $item['gender'], $item['feminine'], $item['plural'],
+        $item['smihut'], $item['abbrev']);
     $st->execute();
     $item['id'] = $st->insert_id;
     $st->close();
@@ -45,13 +49,18 @@ function modifyItem(&$item) {
 
     $st = $mysqli->prepare(
         'update items
-         set hebrew = ?, hebrew_bare = ?, hebrew_comment = ?, russian = ?,
-             russian_comment = ?
+         set hebrew = ?, hebrew_bare = ?, hebrew_comment = ?,
+             russian = ?, russian_comment = ?,
+             root = ?, gender = ?, feminine = ?, plural = ?, smihut = ?,
+             abbrev = ?
          where id = ?');
     dbFailsafe($mysqli);
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);
-    $st->bind_param('sssssi', $item['hebrew'], $item['hebrew_bare'],
-        $item['hebrew_comment'], $item['russian'], $item['russian_comment'],
+    $st->bind_param('ssssssiisssi',
+        $item['hebrew'], $item['hebrew_bare'], $item['hebrew_comment'],
+        $item['russian'], $item['russian_comment'],
+        $item['root'], $item['gender'], $item['feminine'], $item['plural'],
+        $item['smihut'], $item['abbrev'],
         $item['id']);
     $st->execute();
     $st->close();
@@ -99,7 +108,14 @@ $item = array(
     'hebrew_comment' => postVar('hebrew_comment'),
     'russian' => postVar('russian'),
     'russian_comment' => postVar('russian_comment'),
-    'familiar' => postBoolVar('familiar')
+    'familiar' => postBoolVar('familiar'),
+    'root' => postVar('root'),
+    'group' => postIntVar('group'),
+    'gender' => postIntVar('gender'),
+    'feminine' => postVar('feminine'),
+    'plural' => postVar('plural'),
+    'smihut' => postVar('smihut'),
+    'abbrev' => postVar('abbrev')
 );
 
 $mysqli = dbConnect();

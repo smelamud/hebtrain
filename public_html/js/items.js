@@ -3,12 +3,23 @@ function addLine(data) {
     newLine.removeClass("template");
     newLine.addClass("item");
     newLine.data("id", data.id);
-    newLine.find(".hebrew").text(data.hebrew);
-    newLine.find(".hebrew-comment").text(data.hebrew_comment);
-    newLine.find(".russian").text(data.russian);
-    newLine.find(".russian-comment").text(data.russian_comment);
+    assignLine(newLine, data);
     newLine.click(editDialogOpenEdit);
     $("#found .template").before(newLine);
+}
+
+function assignLine(line, data) {
+    line.find(".hebrew").text(data.hebrew);
+    line.find(".hebrew-comment").text(data.hebrew_comment);
+    line.find(".russian").text(data.russian);
+    line.find(".russian-comment").text(data.russian_comment);
+    line.data("root", data.root);
+    line.data("group", data.group);
+    line.data("gender", data.gender);
+    line.data("feminine", data.feminine);
+    line.data("plural", data.plural);
+    line.data("smihut", data.smihut);
+    line.data("abbrev", data.abbrev);
 }
 
 function findItems(keyword, offset) {
@@ -57,10 +68,7 @@ function addOrModifyItem() {
                 return $(this).data("id") == data.id;
             });
             if (line.length > 0) {
-                line.find(".hebrew").text(data.hebrew);
-                line.find(".hebrew-comment").text(data.hebrew_comment);
-                line.find(".russian").text(data.russian);
-                line.find(".russian-comment").text(data.russian_comment);
+                assignLine(line, data);
             } else {
                 if ($("#added-title").css("display") == "none") {
                     $("#found-title").hide();
@@ -128,6 +136,7 @@ function editDialogOpenEdit() {
     $("#edit-dialog input[name='hebrew_comment']").val(self.find(".hebrew-comment").text());
     $("#edit-dialog input[name='russian']").val(self.find(".russian").text());
     $("#edit-dialog input[name='russian_comment']").val(self.find(".russian-comment").text());
+    $("#edit-dialog input[name='root']").val(self.data("root"));
     $("#edit-dialog-familiar").hide();
     $("#edit-dialog-add").hide();
     $("#edit-dialog-modify").show();

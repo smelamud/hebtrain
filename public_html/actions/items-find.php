@@ -35,7 +35,8 @@ function findItems($keyword, $offset) {
     $st->close();
 
     $st = $mysqli->prepare(
-        'select id, hebrew, hebrew_comment, russian, russian_comment
+        'select id, hebrew, hebrew_comment, russian, russian_comment,
+                root, `group`, gender, feminine, plural, smihut, abbrev
          from items
          where russian like ? and hebrew_bare like ?
          order by hebrew_bare
@@ -48,7 +49,8 @@ function findItems($keyword, $offset) {
     $st->store_result();
     $result['count'] = $st->num_rows;
 
-    $st->bind_result($id, $hebrew, $hebrew_comment, $russian, $russian_comment);
+    $st->bind_result($id, $hebrew, $hebrew_comment, $russian, $russian_comment,
+        $root, $group, $gender, $feminine, $plural, $smihut, $abbrev);
     while ($st->fetch()) {
         array_push(
             $result['items'],
@@ -56,7 +58,14 @@ function findItems($keyword, $offset) {
                   'hebrew' => $hebrew,
                   'hebrew_comment' => $hebrew_comment,
                   'russian' => $russian,
-                  'russian_comment' => $russian_comment));
+                  'russian_comment' => $russian_comment,
+                  'root' => $root,
+                  'group' => (int)$group,
+                  'gender' => (int)$gender,
+                  'feminine' => $feminine,
+                  'plural' => $plural,
+                  'smihut' => $smihut,
+                  'abbrev' => $abbrev));
     }
 
     $st->close();

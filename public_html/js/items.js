@@ -137,6 +137,10 @@ function editDialogOpenEdit() {
     $("#edit-dialog input[name='russian']").val(self.find(".russian").text());
     $("#edit-dialog input[name='russian_comment']").val(self.find(".russian-comment").text());
     $("#edit-dialog input[name='root']").val(self.data("root"));
+    $("#edit-dialog input[name='feminine']").val(self.data("feminine"));
+    $("#edit-dialog input[name='plural']").val(self.data("plural"));
+    $("#edit-dialog input[name='smihut']").val(self.data("smihut"));
+    $("#edit-dialog input[name='abbrev']").val(self.data("abbrev"));
     $("#edit-dialog-familiar").hide();
     $("#edit-dialog-add").hide();
     $("#edit-dialog-modify").show();

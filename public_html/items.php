@@ -71,8 +71,24 @@ require_once('parts/keyboard.php');
                         <span class="checkbox-label">Знакомое слово</span>
                     </label><br/>
                     <label>
-                        Корень&nbsp;
+                        <span class="main-label">Корень</span>
                         <input type="text" class="hebrew keyboard-enabled input-mini" name="root" maxlength="10"/>
+                    </label><br/>
+                    <label>
+                        <span class="main-label">Сокращ.</span>
+                        <input type="text" class="hebrew keyboard-enabled input-mini" name="abbrev" maxlength="10"/>
+                    </label><br/>
+                    <label>
+                        <span class="main-label">Она</span>
+                        <input type="text" class="hebrew keyboard-enabled" name="feminine" maxlength="63"/>
+                    </label><br/>
+                    <label>
+                        <span class="main-label">Много</span>
+                        <input type="text" class="hebrew keyboard-enabled" name="plural" maxlength="63"/>
+                    </label><br/>
+                    <label>
+                        <span class="main-label">Смихут</span>
+                        <input type="text" class="hebrew keyboard-enabled" name="smihut" maxlength="63"/>
                     </label>
                 </div>
                 <div class="modal-footer">

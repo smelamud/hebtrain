@@ -19,7 +19,9 @@ const VI_PHRASE = 12;
 const VI_SLANG = 13;
 
 $VI_QUESTIONS = array(
+    // This one is used for 'hard' words
     VI_WORD => array(QV_WORD_BARE_HE_RU, QV_WORD_RU_HE, QV_WORD_RU_HE_WRITE),
+    //
     VI_NOUN_UNI => array(QV_WORD_BARE_HE_RU, QV_WORD_RU_HE, QV_WORD_RU_HE_WRITE),
     VI_NOUN_MULTI => array(QV_WORD_BARE_HE_RU, QV_WORD_RU_HE, QV_WORD_RU_HE_WRITE),
     VI_ADJECTIVE => array(QV_WORD_BARE_HE_RU, QV_WORD_RU_HE, QV_WORD_RU_HE_WRITE),

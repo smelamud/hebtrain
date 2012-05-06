@@ -20,6 +20,7 @@ function assignLine(line, data) {
     line.data("plural", data.plural);
     line.data("smihut", data.smihut);
     line.data("abbrev", data.abbrev);
+    line.data("hard", data.hard);
     if (data.group == 0) {
         line.find(".hebrew").addClass("group-none");
     } else {
@@ -146,6 +147,7 @@ function editDialogOpenEdit() {
     $("#edit-dialog input[name='plural']").val(self.data("plural"));
     $("#edit-dialog input[name='smihut']").val(self.data("smihut"));
     $("#edit-dialog input[name='abbrev']").val(self.data("abbrev"));
+    $("#edit-dialog input[name='hard']").val(self.data("hard") ? [1] : []);
     $("#edit-dialog select[name='group']").val(self.data("group"));
     $("#edit-dialog select[name='gender']").val(self.data("gender"));
     $("#edit-dialog-familiar").hide();

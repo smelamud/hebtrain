@@ -30,15 +30,16 @@ function insertItem(&$item) {
     $st = $mysqli->prepare(
         'insert into items(`group`, hebrew, hebrew_bare, hebrew_comment,
                            russian, russian_comment, next_test,
-                           root, gender, feminine, plural, smihut, abbrev)
-         values(?, ?, ?, ?, ?, ?, now(), ?, ?, ?, ?, ?, ?)');
+                           root, gender, feminine, plural, smihut, abbrev,
+                           hard)
+         values(?, ?, ?, ?, ?, ?, now(), ?, ?, ?, ?, ?, ?, ?)');
     dbFailsafe($mysqli);
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);
-    $st->bind_param('issssssissss', $item['group'],
+    $st->bind_param('issssssissssi', $item['group'],
         $item['hebrew'], $item['hebrew_bare'], $item['hebrew_comment'],
         $item['russian'], $item['russian_comment'],
         $item['root'], $item['gender'], $item['feminine'], $item['plural'],
-        $item['smihut'], $item['abbrev']);
+        $item['smihut'], $item['abbrev'], $item['hard']);
     $st->execute();
     $item['id'] = $st->insert_id;
     $st->close();
@@ -60,7 +61,8 @@ function insertItem(&$item) {
     }
     $st->close();
 
-    enableQuestions($item['id'], $item['group']);
+    enableQuestions($item['id'],
+        $item['hard'] == 0 ? $item['group'] : VI_WORD);
 }
 
 function modifyItem(&$item) {
@@ -71,15 +73,15 @@ function modifyItem(&$item) {
          set `group` = ?, hebrew = ?, hebrew_bare = ?, hebrew_comment = ?,
              russian = ?, russian_comment = ?,
              root = ?, gender = ?, feminine = ?, plural = ?, smihut = ?,
-             abbrev = ?
+             abbrev = ?, hard = ?
          where id = ?');
     dbFailsafe($mysqli);
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);
-    $st->bind_param('issssssissssi', $item['group'],
+    $st->bind_param('issssssissssii', $item['group'],
         $item['hebrew'], $item['hebrew_bare'], $item['hebrew_comment'],
         $item['russian'], $item['russian_comment'],
         $item['root'], $item['gender'], $item['feminine'], $item['plural'],
-        $item['smihut'], $item['abbrev'],
+        $item['smihut'], $item['abbrev'], $item['hard'],
         $item['id']);
     $st->execute();
     $st->close();
@@ -93,7 +95,8 @@ function modifyItem(&$item) {
     $st->execute();
     $st->close();
 
-    enableQuestions($item['id'], $item['group']);
+    enableQuestions($item['id'],
+        $item['hard'] == 0 ? $item['group'] : VI_WORD);
 }
 
 function getSimilarItems(&$item) {
@@ -145,7 +148,8 @@ $item = array(
     'feminine' => postVar('feminine'),
     'plural' => postVar('plural'),
     'smihut' => postVar('smihut'),
-    'abbrev' => postVar('abbrev')
+    'abbrev' => postVar('abbrev'),
+    'hard' => postIntVar('hard')
 );
 
 $mysqli = dbConnect();

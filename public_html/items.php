@@ -69,6 +69,10 @@ require_once('parts/keyboard.php');
                     <label id="edit-dialog-familiar">
                         <input type="checkbox" name="familiar" value="1"/>
                         <span class="checkbox-label">Знакомое слово</span>
+                    </label>&nbsp;&nbsp;
+                    <label>
+                        <input type="checkbox" name="hard" value="1"/>
+                        <span class="checkbox-label">Сложное слово</span>
                     </label><br/><br/>
                     <label>
                         <select name="group">

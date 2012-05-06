@@ -6,6 +6,24 @@ require_once('lib/questions.php');
 require_once('lib/hebrew.php');
 require_once('lib/stages.php');
 
+function enableQuestions($item_id, $group) {
+    global $VI_QUESTIONS, $mysqli;
+
+    $conds = array();
+    foreach($VI_QUESTIONS[$group] as $q) {
+        $conds[] = "question = $q";
+    }
+
+    $st = $mysqli->prepare(
+        'update questions
+         set active = 1
+         where item_id = ? and ' . join(' or ', $conds));
+    dbFailsafe($mysqli);
+    $st->bind_param('i', $item_id);
+    $st->execute();
+    $st->close();
+}
+
 function insertItem(&$item) {
     global $mysqli;
 
@@ -27,7 +45,7 @@ function insertItem(&$item) {
 
     $st = $mysqli->prepare(
         'insert into questions(item_id, question, stage, next_test, active)
-         values(?, ?, ?, now() + interval ? day, 1)');
+         values(?, ?, ?, now() + interval ? day, 0)');
     dbFailsafe($mysqli);
     for($variant = QV_WORD_MIN; $variant <= QV_WORD_MAX; $variant++) {
         if (!$item['familiar']) {
@@ -41,6 +59,8 @@ function insertItem(&$item) {
         $st->execute();
     }
     $st->close();
+
+    enableQuestions($item['id'], $item['group']);
 }
 
 function modifyItem(&$item) {
@@ -63,6 +83,17 @@ function modifyItem(&$item) {
         $item['id']);
     $st->execute();
     $st->close();
+
+    $st = $mysqli->prepare(
+        'update questions
+         set active = 0
+         where item_id = ?');
+    dbFailsafe($mysqli);
+    $st->bind_param('i', $item['id']);
+    $st->execute();
+    $st->close();
+
+    enableQuestions($item['id'], $item['group']);
 }
 
 function getSimilarItems(&$item) {

@@ -161,6 +161,7 @@ function editDialogCancel() {
 }
 
 function editDialogShow() {
+    editDialogUpdateOptionalFields();
     $("#edit-dialog").modal({
         keyboard: true
     });
@@ -169,6 +170,101 @@ function editDialogShow() {
 
 function editDialogHide() {
     $("#edit-dialog").modal('hide');
+}
+
+editDialogOptionalFields = [
+    { // 0
+        gender: true,
+        feminine: true,
+        plural: true,
+        smihut: true,
+    },
+    { // 1
+        gender: true,
+        feminine: false,
+        plural: true,
+        smihut: true,
+    },
+    { // 2
+        gender: false,
+        feminine: true,
+        plural: true,
+        smihut: true,
+    },
+    { // 3
+        gender: false,
+        feminine: true,
+        plural: true,
+        smihut: false,
+    },
+    { // 4
+        gender: false,
+        feminine: false,
+        plural: false,
+        smihut: false,
+    },
+    { // 5
+        gender: false,
+        feminine: false,
+        plural: false,
+        smihut: false,
+    },
+    { // 6
+        gender: false,
+        feminine: false,
+        plural: false,
+        smihut: false,
+    },
+    { // 7
+        gender: false,
+        feminine: false,
+        plural: false,
+        smihut: false,
+    },
+    { // 8
+        gender: false,
+        feminine: false,
+        plural: false,
+        smihut: false,
+    },
+    { // 9
+        gender: false,
+        feminine: true,
+        plural: false,
+        smihut: false,
+    },
+    { // 10
+        gender: true,
+        feminine: true,
+        plural: true,
+        smihut: true,
+    },
+    { // 11
+        gender: false,
+        feminine: false,
+        plural: false,
+        smihut: false,
+    },
+    { // 12
+        gender: false,
+        feminine: false,
+        plural: false,
+        smihut: false,
+    },
+    { // 13
+        gender: true,
+        feminine: true,
+        plural: true,
+        smihut: true,
+    },
+];
+
+function editDialogUpdateOptionalFields() {
+    var group = parseInt($("#edit-dialog select[name='group']").val());
+    for (name in editDialogOptionalFields[group]) {
+        $("#" + name + "-section").css("visibility",
+            editDialogOptionalFields[group][name] ? "visible" : "hidden");
+    }
 }
 
 function resolveSimilar(data) {
@@ -249,6 +345,7 @@ $(function() {
         $("#spinner-continue").css("visibility", "hidden");
         $("#spinner-similar").css("visibility", "hidden");
     });
+    $("#edit-dialog select[name=group]").change(editDialogUpdateOptionalFields);
     $("#edit-dialog .close").click(editDialogCancel);
     $("#edit-dialog-cancel").click(editDialogCancel);
     $('#edit-dialog').on('hide', hideKeyboard);

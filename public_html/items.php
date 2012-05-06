@@ -79,16 +79,16 @@ require_once('parts/keyboard.php');
                             <option value="4">Глагол</option>
                             <option value="5">Наречие</option>
                             <option value="6">Наречие-оборот</option>
-                            <option value="7">Предлог</option>
+                            <option value="7">Связка</option>
+                            <option value="12">Оборот</option>
                             <option value="8">Вопросительное слово</option>
                             <option value="9">Числительное</option>
                             <option value="10">Иностранное слово</option>
                             <option value="11">Географическое название</option>
-                            <option value="12">Оборот</option>
                             <option value="13">Сленг</option>
                         </select>
                     </label>
-                    <label>
+                    <label id="gender-section">
                         &nbsp;&nbsp;&nbsp;Род&nbsp;
                         <select name="gender">
                             <option value="0">Нет</option>
@@ -106,15 +106,15 @@ require_once('parts/keyboard.php');
                         <span class="main-label">Сокращ.</span>
                         <input type="text" class="hebrew keyboard-enabled input-mini" name="abbrev" maxlength="10"/>
                     </label><br/>
-                    <label>
+                    <label id="feminine-section">
                         <span class="main-label">Она</span>
                         <input type="text" class="hebrew keyboard-enabled" name="feminine" maxlength="63"/>
                     </label><br/>
-                    <label>
+                    <label id="plural-section">
                         <span class="main-label">Много</span>
                         <input type="text" class="hebrew keyboard-enabled" name="plural" maxlength="63"/>
                     </label><br/>
-                    <label>
+                    <label id="smihut-section">
                         <span class="main-label">Смихут</span>
                         <input type="text" class="hebrew keyboard-enabled" name="smihut" maxlength="63"/>
                     </label>

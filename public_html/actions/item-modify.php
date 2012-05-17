@@ -24,6 +24,29 @@ function enableQuestions($item_id, $group) {
     $st->close();
 }
 
+function getWordsByRootCount($root) {
+    global $mysqli;
+
+    $count = 0;
+
+    if ($root == '') {
+        return $count;
+    }
+
+    $st = $mysqli->prepare(
+        'select count(*)
+         from items
+         where root = ?');
+    dbFailsafe($mysqli);
+    $st->bind_param('s', $root);
+    $st->execute();
+    $st->bind_result($count);
+    $st->fetch();
+    $st->close();
+
+    return $count;
+}
+
 function insertItem(&$item) {
     global $mysqli;
 
@@ -50,8 +73,13 @@ function insertItem(&$item) {
     dbFailsafe($mysqli);
     for($variant = QV_WORD_MIN; $variant <= QV_WORD_MAX; $variant++) {
         if (!$item['familiar']) {
-            $stage = LS_1_DAY;
-            $delay = 0;
+            if (getWordsByRootCount($item['root']) <= 1) {
+                $stage = LS_1_DAY;
+                $delay = 0;
+            } else {
+                $stage = LS_3_DAYS;
+                $delay = rand(1, 2);
+            }
         } else {
             $stage = LS_2_WEEKS;
             $delay = rand(0, 13);

@@ -73,13 +73,8 @@ function insertItem(&$item) {
     dbFailsafe($mysqli);
     for($variant = QV_WORD_MIN; $variant <= QV_WORD_MAX; $variant++) {
         if (!$item['familiar']) {
-            if (getWordsByRootCount($item['root']) <= 1) {
-                $stage = LS_1_DAY;
-                $delay = 0;
-            } else {
-                $stage = LS_3_DAYS;
-                $delay = rand(1, 2);
-            }
+	    $stage = LS_1_DAY;
+	    $delay = 0;
         } else {
             $stage = LS_2_WEEKS;
             $delay = rand(0, 13);

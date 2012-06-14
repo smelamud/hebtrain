@@ -29,7 +29,7 @@ require_once('parts/keyboard.php');
                 <div id="run">
                     <div class="message">
                         <span id="question-title-1" class="question-title-hide">
-                            Переведите на русский язык
+                            Расшифруйте <i>аббревиатуру</i>
                         </span>
                         <span id="question-title-2" class="question-title-hide">
                             Переведите на русский язык
@@ -39,6 +39,9 @@ require_once('parts/keyboard.php');
                         </span>
                         <span id="question-title-4" class="question-title-hide">
                             Напишите на иврите без огласовок
+                        </span>
+                        <span id="question-title-5" class="question-title-hide">
+                            Переведите на иврит <i>аббревиатурой</i>
                         </span>
                     </div>
                     <div class="word">

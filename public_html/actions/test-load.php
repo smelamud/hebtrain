@@ -20,7 +20,7 @@ function loadTest($qv) {
     }
     $st = $mysqli->prepare(
         "select item_id, hebrew, hebrew_bare, hebrew_comment,
-                russian, russian_comment, question, priority
+                russian, russian_comment, abbrev, question, priority
          from questions inner join items
               on questions.item_id = items.id
          where active = 1 $qvFilter and items.next_test <= now()
@@ -39,7 +39,7 @@ function loadTest($qv) {
 
     $questions = array();
     $st->bind_result($itemId, $hebrew, $hebrewBare, $hebrewComment,
-        $russian, $russianComment, $question, $priority);
+        $russian, $russianComment, $abbrev, $question, $priority);
     while ($st->fetch()) {
         if (!array_key_exists($itemId, $questions)) {
             $questions[$itemId] = array();
@@ -53,6 +53,7 @@ function loadTest($qv) {
                 'hebrew_comment' => $hebrewComment,
                 'russian' => $russian,
                 'russian_comment' => $russianComment,
+                'abbrev' => $abbrev,
                 'question' => $question,
                 'priority' => $priority));
     }

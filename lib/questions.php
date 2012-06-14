@@ -3,15 +3,23 @@
 
 const QV_WORD_RANDOM = -1;
 const QV_WORD_MIX = 0;
-const QV_WORD_HE_RU = 1; // obsolete
+const QV_WORD_ABBR_HE = 1;
 const QV_WORD_BARE_HE_RU = 2;
 const QV_WORD_RU_HE = 3;
 const QV_WORD_RU_HE_WRITE = 4;
+const QV_WORD_RU_ABBR = 5;
 
-const QV_WORD_MIN = QV_WORD_BARE_HE_RU;
-const QV_WORD_MAX = QV_WORD_RU_HE_WRITE;
+const QV_WORD_MIN = QV_WORD_ABBR_HE;
+const QV_WORD_MAX = QV_WORD_RU_ABBR;
 
 $QV_PARAMS = array(
+    QV_WORD_ABBR_HE => array(
+        'ident' => 'abbr_he',
+        'title' => 'Сокращ. → иврит',
+        'word' => 'abbrev',
+        'comment' => 'hebrew_comment',
+        'answer' => 'hebrew',
+        'input' => false),
     QV_WORD_BARE_HE_RU => array(
         'ident' => 'bare_he_ru',
         'title' => 'Иврит б/о → русский',
@@ -32,13 +40,22 @@ $QV_PARAMS = array(
         'word' => 'russian',
         'comment' => 'russian_comment',
         'answer' => 'hebrew',
-        'input' => true));
+        'input' => true),
+    QV_WORD_RU_ABBR => array(
+        'ident' => 'ru_abbr',
+        'title' => 'Русский → сокращ.',
+        'word' => 'russian',
+        'comment' => 'russian_comment',
+        'answer' => 'abbrev',
+        'input' => false));
 
 $QV_IDENTS = array(
     QV_WORD_RANDOM => 'random',
     QV_WORD_MIX => 'mix',
+    QV_WORD_ABBR_HE => 'abbr_he',
     QV_WORD_BARE_HE_RU => 'bare_he_ru',
     QV_WORD_RU_HE => 'ru_he',
-    QV_WORD_RU_HE_WRITE => 'ru_he_write'
+    QV_WORD_RU_HE_WRITE => 'ru_he_write',
+    QV_WORD_RU_ABBR => 'ru_abbr'
 );
 ?>

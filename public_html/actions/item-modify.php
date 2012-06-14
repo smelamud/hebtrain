@@ -6,11 +6,17 @@ require_once('lib/questions.php');
 require_once('lib/hebrew.php');
 require_once('lib/stages.php');
 
-function enableQuestions($item_id, $group) {
+function enableQuestions($item_id, $group, $hasAbbrev) {
     global $VI_QUESTIONS, $mysqli;
 
+    $questions = $VI_QUESTIONS[$group];
+    if ($hasAbbrev) {
+        $questions[] = QV_WORD_ABBR_HE;
+        $questions[] = QV_WORD_RU_ABBR;
+    }
+
     $conds = array();
-    foreach($VI_QUESTIONS[$group] as $q) {
+    foreach($questions as $q) {
         $conds[] = "question = $q";
     }
 
@@ -73,8 +79,8 @@ function insertItem(&$item) {
     dbFailsafe($mysqli);
     for($variant = QV_WORD_MIN; $variant <= QV_WORD_MAX; $variant++) {
         if (!$item['familiar']) {
-	    $stage = LS_1_DAY;
-	    $delay = 0;
+            $stage = LS_1_DAY;
+            $delay = 0;
         } else {
             $stage = LS_2_WEEKS;
             $delay = rand(0, 13);
@@ -85,7 +91,8 @@ function insertItem(&$item) {
     $st->close();
 
     enableQuestions($item['id'],
-        $item['hard'] == 0 ? $item['group'] : VI_WORD);
+        $item['hard'] == 0 ? $item['group'] : VI_WORD,
+        $item['abbrev'] != '');
 }
 
 function modifyItem(&$item) {
@@ -119,7 +126,8 @@ function modifyItem(&$item) {
     $st->close();
 
     enableQuestions($item['id'],
-        $item['hard'] == 0 ? $item['group'] : VI_WORD);
+        $item['hard'] == 0 ? $item['group'] : VI_WORD,
+        $item['abbrev'] != '');
 }
 
 function getSimilarItems(&$item) {

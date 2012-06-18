@@ -58,4 +58,63 @@ $QV_IDENTS = array(
     QV_WORD_RU_HE_WRITE => 'ru_he_write',
     QV_WORD_RU_ABBR => 'ru_abbr'
 );
+
+require_once('lib/items.php');
+
+function enableQuestions($mysqli, $item_id, $group, $isHard, $hasAbbrev,
+                         $activate) {
+    global $VI_QUESTIONS;
+
+    $st = $mysqli->prepare(
+        'select active
+         from items
+         where id = ?');
+    dbFailsafe($mysqli);
+    $st->bind_param('i', $item_id);
+    $st->execute();
+    $st->bind_result($active);
+    $st->fetch();
+    $st->close();
+
+    if (!$active) {
+        if (!$activate) {
+            return 0;
+        }
+
+        $st = $mysqli->prepare(
+            'update items
+             set active = 1, activated = now()
+             where id = ?');
+        dbFailsafe($mysqli);
+        $st->bind_param('i', $item_id);
+        $st->execute();
+        $st->close();
+    }
+
+    if ($isHard) {
+        $group = VI_WORD;
+    }
+
+    $questions = $VI_QUESTIONS[$group];
+    if ($hasAbbrev) {
+        $questions[] = QV_WORD_ABBR_HE;
+        $questions[] = QV_WORD_RU_ABBR;
+    }
+
+    $conds = array();
+    foreach($questions as $q) {
+        $conds[] = "question = $q";
+    }
+
+    $st = $mysqli->prepare(
+        'update questions
+         set active = 1
+         where item_id = ? and (' . join(' or ', $conds) . ')');
+    dbFailsafe($mysqli);
+    $st->bind_param('i', $item_id);
+    $st->execute();
+    $st->close();
+    
+    return count($questions);
+}
 ?>

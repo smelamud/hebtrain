@@ -23,7 +23,7 @@ function loadTest($qv) {
                 russian, russian_comment, abbrev, question, priority
          from questions inner join items
               on questions.item_id = items.id
-         where active = 1 $qvFilter and items.next_test <= now()
+         where questions.active = 1 $qvFilter and items.next_test <= now()
                and questions.next_test <= now()
          order by priority
          limit ?");

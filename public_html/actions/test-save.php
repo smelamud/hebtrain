@@ -73,6 +73,13 @@ function saveResult($data) {
         $st->execute();
         $st->close();
     }
+
+    $st = $mysqli->prepare(
+        'insert into tests(completed)
+         values(now())');
+    dbFailsafe($mysqli);
+    $st->execute();
+    $st->close();
 }
 
 $mysqli = dbConnect();

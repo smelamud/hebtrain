@@ -6,30 +6,6 @@ require_once('lib/questions.php');
 require_once('lib/hebrew.php');
 require_once('lib/stages.php');
 
-function enableQuestions($item_id, $group, $hasAbbrev) {
-    global $VI_QUESTIONS, $mysqli;
-
-    $questions = $VI_QUESTIONS[$group];
-    if ($hasAbbrev) {
-        $questions[] = QV_WORD_ABBR_HE;
-        $questions[] = QV_WORD_RU_ABBR;
-    }
-
-    $conds = array();
-    foreach($questions as $q) {
-        $conds[] = "question = $q";
-    }
-
-    $st = $mysqli->prepare(
-        'update questions
-         set active = 1
-         where item_id = ? and (' . join(' or ', $conds) . ')');
-    dbFailsafe($mysqli);
-    $st->bind_param('i', $item_id);
-    $st->execute();
-    $st->close();
-}
-
 function getWordsByRootCount($root) {
     global $mysqli;
 
@@ -58,10 +34,10 @@ function insertItem(&$item) {
 
     $st = $mysqli->prepare(
         'insert into items(`group`, hebrew, hebrew_bare, hebrew_comment,
-                           russian, russian_comment, next_test,
+                           russian, russian_comment, added, next_test,
                            root, gender, feminine, plural, smihut, abbrev,
                            hard)
-         values(?, ?, ?, ?, ?, ?, now(), ?, ?, ?, ?, ?, ?, ?)');
+         values(?, ?, ?, ?, ?, ?, now(), now(), ?, ?, ?, ?, ?, ?, ?)');
     dbFailsafe($mysqli);
     $item['hebrew_bare'] = bareHebrew($item['hebrew']);
     $st->bind_param('issssssissssi', $item['group'],
@@ -90,9 +66,13 @@ function insertItem(&$item) {
     }
     $st->close();
 
-    enableQuestions($item['id'],
-        $item['hard'] == 0 ? $item['group'] : VI_WORD,
-        $item['abbrev'] != '');
+    enableQuestions(
+        $mysqli,
+        $item['id'],
+        $item['group'],
+        $item['hard'] != 0,
+        $item['abbrev'] != '',
+        $item['familiar']);
 }
 
 function modifyItem(&$item) {
@@ -125,9 +105,13 @@ function modifyItem(&$item) {
     $st->execute();
     $st->close();
 
-    enableQuestions($item['id'],
-        $item['hard'] == 0 ? $item['group'] : VI_WORD,
-        $item['abbrev'] != '');
+    enableQuestions(
+        $mysqli,
+        $item['id'],
+        $item['group'],
+        $item['hard'] != 0,
+        $item['abbrev'] != '',
+        false);
 }
 
 function getSimilarItems(&$item) {

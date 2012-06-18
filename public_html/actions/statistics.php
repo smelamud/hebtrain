@@ -29,7 +29,7 @@ function getStatistics() {
         'select question, count(*)
          from questions left join items
               on questions.item_id = items.id
-         where active = 1
+         where questions.active = 1
          group by question
          order by question');
     dbFailsafe($mysqli);
@@ -53,7 +53,7 @@ function getStatistics() {
         'select question, count(*)
          from questions left join items
               on questions.item_id = items.id
-         where active = 1 and items.next_test <= now()
+         where questions.active = 1 and items.next_test <= now()
                and questions.next_test <= now()
          group by question
          order by question');
@@ -71,7 +71,7 @@ function getStatistics() {
         'select count(distinct questions.item_id)
          from questions left join items
               on questions.item_id = items.id
-         where active = 1 and items.next_test <= now()
+         where questions.active = 1 and items.next_test <= now()
                and questions.next_test <= now()');
     dbFailsafe($mysqli);
     $st->execute();
@@ -84,7 +84,7 @@ function getStatistics() {
         'select stage, step, count(*)
          from questions left join items
               on questions.item_id = items.id
-         where active = 1
+         where questions.active = 1
          group by stage, step
          order by stage, step');
     dbFailsafe($mysqli);
@@ -121,7 +121,7 @@ function getStatistics() {
         'select stage, count(*)
          from questions left join items
               on questions.item_id = items.id
-         where active = 1 and items.next_test <= now()
+         where questions.active = 1 and items.next_test <= now()
                and questions.next_test <= now()
          group by stage
          order by stage');

@@ -12,7 +12,7 @@ require_once('parts/header.php');
         <div class="container"><div class="content">
             <div id="totals">
                 <img id="spinner" src="/pics/ajax.gif"><br/>
-                <strong>Всего слов в словаре:</strong> <span id="words-total">0</span><br/>
+                <strong>Всего слов в словаре:</strong> <span id="words-total">0</span> (активных: <span id="words-active">0</span>)<br/>
             </div>
             <div id="questions">
                 <strong>По вопросам:</strong>
@@ -74,6 +74,9 @@ require_once('parts/header.php');
                         </td>
                     </tr>
                 </table>
+            </div>
+            <div id="tests-totals">
+                <strong>Сегодня закончено тестов:</strong> <span id="tests-done-today">0</span>
             </div>
         </div></div>
     </body>

@@ -2,6 +2,8 @@ function loadStatistics() {
     $.getJSON("/actions/statistics.php",
         function(data) {
             $("#words-total").text(data.words_total);
+            $("#words-active").text(data.words_active);
+            $("#tests-done-today").text(data.tests_done_today);
             $("#questions-total").text(data.questions_total);
             $(".questions-now").text(data.questions_now);
             $("#items-now").text(data.items_now);

@@ -19,6 +19,17 @@ function getStatistics() {
     $st->fetch();
     $st->close();
 
+    /* Total number of active items */
+    $st = $mysqli->prepare(
+        'select count(*)
+         from items
+         where active = 1');
+    dbFailsafe($mysqli);
+    $st->execute();
+    $st->bind_result($result['words_active']);
+    $st->fetch();
+    $st->close();
+
     /* Number of questions per type */
     $result['questions'] = array();
 
@@ -137,6 +148,17 @@ function getStatistics() {
             $result['ready'],
             $info);
     }
+    $st->close();
+
+    /* Total number of tests completed today */
+    $st = $mysqli->prepare(
+        'select count(*)
+         from tests
+         where date(completed) = curdate()');
+    dbFailsafe($mysqli);
+    $st->execute();
+    $st->bind_result($result['tests_done_today']);
+    $st->fetch();
     $st->close();
 
     return $result;

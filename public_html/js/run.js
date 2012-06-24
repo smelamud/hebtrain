@@ -222,21 +222,13 @@ function keyboardNavigation(event) {
     }
 }
 
-function leavePage(event) {
+function leavePage() {
     if (window.testStatus != "asking" && window.testStatus != "answered"
         && window.testStatus != "finished") {
         return;
     }
 
-    var message = "Тест не завершен. Вы действительно хотите покинуть"
-        + " страницу?";
-    // For IE and Firefox
-    if (event) {
-        e.returnValue = message;
-    }
-    
-    // For Safari
-    return message;
+    return "Тест не завершен. Вы действительно хотите покинуть страницу?";
 }
 
 $(function() {
@@ -252,6 +244,6 @@ $(function() {
         $("#spinner").css("visibility", "hidden");
     });
     $(document).keydown(keyboardNavigation);
-    $(window).on("beforeunload", leavePage);
+    $(window).bind("beforeunload", leavePage);
     loadTest();
 });

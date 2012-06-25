@@ -222,6 +222,15 @@ function keyboardNavigation(event) {
     }
 }
 
+function leavePage() {
+    if (window.testStatus != "asking" && window.testStatus != "answered"
+        && window.testStatus != "finished") {
+        return;
+    }
+
+    return "Тест не завершен.";
+}
+
 $(function() {
     $("#button-start").click(startTest);
     $("#button-answer").click(answered);
@@ -235,5 +244,6 @@ $(function() {
         $("#spinner").css("visibility", "hidden");
     });
     $(document).keydown(keyboardNavigation);
+    $(window).bind("beforeunload", leavePage);
     loadTest();
 });

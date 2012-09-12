@@ -2,6 +2,11 @@ body {
     padding-top: 50px;
 }
 
+body.mobile {
+    padding-top: 2ex;
+    padding-left: 1em;
+}
+
 .navbar p {
     color: #aaaaaa;
     margin-top: 10px;

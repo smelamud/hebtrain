@@ -9,7 +9,7 @@ require_once('parts/header.php');
     </head>
     <body class="mobile">
         <div id="totals">
-            <a class="btn-large btn-primary" href="/mobile/run.php?qv=<?= QV_WORD_MIX ?>">Начать тест</a><br/>
+            <a class="btn btn-large btn-primary" href="/mobile/run.php?qv=<?= QV_WORD_MIX ?>">Начать тест</a><br/>
             <img id="spinner" src="/pics/ajax.gif"><br/>
             <strong>Всего слов в словаре:</strong>
             <span id="words-total">0</span>

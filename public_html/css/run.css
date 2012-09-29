@@ -60,6 +60,7 @@ BODY.mobile .message {
 
 BODY.mobile #answer-input {
     margin-right: .5em;
+    padding-right: .5em;
 }
 
 #answer-input-text {

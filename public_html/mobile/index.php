@@ -6,6 +6,7 @@ require_once('parts/header.php');
     <head>
         <title>Иврит</title>
         <?php displayPreamble('index'); ?>
+	<meta name="viewport" content=width=400"/>
     </head>
     <body class="mobile">
         <div id="totals">

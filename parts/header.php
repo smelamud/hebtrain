@@ -2,7 +2,12 @@
 require_once('lib/questions.php');
 require_once('lib/util.php');
 
-function displayPreamble($page, $bootstrapScripts = array()) {
+function displayPreamble($page, $mobile=false, $bootstrapScripts = array()) {
+    if ($mobile) {
+    ?>
+        <meta name="viewport" content="width=400 user-scalable=no"/>
+    <?php
+    }
     ?>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>

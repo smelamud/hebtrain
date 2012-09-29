@@ -6,7 +6,7 @@ require_once('parts/keyboard.php');
 <html>
     <head>
         <title>Иврит - Тест</title>
-        <?php displayPreamble('run', array('button')); ?>
+        <?php displayPreamble('run', true, array('button')); ?>
     </head>
     <body class="mobile">
         <img id="spinner" src="/pics/ajax.gif"><br/>

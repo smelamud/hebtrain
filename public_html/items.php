@@ -6,7 +6,7 @@ require_once('parts/keyboard.php');
 <html>
     <head>
         <title>Иврит - Слова</title>
-        <?php displayPreamble('items', array('modal')); ?>
+        <?php displayPreamble('items', false, array('modal')); ?>
     </head>
     <body>
         <?php displayMainMenu('items'); ?>

@@ -6,7 +6,7 @@ require_once('parts/keyboard.php');
 <html>
     <head>
         <title>Иврит - Тест</title>
-        <?php displayPreamble('run', array('button')); ?>
+        <?php displayPreamble('run', false, array('button')); ?>
     </head>
     <body>
         <?php displayMainMenu('run'); ?>

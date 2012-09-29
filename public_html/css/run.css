@@ -58,6 +58,10 @@ BODY.mobile .message {
     height: 26pt;
 }
 
+BODY.mobile #answer-input {
+    margin-right: .5em;
+}
+
 #answer-input-text {
     color: #888;
 }

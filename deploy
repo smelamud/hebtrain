@@ -1,3 +1,4 @@
 #!/bin/bash
 
 ssh lamed.od.ua 'cd /srv/heb.lamed.od.ua/; git pull'
+ssh lamed.od.ua 'cd /srv/heba.lamed.od.ua/; git pull'

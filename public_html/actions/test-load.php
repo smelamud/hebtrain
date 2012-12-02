@@ -60,6 +60,9 @@ function loadTest($qv) {
     
     srand();
     $itemIds = array_keys($questions);
+    if (count($itemIds) == 0) {
+    	return array();
+    }
     shuffle($itemIds);
     $result = array();
     $usedIds = array();

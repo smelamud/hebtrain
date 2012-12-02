@@ -3,4 +3,7 @@
 DB_USER=root
 DB_NAME=hebtrain
 
+echo 'Dumping structure...'
 mysqldump -u $DB_USER -p $DB_NAME --no-data -Q > create.sql
+echo 'Dumping version...'
+mysqldump -u $DB_USER -p $DB_NAME versions --no-create-info -Q >> create.sql

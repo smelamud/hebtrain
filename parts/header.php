@@ -59,10 +59,10 @@ function displayMainMenuItem($current, $page, $title, $href, $subMenu = array())
 
 function displayCountdown() {
     $currentDate = new DateTime();
-    $alyahDate = new DateTime('2013-01-15');
+    $alyahDate = new DateTime('2013-01-29');
     $diffDays = $alyahDate->diff($currentDate)->days;
     ?>
-    <p class="pull-right">осталось примерно <?php echo getPlural($diffDays, 'день', 'дня', 'дней'); ?></p>
+    <p class="pull-right">осталось, с Б-жьей помощью, <?php echo getPlural($diffDays, 'день', 'дня', 'дней'); ?></p>
     <?php
 }
 

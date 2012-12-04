@@ -45,7 +45,7 @@ $LS_PARAMS =
             'period' => 3 * 28),
         LS_PERMANENT => array(
             'name' => 'навсегда',
-            'steps' => 1000000,
+            'steps' => 1,
             'priority' => 6,
             'period' => 10 * (12 * 28 + 6)));
 

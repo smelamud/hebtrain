@@ -83,16 +83,6 @@ function enterHebrewChar(key) {
             input.selectionStart = st.length - 1;
         }
         input.selectionEnd = input.selectionStart;
-        if ($("body").hasClass("mobile")) {
-	    s = window.keyboardElement.val();
-	    if (s != '' && s.charAt(0) != ' ') {
-	        s = ' ' + s;
-	    }
-	    if (s != '' && (s.length < 2 || s.charAt(1) != ' ')) {
-	        s = ' ' + s;
-	    }
-	    window.keyboardElement.val(s);
-        }
     } else {
         window.keyboardElement.text(getKeyHebrewChar(key));
     }

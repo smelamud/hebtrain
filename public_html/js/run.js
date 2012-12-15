@@ -220,6 +220,21 @@ function keyboardNavigation(event) {
         event.stopPropagation();
         event.preventDefault();
     }
+    // Workaround hidden first hebrew chars bug in mobile Firefox
+    if ($("body").hasClass("mobile")) {
+	$(".keyboard-enabled").each(function() {
+	    s = $(this).val();
+            if (s != '') {
+		if (s.charAt(0) != ' ') {
+		    s = ' ' + s;
+		}
+		if (s.length < 2 || s.charAt(1) != ' ') {
+		    s = ' ' + s;
+		}
+		$(this).val(s);
+            }
+	});
+    }
 }
 
 function leavePage() {

@@ -224,15 +224,13 @@ function keyboardNavigation(event) {
     if ($("body").hasClass("mobile")) {
 	$(".keyboard-enabled").each(function() {
 	    s = $(this).val();
-            if (s != '') {
-		if (s.charAt(0) != ' ') {
-		    s = ' ' + s;
-		}
-		if (s.length < 2 || s.charAt(1) != ' ') {
-		    s = ' ' + s;
-		}
-		$(this).val(s);
-            }
+	    if (s.charAt(0) != ' ') {
+		s = ' ' + s;
+	    }
+	    if (s.length < 2 || s.charAt(1) != ' ') {
+		s = ' ' + s;
+	    }
+	    $(this).val(s);
 	});
     }
 }

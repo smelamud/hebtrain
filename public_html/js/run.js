@@ -238,7 +238,7 @@ $(function() {
     $("#button-incorrect").click(answerIncorrect);
     $("#button-save").click(saveResult);
     $("#button-restart").click(loadTest);
-    $("#main").ajaxStart(function() {
+    $("body").ajaxStart(function() {
         $("#spinner").css("visibility", "visible");
     }).ajaxStop(function() {
         $("#spinner").css("visibility", "hidden");

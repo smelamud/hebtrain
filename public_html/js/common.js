@@ -88,7 +88,7 @@ function enterHebrewChar(key) {
 	    if (s != '' && s.charAt(0) != ' ') {
 	        s = ' ' + s;
 	    }
-	    if (s != '' && (s.length < 2 || s.charAt(1) != ' ') {
+	    if (s != '' && (s.length < 2 || s.charAt(1) != ' ')) {
 	        s = ' ' + s;
 	    }
 	    window.keyboardElement.val(s);

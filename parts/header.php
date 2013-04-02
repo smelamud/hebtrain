@@ -60,7 +60,7 @@ function displayMainMenuItem($current, $page, $title, $href, $subMenu = array())
 function displayCountdown() {
     $currentDate = new DateTime();
     $alyahDate = new DateTime('2013-01-29');
-    $interval = $alyahDate->diff($currentDate)->days;
+    $interval = $alyahDate->diff($currentDate);
     $diffDays = $interval->days;
     if (!$interval->$invert) {
     ?>

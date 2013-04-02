@@ -62,7 +62,7 @@ function displayCountdown() {
     $alyahDate = new DateTime('2013-01-29');
     $interval = $alyahDate->diff($currentDate);
     $diffDays = $interval->days;
-    if (!$interval->$invert) {
+    if (!$interval->invert) {
     ?>
         <p class="pull-right">осталось, с Б-жьей помощью, <?php echo getPlural($diffDays, 'день', 'дня', 'дней'); ?></p>
     <?php } else { ?>

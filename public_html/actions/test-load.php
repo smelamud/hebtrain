@@ -10,6 +10,7 @@ require_once('lib/stages.php');
 function loadTest($qv) {
     global $mysqli, $QV_PARAMS;
 
+    $limit = CFG_QUESTIONS_LOAD_LIMIT;
     if ($qv == QV_WORD_FAST) {
         $qvs = array();
 	foreach ($QV_PARAMS as $key => $param) {
@@ -18,12 +19,14 @@ function loadTest($qv) {
 	    }
 	}
 	$qvFilter = 'and question in (' . join(',', $qvs) . ')';
+        $limit *= count($qvs);
     } else {
 	if ($qv == QV_WORD_RANDOM) {
 	    $qv = rand(QV_WORD_MIN, QV_WORD_MAX);
 	}
 	if ($qv == QV_WORD_MIX) {
 	    $qvFilter = '';
+            $limit *= QV_WORD_MAX - QV_WORD_MIN + 1;
 	} else {
 	    $qvFilter = 'and question=?';
 	}
@@ -38,9 +41,7 @@ function loadTest($qv) {
          order by priority
          limit ?");
     dbFailsafe($mysqli);
-    $limit = CFG_QUESTIONS_LOAD_LIMIT;
-    if ($qv == QV_WORD_MIX) {
-        $limit *= QV_WORD_MAX - QV_WORD_MIN + 1;
+    if ($qv == QV_WORD_MIX || $qv == QV_WORD_FAST) {
         $st->bind_param('i', $limit);
     } else {
         $st->bind_param('ii', $qv, $limit);

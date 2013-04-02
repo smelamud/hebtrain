@@ -10,13 +10,23 @@ require_once('lib/stages.php');
 function loadTest($qv) {
     global $mysqli, $QV_PARAMS;
 
-    if ($qv == QV_WORD_RANDOM) {
-        $qv = rand(QV_WORD_MIN, QV_WORD_MAX);
-    }
-    if ($qv == QV_WORD_MIX) {
-        $qvFilter = '';
+    if ($qv == QV_WORD_FAST) {
+        $qvs = array();
+	foreach ($QV_PARAMS as $key => $param) {
+	    if (!$param['input']) {
+	        $qvs[] = $key;
+	    }
+	}
+	$qvFilter = 'and question in (' . join(',', $qvs) . ')';
     } else {
-        $qvFilter = 'and question=?';
+	if ($qv == QV_WORD_RANDOM) {
+	    $qv = rand(QV_WORD_MIN, QV_WORD_MAX);
+	}
+	if ($qv == QV_WORD_MIX) {
+	    $qvFilter = '';
+	} else {
+	    $qvFilter = 'and question=?';
+	}
     }
     $st = $mysqli->prepare(
         "select item_id, hebrew, hebrew_bare, hebrew_comment,

@@ -82,6 +82,8 @@ function displayMainMenu($current) {
                     displayMainMenuItem($current, 'index', 'Начало', '/');
                     $testMenu = array(
                         array('run-mix', 'Микс',
+                            '/run.php?qv=' . QV_WORD_FAST),
+                        array('run-fast', 'Быстрый',
                             '/run.php?qv=' . QV_WORD_MIX),
                         array('run-random', 'Случайный',
                             '/run.php?qv=' . QV_WORD_RANDOM),

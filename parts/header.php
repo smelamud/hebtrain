@@ -60,10 +60,14 @@ function displayMainMenuItem($current, $page, $title, $href, $subMenu = array())
 function displayCountdown() {
     $currentDate = new DateTime();
     $alyahDate = new DateTime('2013-01-29');
-    $diffDays = $alyahDate->diff($currentDate)->days;
+    $interval = $alyahDate->diff($currentDate)->days;
+    $diffDays = $interval->days;
+    if (!$interval->$invert) {
     ?>
-    <p class="pull-right">п╬я│я┌п╟п╩п╬я│я▄, я│ п▒-п╤я▄п╣п╧ п©п╬п╪п╬я┴я▄я▌, <?php echo getPlural($diffDays, 'п╢п╣п╫я▄', 'п╢п╫я▐', 'п╢п╫п╣п╧'); ?></p>
-    <?php
+        <p class="pull-right">осталось, с Б-жьей помощью, <?php echo getPlural($diffDays, 'день', 'дня', 'дней'); ?></p>
+    <?php } else { ?>
+        <p class="pull-right">Уже <?php echo getPlural($diffDays, 'день', 'дня', 'дней'); ?> в Израиле</p>
+    <?php }
 }
 
 function displayMainMenu($current) {
@@ -73,13 +77,13 @@ function displayMainMenu($current) {
     <div class="navbar navbar-fixed-top" data-dropdown="dropdown">
         <div class="navbar-inner">
             <div class="container">
-                <a class="brand" href="/">п≤п╡я─п╦я┌</a>
+                <a class="brand" href="/">Иврит</a>
                 <ul class="nav"><?php
-                    displayMainMenuItem($current, 'index', 'п²п╟я┤п╟п╩п╬', '/');
+                    displayMainMenuItem($current, 'index', 'Начало', '/');
                     $testMenu = array(
-                        array('run-mix', 'п°п╦п╨я│',
+                        array('run-mix', 'Микс',
                             '/run.php?qv=' . QV_WORD_MIX),
-                        array('run-random', 'п║п╩я┐я┤п╟п╧п╫я▀п╧',
+                        array('run-random', 'Случайный',
                             '/run.php?qv=' . QV_WORD_RANDOM),
                         array('', '-', '')
                     );
@@ -88,12 +92,12 @@ function displayMainMenu($current) {
                             '/run.php?qv=' . $index);
                     }
                     displayMainMenuItem($current . '-' . $QV_IDENTS[$_GET['qv']],
-                        'run', 'п╒п╣я│я┌', '#', $testMenu);
-                    displayMainMenuItem($current, 'exercise', 'пёп©я─п╟п╤п╫п╣п╫п╦я▐', '#', array(
-                        array('exercise-keyboard', 'п п╩п╟п╡п╦п╟я┌я┐я─п╟', '/exercise-keyboard.php'),
-                        array('exercise-flexion', 'п▓п╫я┐я┌я─п╣п╫п╫я▐я▐ я└п╩п╣п╨я│п╦я▐', '/exercise-flexion.php')
+                        'run', 'Тест', '#', $testMenu);
+                    displayMainMenuItem($current, 'exercise', 'Упражнения', '#', array(
+                        array('exercise-keyboard', 'Клавиатура', '/exercise-keyboard.php'),
+                        array('exercise-flexion', 'Внутренняя флексия', '/exercise-flexion.php')
                     ));
-                    displayMainMenuItem($current, 'items', 'п║п╩п╬п╡п╟я─я▄', '/items.php');
+                    displayMainMenuItem($current, 'items', 'Словарь', '/items.php');
                 ?></ul>
                 <?php displayCountdown(); ?>
             </div>

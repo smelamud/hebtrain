@@ -60,10 +60,14 @@ function displayMainMenuItem($current, $page, $title, $href, $subMenu = array())
 function displayCountdown() {
     $currentDate = new DateTime();
     $alyahDate = new DateTime('2013-01-29');
-    $diffDays = $alyahDate->diff($currentDate)->days;
+    $interval = $alyahDate->diff($currentDate);
+    $diffDays = $interval->days;
+    if ($interval->invert) {
     ?>
-    <p class="pull-right">осталось, с Б-жьей помощью, <?php echo getPlural($diffDays, 'день', 'дня', 'дней'); ?></p>
-    <?php
+        <p class="pull-right">осталось, с Б-жьей помощью, <?php echo getPlural($diffDays, 'день', 'дня', 'дней'); ?></p>
+    <?php } else { ?>
+        <p class="pull-right">Уже <?php echo getPlural($diffDays, 'день', 'дня', 'дней'); ?> в Израиле</p>
+    <?php }
 }
 
 function displayMainMenu($current) {
@@ -79,6 +83,8 @@ function displayMainMenu($current) {
                     $testMenu = array(
                         array('run-mix', 'Микс',
                             '/run.php?qv=' . QV_WORD_MIX),
+                        array('run-fast', 'Быстрый',
+                            '/run.php?qv=' . QV_WORD_FAST),
                         array('run-random', 'Случайный',
                             '/run.php?qv=' . QV_WORD_RANDOM),
                         array('', '-', '')

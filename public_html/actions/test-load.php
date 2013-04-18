@@ -10,13 +10,26 @@ require_once('lib/stages.php');
 function loadTest($qv) {
     global $mysqli, $QV_PARAMS;
 
-    if ($qv == QV_WORD_RANDOM) {
-        $qv = rand(QV_WORD_MIN, QV_WORD_MAX);
-    }
-    if ($qv == QV_WORD_MIX) {
-        $qvFilter = '';
+    $limit = CFG_QUESTIONS_LOAD_LIMIT;
+    if ($qv == QV_WORD_FAST) {
+        $qvs = array();
+	foreach ($QV_PARAMS as $key => $param) {
+	    if (!$param['input']) {
+	        $qvs[] = $key;
+	    }
+	}
+	$qvFilter = 'and question in (' . join(',', $qvs) . ')';
+        $limit *= count($qvs);
     } else {
-        $qvFilter = 'and question=?';
+	if ($qv == QV_WORD_RANDOM) {
+	    $qv = rand(QV_WORD_MIN, QV_WORD_MAX);
+	}
+	if ($qv == QV_WORD_MIX) {
+	    $qvFilter = '';
+            $limit *= QV_WORD_MAX - QV_WORD_MIN + 1;
+	} else {
+	    $qvFilter = 'and question=?';
+	}
     }
     $st = $mysqli->prepare(
         "select item_id, hebrew, hebrew_bare, hebrew_comment,
@@ -28,9 +41,7 @@ function loadTest($qv) {
          order by priority
          limit ?");
     dbFailsafe($mysqli);
-    $limit = CFG_QUESTIONS_LOAD_LIMIT;
-    if ($qv == QV_WORD_MIX) {
-        $limit *= QV_WORD_MAX - QV_WORD_MIN + 1;
+    if ($qv == QV_WORD_MIX || $qv == QV_WORD_FAST) {
         $st->bind_param('i', $limit);
     } else {
         $st->bind_param('ii', $qv, $limit);

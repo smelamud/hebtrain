@@ -1,6 +1,7 @@
 <?php
 # Question variants
 
+const QV_WORD_FAST = -2;
 const QV_WORD_RANDOM = -1;
 const QV_WORD_MIX = 0;
 const QV_WORD_ABBR_HE = 1;
@@ -50,6 +51,7 @@ $QV_PARAMS = array(
         'input' => false));
 
 $QV_IDENTS = array(
+    QV_WORD_FAST => 'fast',
     QV_WORD_RANDOM => 'random',
     QV_WORD_MIX => 'mix',
     QV_WORD_ABBR_HE => 'abbr_he',

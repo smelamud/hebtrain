@@ -81,6 +81,7 @@ require_once('parts/keyboard.php');
                             <option value="2">Существительное двуполое</option>
                             <option value="3">Прилагательное</option>
                             <option value="4">Глагол</option>
+                            <option value="14">Глагол с предлогом</option>
                             <option value="5">Наречие</option>
                             <option value="6">Наречие-оборот</option>
                             <option value="7">Связка</option>

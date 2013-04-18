@@ -17,6 +17,7 @@ const VI_FOREIGN = 10;
 const VI_GEO = 11;
 const VI_PHRASE = 12;
 const VI_SLANG = 13;
+const VI_VERB_PREP = 14;
 
 $VI_QUESTIONS = array(
     // This one is used for 'hard' words
@@ -34,7 +35,8 @@ $VI_QUESTIONS = array(
     VI_FOREIGN => array(QV_WORD_RU_HE, QV_WORD_RU_HE_WRITE),
     VI_GEO => array(QV_WORD_RU_HE),
     VI_PHRASE => array(QV_WORD_RU_HE),
-    VI_SLANG => array(QV_WORD_BARE_HE_RU, QV_WORD_RU_HE, QV_WORD_RU_HE_WRITE)
+    VI_SLANG => array(QV_WORD_BARE_HE_RU, QV_WORD_RU_HE, QV_WORD_RU_HE_WRITE),
+    VI_VERB_PREP => array(QV_WORD_RU_HE)
 );
 
 # Genders

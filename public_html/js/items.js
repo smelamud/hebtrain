@@ -259,6 +259,12 @@ editDialogOptionalFields = [
         plural: true,
         smihut: true,
     },
+    { // 14
+        gender: false,
+        feminine: false,
+        plural: false,
+        smihut: false,
+    },
 ];
 
 function editDialogUpdateOptionalFields() {

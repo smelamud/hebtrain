@@ -9,6 +9,19 @@ function activateItems() {
 
     $st = $mysqli->prepare(
         'select count(*)
+         from tests
+         where completed >= now() - interval 1 day');
+    dbFailsafe($mysqli);
+    $st->execute();
+    $st->bind_result($tests_count);
+    $st->fetch();
+    $st->close();
+
+    if ($tests_count < CFG_MIN_TESTS_PER_DAY)
+    	return array();
+
+    $st = $mysqli->prepare(
+        'select count(*)
          from questions left join items
               on questions.item_id = items.id
          where questions.active = 1 and items.active = 1

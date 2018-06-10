@@ -1,0 +1,37 @@
+<?php
+# Database location
+const CFG_DB_HOST = 'localhost';
+const CFG_DB_USER = 'hebtrain';
+const CFG_DB_PASSWORD = '<PASSWORD>';
+const CFG_DB_NAME = 'hebtrain';
+
+# Number of vocabulary entries loaded at one request
+const CFG_ITEMS_LOAD_LIMIT = 20;
+
+# Number of questions loaded for test
+const CFG_QUESTIONS_LOAD_LIMIT = 100;
+
+# Number of questions included into test
+const CFG_QUESTIONS_PER_TEST = 20;
+
+# Maximum number of correct answers on a question
+const CFG_MAX_CORRECT_ANSWERS = 3;
+
+# Maximum number of incorrect answers on a question, more will be penalized
+const CFG_MAX_INCORRECT_ANSWERS = 1;
+
+# Minimum number of questions in a test
+const CFG_MIN_QUESTIONS_IN_TEST = 5;
+
+# Minimum number of answers to make decision
+const CFG_MIN_ANSWERS_TO_ADVANCE = 2;
+
+# Period (in minutes) between questions related to the same vocabulary item
+const CFG_ITEM_QUESTIONS_PERIOD = 360;
+
+# Number of new questions activated each day
+const CFG_NEW_QUESTIONS_PER_DAY = 14;
+
+# Number of tests to be completed to activate additional questions
+const CFG_MIN_TESTS_PER_DAY = 10;
+?>
